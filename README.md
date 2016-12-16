@@ -1,9 +1,11 @@
 **RoomRenter**
+
 A web-based solution to handling temporary room rentals.
 Utilizing Nodejs, and Node-Webkit(nwjs).
 
 ---
 **Branches**
+
 We will use a basic 3 branch system. With most work being done in the
 **Dev** branch. After a usable chunk of development is finished we will merge
 the changes to the **Test** branch, which will be deployed to test.

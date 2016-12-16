@@ -1,8 +1,12 @@
 [Todo List]
 General program todos: (things to make the project more accessible)
-1. Investegate how to use the package.json to run scripts (so we can run the start shell script?)
+1. Investigate how to use the package.json to run scripts (so we can run the start shell script?)
 2. Add a windows launch command script
 3. Possibly add an installer script for Linux and Windows (to install nodejs, and the necessary packages)
+4. Limit the huge size of node_modules, by providing an installation script that installs the nwjs for you.
+    This would limit or remove the need for the node_modules folder, as the user will downloading during installation.
+    I will look into this solution...
+
 
 "Front-end" todos:
 1. make it...

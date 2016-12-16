@@ -15,8 +15,17 @@
 
 </head>
 <body>
+<!--TODO awaiting v's changes here!-->
+
 <!--BASIC HELLO WORLD TEST TO MAKE SURE OUR SETUP WORKS!-->
 <h1>HELLO DOG!</h1>
+
+<!--angular test-->
+<div class="input-group" ng-app="">
+    <h1>Hello {{name}}</h1>
+    <p>Name : <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
+                     ng-model="name"></p>
+</div>
 
 <!--include javascript files here-->
 <script type="text/javascript" src="js/lib/jquery-3.1.1.min.js"></script>
@@ -30,6 +39,6 @@
 <script type="text/javascript" src="js/lib/angular-route.min.js"></script>
 
 <!--CUSTOM JAVASCRIPT FILES GO HERE-->
-
+<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

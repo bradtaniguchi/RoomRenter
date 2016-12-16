@@ -1,0 +1,19 @@
+{
+  "name": "RoomRenter",
+  "version": "0.0.1",
+  "description": "A desktop application using nw.js, to provide room rentals of students",
+  "author": "Brad Taniguchi",
+  "contributors": [
+    {
+      "name": "Brad Taniguchi",
+      "email": "bradtaniguchi.dev@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bradtaniguchi/RoomRenter"
+  },
+  "bugs": {
+    "url": "https://github.com/bradtaniguchi/RoomRenter/issues"
+  }
+}

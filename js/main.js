@@ -17,15 +17,15 @@ window.onload = function() {
     }
 };
 
-var mainApp = angular.module('roomRenterApp', []);
+var mainApp = angular.module('roomRenterApp', ["ngRoute"]);
 
 /* Define routes for angularJS*/
+/*TODO: update this to provide ACTUAL routing*/
 mainApp.config(['$routeProvider'],
     function($routeProvider){
         $routeProvider.
             when('/ClockIn', {
-                templateUrl:'templates/ClockIn.html',
-                controller: 'ClockInController'
+                templateUrl:'templates/ClockIn.html'
         })
             .otherwise({
                 redirectTo: '/index.html'
@@ -35,4 +35,7 @@ mainApp.config(['$routeProvider'],
 /*Define Button listeners using jquery*/
 $(document).ready(function(){
     if (debug) console.log("Page is loaded");
+    $('#testButton').on('click', function(){
+       window.location = '/html/ClockIn.html';
+    });
 });

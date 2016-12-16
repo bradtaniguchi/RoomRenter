@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lng="en" ng-app>
+<html ng-app lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Room Renter v.1</title>
@@ -7,25 +7,23 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
 </head>
 <body>
-
 <nav class="navbar navbar-default">
     <div class="navbar-header">
-        <form class="navbar-form navbar-left" role="search">
-            <button type="submit" class="btn btn-default" id="AdminButton">Admin</button>
-            <button type="submit" class="btn btn-default" id="SwapRoomButton">Swap Rooms</button>
-            <button type="submit" class="btn btn-default" id="HelpButton">Help</button>
-        </form>
+        <div class="navbar-form navbar-left">
+            <button class="btn btn-default" id="AdminButton">Admin</button>
+            <button class="btn btn-default" id="SwapRoomButton">Swap Rooms</button>
+            <button class="btn btn-default" id="HelpButton">Help</button>
+        </div>
     </div>
 </nav>
-
 <div class="input-group">
     <h1>Welcome! {{name}}</h1>
     <p>Name : <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
                      ng-model="name"></p>
 </div>
+<button class="btn btn-default" id="testButton">Test</button>
 
 
 <!--include javascript files here-->

@@ -1,0 +1,4 @@
+this file is just to help keep track of the file structure.
+The html folder will be used to hold html templates that angular will use to route to.
+This MAY or MAYNOT be used. Regardless, this folder will end up holding either full pages, or parts of pages.
+

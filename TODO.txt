@@ -1,0 +1,11 @@
+[Todo List]
+General program todos: (things to make the project more accessible)
+1. Investegate how to use the package.json to run scripts (so we can run the start shell script?)
+2. Add a windows launch command script
+3. Possibly add an installer script for Linux and Windows (to install nodejs, and the necessary packages)
+
+"Front-end" todos:
+1. make it...
+
+"Back-end" todos:
+1. make it...

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app lang="en">
+<html data-ng-app="mainApp" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Room Renter v.1</title>
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
-<body>
+<body class="container" data-ng-controller="mainPageController">
 <nav class="navbar navbar-default">
     <div class="navbar-header">
         <div class="navbar-form navbar-left">
@@ -21,9 +21,9 @@
 <div class="input-group">
     <h1>Welcome! {{name}}</h1>
     <p>Name : <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
-                     ng-model="name"></p>
+                     data-ng-model="name"></p>
 </div>
-<button class="btn btn-default" id="testButton">Test</button>
+<button data-ng-href="#/ClockIn" class="btn btn-default">Test</button>
 
 
 <!--include javascript files here-->
@@ -39,5 +39,7 @@
 
 <!--CUSTOM JAVASCRIPT FILES GO HERE-->
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/controllers/mainPageController.js"></script>
+<script type="text/javascript" src="js/routes.js"></script>
 </body>
 </html>

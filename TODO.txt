@@ -13,3 +13,6 @@ General program todos: (things to make the project more accessible)
 
 "Back-end" todos:
 1. make it...
+
+---NOTES:
+http://thejackalofjavascript.com/node-webkit-and-angularjs-a-moviestub-app/

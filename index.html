@@ -1,113 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room Renter v.1</title>
-    <!--use bootstrap CDN until we can figure out how fonts work in bootstrap-->
+    <!DOCTYPE html>
+    <html ng-app lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Room Renter v.1</title>
+            <!--use bootstrap CDN until we can figure out how fonts work in bootstrap-->
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+                  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        </head>
+        <body>
+        <!--BASIC HELLO WORLD TEST TO MAKE SURE OUR SETUP WORKS!-->
+        <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <form class="navbar-form navbar-left" role="search">
+                        <button type="submit" class="btn btn-default btn-lg" id="AdminButton">Admin</button>
+                        <button type="submit" class="btn btn-default btn-lg" id="SwapRoomButton">Swap Rooms</button>
+                        <button type="submit" class="btn btn-default btn-lg" id="ReviewButton">Reviews</button>
+                        <button type="submit" class="btn btn-default btn-lg" id="HelpButton">Help</button>
+                    </form>
+                </div>
+            <br>
+                <div class="alert alert-success" role="alert"><em><strong><p>&emsp;" Potential Two Hour Limit "</p></strong></em></div>
+        </nav>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-</head>
-<body>
-<!--BASIC HELLO WORLD TEST TO MAKE SURE OUR SETUP WORKS!-->
-
-<nav class="navbar navbar-default">
-        <div class="navbar-header">
-            <form class="navbar-form navbar-left" role="search">
-                <button type="submit" class="btn btn-default btn-lg" id="AdminButton">Admin</button>
-                <button type="submit" class="btn btn-default btn-lg" id="SwapRoomButton">Swap Rooms</button>
-                <button type="submit" class="btn btn-default btn-lg" id="ReviewButton">Reviews</button>
-                <button type="submit" class="btn btn-default btn-lg" id="HelpButton">Help</button>
-            </form>
+        <!--Title page !-->
+        <div class="page-header">
+            <h1>
+                &emsp;
+                IMS Room Renter v.1 <small>
+                &emsp;<span class="label label-default"><em>Welcome Toro!</em></span></small>
+            </h1>
         </div>
-    <br>
-        <div class="alert alert-success" role="alert"><em><strong><p>&emsp;" Potential Two Hour Limit "</p></strong></em></div>
-</nav>
 
-<!--Title page !-->
-<div class="page-header">
-    <h1>
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-        IMS Room Renter v.1 <small>
-        &emsp;<span class="label label-default"><em>Welcome Toro!</em></span></small>
-    </h1>
-</div>
-
-
-<nav class="navbar navbar-default">
-    <div class="navbar-header">
-        <form class="navbar-form navbar-left" role="search">
-
-            <br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-            Need a quiet place to study?
-
-            <br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-            Instructional Media Services
-
-            <br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-            presents <em>IMS Room Renter v.1</em>
-            <br><br>
-            <h3>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                    <span class="label label-default"> Next Available Time:</span>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                    <span class="label label-default"> Current Available Rooms:</span>
-            </h3>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <form class="navbar-form navbar-left" role="search">
+                    <!-- //was just an idea
                     <br>
-                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                        &emsp;&emsp;&emsp;&emsp;&emsp;
+                            Need a quiet place to study?
+                    <br>
+                             Instructional Media Services
+                    <br>
+                        <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                             presents <em>IMS Room Renter v.1</em>-->
+                    <h3>
+                            <span class="label label-default"> Next Available Time:</span>
+                            <span class="label label-default"> Current Available Rooms:</span>
+                    </h3>
+                            <br>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="">
                     </div>
                     <button type="submit" class="btn btn-default">Check</button>
-                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="">
                     </div>
                     <button type="submit" class="btn btn-default">Check</button>
-        </form>
-    </div>
-</nav>
-<div class="body">
-    <form class="navbar-form navbar-left" role="search">
-        <ul class="nav nav-pills">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">ClockIn</a></li>
-            <li role="presentation"><a href="#">ClockOut</a></li>
-            <li role="presentation"><a href="#">FAQ</a></li>
-            <li role="presentation"><a href="#">Contact Us</a></li>
-        </ul>
-    </form>
-</div>
-            <!--include javascript files here-->
-<script type="text/javascript" src="js/lib/jquery-3.1.1.min.js"></script>
-<!--cdn our bootstrap js, just to keep things clean-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                </form>
+            </div>
+        </nav>
+            <div class="body">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="well well-lg">
+                    <ul class="nav nav-pills" id="testButton">
+                        <li role="presentation" class="active"><a href="#">Home</a></li>
+                        <li role="presentation"><a href="#">ClockIn</a></li>
+                        <li role="presentation"><a href="#">ClockOut</a></li>
+                        <li role="presentation"><a href="#">FAQ</a></li>
+                        <li role="presentation"><a href="#">Contact Us</a></li>
+                    </ul>
+                    </div>
+                </form>
+            </div>
+       <!-- <div class="input-group"> //I don't get the purpose of {{}}name.  All sorts of students will be using it.
+            <h1>Welcome! {{name}}</h1>
+            <p>Name : <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
+                             ng-model="name"></p>
+        </div>
+        <button class="btn btn-default" id="testButton">Test</button>-->
 
-<!--include our angularjs file-->
-<script type="text/javascript" src="js/lib/angular.min.js"></script>
-<!--and our angular-route file-->
-<script type="text/javascript" src="js/lib/angular-route.min.js"></script>
 
-<!--CUSTOM JAVASCRIPT FILES GO HERE-->
+        <!--include javascript files here-->
 
-</body>
-</html>
+        <script type="text/javascript" src="js/lib/jquery-3.1.1.min.js"></script>
+        <!--cdn our bootstrap js, just to keep things clean-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <!--include our angularjs file-->
+        <script type="text/javascript" src="js/lib/angular.min.js"></script>
+        <!--and our angular-route file-->
+        <script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+
+        <!--CUSTOM JAVASCRIPT FILES GO HERE-->
+        <script type="text/javascript" src="js/main.js"></script>
+        </body>
+    </html>

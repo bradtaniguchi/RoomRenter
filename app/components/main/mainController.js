@@ -2,7 +2,7 @@
  * Created by brad on 12/16/16.
  */
 
-mainApp.controller("mainPageController", function($scope, $location){
+roomRenter.controller("mainController", function($scope, $location){
     $scope.name = "";
     $scope.back = function () {
         window.history.back();

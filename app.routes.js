@@ -1,12 +1,12 @@
 /**
- * Created by brad on 12/16/16.
+ * Created by brad on 12/22/16.
  */
-mainApp.config(function ($routeProvider) {
+roomRenter.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/ClockIn', {
         templateUrl: '/templates/ClockIn.html',
         controller: 'clockInController'
-    }).when('/ClockOut',{
+    })/*.when('/ClockOut',{
         templateUrl: '/templates/ClockOut.html',
         controller: 'clockOutController'
     }).when('/Admin', {
@@ -18,8 +18,8 @@ mainApp.config(function ($routeProvider) {
     }).when('Admin/ViewStats',{
         templateUrl: '/templates/ViewStats.html',
         controller: 'viewStatsController'
-    }).otherwise({
-        redirectTo: '/index.html',
-        controller: 'mainPageController'
+    })*/.otherwise({
+        templateUrl: 'app/components/main/mainView.html',
+        controller: 'mainController'
     });
-});
+}]);

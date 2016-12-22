@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="mainApp" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Room Renter v.1</title>
@@ -7,39 +7,33 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--include our custom theme-->
+    <link rel="stylesheet" href="assets/css/theme.css">
 </head>
-<body class="container" data-ng-controller="mainPageController">
-<nav class="navbar navbar-default">
-    <div class="navbar-header">
-        <div class="navbar-form navbar-left">
-            <button class="btn btn-default" id="AdminButton">Admin</button>
-            <button class="btn btn-default" id="SwapRoomButton">Swap Rooms</button>
-            <button class="btn btn-default" id="HelpButton">Help</button>
-        </div>
-    </div>
-</nav>
-<div class="input-group">
-    <h1>Welcome! {{name}}</h1>
-    <p>Name : <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
-                     data-ng-model="name"></p>
-</div>
-<button data-ng-href="#/ClockIn" class="btn btn-default">Test</button>
+<body class="container" data-ng-app="roomRenter">
+    <!--include the navbar html-->
+    <div ng-include="'app/shared/top-navbar/navbarView.html'"></div>
+    <!--primary view-->
+    <div ng-view></div>
 
 
-<!--include javascript files here-->
-<script type="text/javascript" src="js/lib/jquery-3.1.1.min.js"></script>
-<!--cdn our bootstrap js, just to keep things clean-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--JAVASCRIPT FILES GO BELOW-->
+    <script type="text/javascript" src="assets/lib/jquery-3.1.1.min.js"></script>
+    <!--cdn our bootstrap js, just to keep things clean-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<!--include our angularjs file-->
-<script type="text/javascript" src="js/lib/angular.min.js"></script>
-<!--and our angular-route file-->
-<script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+    <!--include our angularjs file-->
+    <script type="text/javascript" src="assets/lib/angular.min.js"></script>
+    <!--and our angular-route file-->
+    <script type="text/javascript" src="assets/lib/angular-route.min.js"></script>
 
-<!--CUSTOM JAVASCRIPT FILES GO HERE-->
-<script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/controllers/mainPageController.js"></script>
-<script type="text/javascript" src="js/routes.js"></script>
+    <!--CUSTOM JAVASCRIPT FILES GO HERE-->
+    <script type="text/javascript" src="app.module.js"></script>
+    <script type="text/javascript" src="app.routes.js"></script>
+
+    <!--Controllers are included here, include all of them for now-->
+    <script type="text/javascript" src="app/components/main/mainController.js"></script>
+
 </body>
 </html>

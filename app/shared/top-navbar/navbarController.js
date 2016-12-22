@@ -6,6 +6,9 @@ roomRenter.controller("navbarController", function($scope, $location){
     //a simple debugging variable to make sure we are in the right controller
     $scope.name = 'navbarController name';
 
+    $scope.refresh = function() {
+        location.reload();
+    };
     $scope.showBack = function() {
         return $location.path == '/Admin';
     };

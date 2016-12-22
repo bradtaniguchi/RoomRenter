@@ -12,7 +12,9 @@
 </head>
 <body class="container" data-ng-app="roomRenter">
     <!--include the navbar html-->
-    <div ng-include="'app/shared/top-navbar/navbarView.html'"></div>
+    <div ng-controller="navbarController">
+        <div ng-include="'app/shared/top-navbar/navbarView.html'"></div>
+    </div>
 
     <!--primary view-->
     <div ng-view></div>

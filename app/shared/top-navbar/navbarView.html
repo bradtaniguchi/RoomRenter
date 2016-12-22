@@ -3,10 +3,14 @@ NOTE: I think we will have to ng-include this snippet!-->
 <nav class="navbar navbar-default">
     <div class="navbar-header">
         <div class="navbar-form navbar-left">
-            <button class="btn btn-default" id="AdminButton">Admin</button>
-            <button class="btn btn-default" id="SwapRoomButton">Swap Rooms</button>
-            <button class="btn btn-default" id="HelpButton">Help</button>
+            <button class="btn btn-default" data-ng-click="go('/Admin')">Admin</button>
+            <button class="btn btn-default">Swap Rooms</button>
+            <button class="btn btn-default">Help</button>
         </div>
     </div>
+    <div class="navbar-form pull-right">
+        <button class="btn btn-default" data-ng-click="back()">
+            <span class="glyphicon glyphicon-menu-left"></span>
+        </button>
+    </div>
 </nav>
-<div class="alert alert-success" role="alert"><em><strong><p>&emsp;" Potential Two Hour Limit "</p></strong></em></div>

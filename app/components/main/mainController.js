@@ -8,8 +8,8 @@ roomRenter.controller("mainController", function($scope, $location){
         window.history.back();
     };
 
-    $scope.isActive = function (route) {
-        return route === $location.path();
+    $scope.go = function (path) {
+        $location.path(path);
     };
 
     $scope.isActivePath = function (route) {

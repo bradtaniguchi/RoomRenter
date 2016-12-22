@@ -3,9 +3,43 @@
 <div class="alert alert-success" role="alert"><em><strong><p>&emsp;" Potential Two Hour Limit "</p></strong></em></div>
 -->
 <div class="page-header">
-    <h1>IMS Room Renter v.1</h1>
+    <div class="jumbotron">
+        <h1>Room Renter v.1</h1>
+    </div>
 </div>
-<nav class="navbar navbar-default">
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>User Tools</h3>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group" role="group" aria-label="Clock In">
+                    <button class="btn btn-default btn-lg">Clock In</button>
+                </div>
+                <br><br>
+                <div class="btn-group" role="group" aria-label="Clock Out">
+                    <button class="btn btn-default btn-lg">Clock Out</button>
+                </div>
+            </div>
+        </div>
+        <div class="well well-lg">
+            <h3>Test Buttons, used to navigate during dev</h3>
+            <ul class="nav nav-pills">
+                <li class="btn btn-default btn-sm" data-ng-click="go('/')"><a>Home</a></li>
+                <li class="btn btn-default btn-sm" data-ng-click="go('/ClockIn')"><a>ClockIn</a></li>
+                <li class="btn btn-default btn-sm" data-ng-click="go('/ClockOut')"><a>ClockOut</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>SCHOOL MASCOT</h3></div>
+            <div class="panel-body"></div>
+        </div>
+    </div>
+</div>
+<nav class="navbar">
     <div class="navbar-header">
         <form class="navbar-form navbar-left" role="search">
             <h3>
@@ -13,27 +47,14 @@
                 <span class="label label-default"> Current Available Rooms:</span>
             </h3>
             <br>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <input type="text" class="form-control" placeholder="">
             </div>
             <button type="submit" class="btn btn-default">Check</button>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="">
             </div>
-            <button type="submit" class="btn btn-default">Check</button>
+            <button type="submit" class="btn btn-default">Check</button>-->
         </form>
     </div>
 </nav>
-<div class="body">
-    <form class="navbar-form navbar-left" role="search">
-        <div class="well well-lg">
-            <ul class="nav nav-pills" id="testButton">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">ClockIn</a></li>
-                <li role="presentation"><a href="#">ClockOut</a></li>
-                <li role="presentation"><a href="#">FAQ</a></li>
-                <li role="presentation"><a href="#">Contact Us</a></li>
-            </ul>
-        </div>
-    </form>
-</div>

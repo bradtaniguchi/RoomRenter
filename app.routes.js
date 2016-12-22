@@ -12,20 +12,20 @@ roomRenter.config(['$routeProvider', function($routeProvider) {
         controller: 'adminExportController'
     }).when('/Admin',{
         templateUrl: 'app/components/adminMain/adminMainView.html',
-        controller: ''
+        controller: 'adminMainController'
     }).when('/Admin/Stat', {
         templateUrl: 'app/components/adminStat/adminStatView.html',
-        controller: ''
+        controller: 'adminStatController'
     }).when('/Admin/Time',{
         templateUrl: 'app/components/adminTime/adminTimeView.html',
-        controller: ''
+        controller: 'adminTimeController'
 
     }).when('/ClockIn',{
         templateUrl: 'app/components/clockIn/clockInView.html',
-        controller: ''
+        controller: 'clockInController'
     }).when('/ClockOut',{
         templateUrl: 'app/components/clockOut/clockOutView.html',
-        controller: ''
+        controller: 'clockOutController'
     }).otherwise({
         templateUrl: 'app/components/main/mainView.html',
         controller: 'mainController'

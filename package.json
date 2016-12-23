@@ -15,6 +15,10 @@
       "email": "bradtaniguchi.dev@gmail.com"
     }
   ],
+  "dependencies": {
+    "nw": "0.19.2",
+    "sqlite3": "3.1.8"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bradtaniguchi/RoomRenter"

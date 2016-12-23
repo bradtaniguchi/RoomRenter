@@ -34,3 +34,9 @@ app - This folder holds the files for AngularJS
 assets - This folder holds the usual assets for the application in general
 app.route.js - This file handles the routing of the application, uses angular
 app.module.js - This file setups dependences and creates the angular app.
+
+---
+**Installation**
+Due to the large package size, it is neccessary to install the nodejs 
+modules seperately. This can be done with the following command:
+`npm install`

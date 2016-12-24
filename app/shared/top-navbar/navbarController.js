@@ -2,19 +2,16 @@
  * Created by brad on 12/22/16.
  */
 
-roomRenter.controller("navbarController", function($scope, $location){
+roomRenter.controller("navbarController", function($scope, $location, generalService){
     //a simple debugging variable to make sure we are in the right controller
     $scope.name = 'navbarController name';
 
     $scope.refresh = function() {
         location.reload();
     };
-    $scope.showBack = function() {
-        return $location.path == '/Admin';
-    };
 
-    $scope.go = function (path) {
-        $location.path(path);
+    $scope.go = function(path) {
+        generalService.changeView(path);
     };
 
     $scope.back = function () {
@@ -22,6 +19,6 @@ roomRenter.controller("navbarController", function($scope, $location){
     };
 
     $scope.isActive = function (route) {
-        return route === $location.path();
+        return route === location.path();
     };
 });

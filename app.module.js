@@ -7,3 +7,12 @@
 /*Global variable to be used anytime we want to print to console.*/
 var debug = true;
 var roomRenter = angular.module('roomRenter', ['ngRoute']);
+
+/*This service will be moved elsewhere at a later time...*/
+roomRenter.service('generalService', function($location){
+    /*A function to be called to switch location within the application*/
+    this.changeView = function(path) {
+        console.log('Changing View' + path);
+        $location.path(path);
+    }
+});

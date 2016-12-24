@@ -8,6 +8,10 @@
 var debug = true;
 var roomRenter = angular.module('roomRenter', ['ngRoute']);
 
+roomRenter.service('appInfo', function(){
+    this.appVersion = '0.0.7';
+});
+
 /*This service will be moved elsewhere at a later time...*/
 roomRenter.service('generalService', function($location){
     /*A function to be called to switch location within the application*/

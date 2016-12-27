@@ -7,6 +7,7 @@
 /*Global variable to be used anytime we want to print to console.*/
 var debug = true;
 var roomRenter = angular.module('roomRenter', ['ngRoute']);
+//var sqlite3 = require('sqlite3').verbose(); //ONLY WORKS ON NW.JS
 
 roomRenter.service('appInfo', function(){
     this.appVersion = '0.0.7';

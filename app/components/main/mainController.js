@@ -14,5 +14,9 @@ roomRenter.controller("mainController", function($scope, $location){
 
     $scope.isActivePath = function (route) {
         return ($location.path()).indexOf(route) >= 0;
+    };
+
+    $scope.testDatabase = function(){
+        console.log(database.testGetTables()); //should return 2 in console!
     }
 });

@@ -6,28 +6,42 @@ TODO: Add data-toggles and titles to all input fields!-->
     </div>
     <div class="panel-body">
         <div class="form-group row" data-toggle="tooltip" title="Your email the school gave you">
-            <label for="exampleInputEmail1" class="col-xs-2 col-form-label">Toro Email</label>
+            <label for="exampleInputEmail1" class="col-xs-2 col-form-label">Toro Username</label>
             <div class="col-xs-10">
                 <div class="input-group">
-                    <input ng-model="email" class="form-control" id="exampleInputEmail1"
+                    <!--<input ng-model="email" class="form-control" id="exampleInputEmail1"
                            aria-describedby="emailHelp" placeholder="Enter email">
                     <div class="input-group-addon">@toromail.csudh.edu</div>
+                    <div class="input-group">-->
+                        <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-addon" id="basic-addon2">@toromail.csudh.edu</span>
                 </div>
             </div>
         </div>
-        <div class="form-group row" data-toggle="tooltip" title="Your ID that is on your studentID">
-            <label for="example-number-input" class="col-xs-2 col-form-label">StudentID Number</label>
+
+    <div class="form-group row" data-toggle="tooltip" title="Your ID that is on your studentID">
+        <label for="example-number-input" class="col-xs-2 col-form-label">StudentID Number</label>
             <div class="col-xs-10">
                 <input ng-model="studentID" class="form-control" type="number" value="12345678" id="example-number-input">
             </div>
-        </div>
-        <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
+    </div>
+    <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
             <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
             <strong>Error!</strong> Invalid Entry! {{errorMessage}}
-        </div>
-        <h4>Rooms go here DYNAMICALLY</h4>
-
-        <br/>
-        <button class="btn btn-default" data-ng-click="submit()">Submit</button>
     </div>
+    <h4>Rooms go here DYNAMICALLY</h4>
+        <form class="navbar-form navbar-left" role="search">
+            <div class=jumbotron">
+                <h4><Strong>Choose Room:</Strong></h4>
+                <a class="btn btn-primary btn-lg" href="#" role="button">1</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">2</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">3</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">4</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">5</a>
+            </div>
+        </form>
+    </div>
+    &nbsp;&emsp;&emsp;<button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button>
 </div>
+
+

@@ -14,8 +14,8 @@
                 <h3>User Tools</h3>
             </div>
             <div class="panel-body">
-                <div class="btn-group" role="group" aria-label="Clock In" title="Clock Into a Room">
-                    <button data-ng-click="go('/ClockIn')" class="btn btn-default btn-lg">Clock In</button>
+                <div class="btn-group" role="group" aria-label="Clock In " title="Clock Into a Room">
+                    <button data-ng-click="go('/ClockIn')" class="btn btn-default btn-lg">Clock In &nbsp;</button>
                 </div>
                 <br><br>
                 <div class="btn-group" role="group" aria-label="Clock Out" title="Clock Out of a Room">
@@ -25,14 +25,14 @@
         </div>
         <div class="well well-lg">
             <h3>Test Buttons, used to navigate during dev</h3>
-            <ul class="nav nav-pills">
-                <li class="btn btn-default btn-sm" data-ng-click="go('/')"><a>Home</a></li>
-                <li class="btn btn-default btn-sm" data-ng-click="go('/ClockIn')"><a>ClockIn</a></li>
-                <li class="btn btn-default btn-sm" data-ng-click="go('/ClockOut')"><a>ClockOut</a></li>
-                <li class="btn btn-default btn-sm" data-ng-click="go('/Admin')"><a>AdminMain</a></li>
-                <li class="btn btn-default btn-sm" data-ng-click="go('/Admin/Export')"><a>AdminExport</a></li>
-                <li class="btn btn-default btn-sm" data-ng-click="go('/Admin/Stat')"><a>AdminStat</a></li>
-                <li class="btn btn-default btn-sm" data-ng-click="go('/Admin/Time')"><a>AdminTime</a></li>
+            <ul class="list-group">
+                <li class="list-group-item" role="button" data-ng-click="go('/')"><a>Home</a></li>
+                <li class="list-group-item" role="button" data-ng-click="go('/ClockIn')"><a>ClockIn</a></li>
+                <li class="list-group-item" role="button" data-ng-click="go('/ClockOut')"><a>ClockOut</a></li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin')"><a>AdminMain</a></li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Export')"><a>AdminExport</a></li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Stat')"><a>AdminStat</a></li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Time')"><a>AdminTime</a></li>
             </ul>
         </div>
     </div>
@@ -40,6 +40,7 @@
         <div class="panel panel-default">
             <div class="panel-heading"><h3>Logo/Pictures</h3></div>
             <div class="panel-body"></div>
+            <img src="/RoomRenter/assets/RM.png" width="100%">
         </div>
     </div>
 </div>
@@ -47,18 +48,14 @@
     <div class="navbar-header">
         <form class="navbar-form navbar-left" role="search">
             <h3>
-                <span class="label label-default"> Next Available Time:</span>
-                <span class="label label-default"> Current Available Rooms:</span>
-            </h3>
             <br>
-            <!--<div class="form-group">
-                <input type="text" class="form-control" placeholder="">
-            </div>
-            <button type="submit" class="btn btn-default">Check</button>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="">
             </div>
-            <button type="submit" class="btn btn-default">Check</button>-->
+                <span class="label label-default"> Next Available Time: </span>&nbsp;&nbsp;<button type="submit" class="btn btn-default">Check&nbsp;<input type="text" class="form-control" aria-label="..."></button>
+            <div class="form-group">
+            </div>
+                <span class="label label-default">Available Rooms: </span>&nbsp;&nbsp;<button type="submit" class="btn btn-default">Check&nbsp;<input type="text" class="form-control" aria-label="..."></button>
+            </h3>
         </form>
     </div>
 </nav>

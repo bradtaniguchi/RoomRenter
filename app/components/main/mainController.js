@@ -18,13 +18,14 @@ roomRenter.controller("mainController", function($scope, $location) {
 
     $scope.testDatabase = function () {
         console.log(database.testGetTables()); //should return 2 in console!
-    }
+    };
 
     $scope.vacant = function() {
         document.getElementById("avail").innerHTML = "1 2 3 4 5";
-    }
+    };
+
     $scope.time = function() {
-        document.getElementById("opens").innerHTML = Date();
-    }
+        document.getElementById("opens").innerHTML = new Date();
+    };
 
 });

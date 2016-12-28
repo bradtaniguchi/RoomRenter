@@ -25,7 +25,10 @@ roomRenter.controller("mainController", function($scope, $location) {
     };
 
     $scope.time = function() {
-        document.getElementById("opens").innerHTML = new Date();
+        var time= new Date();
+        document.getElementById("opens").innerHTML = time.getHours() + ' : '+ time.getMinutes();
+        //document.getElementById("opens").innerHTML = time.getMinutes();
+
     };
 
 });

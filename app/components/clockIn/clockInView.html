@@ -4,11 +4,7 @@ TODO: Add data-toggles and titles to all input fields!-->
     <div class="panel-heading">
         <h1>ClockIn</h1>
     </div>
-
-    <form class="panel-body">
-
     <form class="panel-body" >
-
         <div class="form-group row" data-toggle="tooltip" title="Your email the school gave you">
             <label for="toromail" class="col-xs-2 col-form-label">Toro Username</label>
             <div class="col-xs-10">
@@ -24,95 +20,14 @@ TODO: Add data-toggles and titles to all input fields!-->
             <div class="col-xs-10">
                 <input data-ng-model="studentID" class="form-control" type="number" id="studentID"/>
             </div>
-
-    </div>
-    <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
-            <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
-            <strong>Error!</strong> Invalid Entry! {{errorMessage}}
-    </div>
-
-   <!-- <h3>Rooms go here DYNAMICALLY</h3>
-            <div class= "well well-sm">
-                <Strong><pre>Choose Room:</pre></Strong>
-            </div>
-        <!--Eric work here//V got here first-->
-
+        </div>
+        <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
+                <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
+                <strong>Error!</strong> Invalid Entry! {{errorMessage}}
+        </div>
         <div class= "well well-sm">
             <Strong>Choose a Room:</Strong>
         </div>
-        <!--<div data-ng-repeat="room in rooms" data-ng-bind-html-unsafe="room.text">
->>>>>>> 16eb892745d1ccd43e0fb004083c25d00c4279f4
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-
-                            <input type="radio" name="optradio" aria-label="...">
-
-                        </span>
-<<<<<<< HEAD
-                        <output type="text" class="form-control" style="display:inline;" aria-label="...">Room 1</output>
-                    </div><!-- /input-group -->
-   <!--             </div><!-- /.col-lg-6 -->
-    <!--            <div class="col-lg-6">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <input type="radio" name="optradio" aria-label="...">
-                    </span>
-                    <output type="text" class="form-control" style="display:inline;" aria-label="...">Room 2</output>
-                    </div><!-- /input-group -->
-      <!--          </div><!-- /.col-lg-6 -->
-   <!--         </div><!-- /.row -->
-  <!--      <div class="row">
-            <div class="col-lg-6">
-                <div class="input-group">
-                        <span class="input-group-addon">
-                            <input type="radio" name="optradio" aria-label="...">
-                        </span>
-                    <output type="text" class="form-control" style="display:inline;" aria-label="...">Room 3</output>
-                </div><!-- /input-group -->
-     <!--       </div><!-- /.col-lg-6 -->
-    <!--        <div class="col-lg-6">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <input type="radio" name="optradio" aria-label="...">
-                    </span>
-                    <output type="text" class="form-control" style="display:inline;" aria-label="...">Room 4</output>
-                </div><!-- /input-group -->
-    <!--        </div><!-- /.col-lg-6 -->
-  <!--          </div><!-- /.row -->
-   <!--         <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="optradio" aria-label="...">
-                            </span>
-                        <output type="text" class="form-control" style="display:inline;" aria-label="...">Room 5</output>
-                    </div><!-- /input-group -->
-   <!--                 <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button>
-                </div><!-- /.col-lg-6 -->
-  <!--          </div>
-
-    </form>
-
--->
-        <!--<form class="navbar-form navbar-left" role="search">
-            <!--<div class=jumbotron">
-                <h4><Strong>Choose Room:</Strong></h4>
->>>>>>> 928a88bdfea38aefd1377718c1ae43aa0114a6a6
-                <a class="btn btn-primary btn-lg" href="#" role="button">1</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button">2</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button">3</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button">4</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button">5</a>
-                <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button>
-=======
-                        <p>{{room.text}}</p>
-                    </div>
-                </div>
->>>>>>> 16eb892745d1ccd43e0fb004083c25d00c4279f4
-            </div>
-        </div>-->
         <div data-ng-repeat="room in rooms" class="btn-group" data-toggle="buttons">
             <div class="row">
                 <div class="col-lg-6">
@@ -131,30 +46,26 @@ TODO: Add data-toggles and titles to all input fields!-->
             <strong>Error!</strong> Invalid Entry! {{errorMessage}}
         </div>
     </form>
-
-<!--modal popup, for successful entry-->
-
-    <!--modal popup, for successful entry-->
-    <div class="modal fade" id="successModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">Sucessful ClockIn</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Add Stuff about the login</p> <!--TODO-->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            data-ng-click="go('/')">Ok</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    </form>
 </div>
+<!--modal popup, for successful entry-->
+<div class="modal fade" id="successModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Sucessful ClockIn</h4>
+            </div>
+            <div class="modal-body">
+                <p>Add Stuff about the login</p> <!--TODO-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        data-ng-click="go('/')">Ok</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 

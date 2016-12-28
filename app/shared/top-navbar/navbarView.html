@@ -52,75 +52,34 @@ NOTE: I think we will have to ng-include this snippet!-->
                 </div>
                 <div class="modal-body">
                     <p> To swap rooms just choose your current room and choose new room from drop down<!-- Split button -->
-                    <div class="btn-group">
+                    <div class="btn-group" role="group" aria-label="First group">
                         <button type="button" class="btn btn-primary">Room 1</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Room 2</a></li>
-                            <li><a href="#">Room 3</a></li>
-                            <li><a href="#">Room 4</a></li>
-                            <li><a href="#">Room 5</a></li>
-                        </ul>
-                    </div>
-                    <!-- Split button -->
-                    <div class="btn-group">
                         <button type="button" class="btn btn-success">Room 2</button>
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Room 1</a></li>
-                            <li><a href="#">Room 3</a></li>
-                            <li><a href="#">Room 4</a></li>
-                            <li><a href="#">Room 5</a></li>
-                        </ul>
-                    </div>
-                    <!-- Split button -->
-                    <div class="btn-group">
                         <button type="button" class="btn btn-info">Room 3</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Room 1</a></li>
-                            <li><a href="#">Room 2</a></li>
-                            <li><a href="#">Room 4</a></li>
-                            <li><a href="#">Room 5</a></li>
-                        </ul>
-                    </div>
-                    <!-- Split button -->
-                    <div class="btn-group">
                         <button type="button" class="btn btn-warning">Room 4</button>
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Room 1</a></li>
-                            <li><a href="#">Room 2</a></li>
-                            <li><a href="#">Room 3</a></li>
-                            <li><a href="#">Room 5</a></li>
-                        </ul>
-                    </div>
-                    <!-- Split button -->
-                    <div class="btn-group">
                         <button type="button" class="btn btn-danger">Room 5</button>
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Room 1</a></li>
-                            <li><a href="#">Room 2</a></li>
-                            <li><a href="#">Room 3</a></li>
-                            <li><a href="#">Room 4</a></li>
-                        </ul>
                     </div>
+                    <form>
+
+
+
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Room 1
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Room 2
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Room 3
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Room 4
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Room 5
+                        </label>
+                    </form>
+
                     </p>
                     {{swapMessage}}
                 </div>

@@ -2,12 +2,25 @@
  * Created by brad on 12/22/16.
  */
 
-roomRenter.controller('clockInController', function($scope, $timeout, generalService){
+roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo){
     $scope.toromail = "";
     $scope.studentID = 0;
     $scope.choosenRoom = 1; //temp hardcode
     $scope.errorMessage = "";
     $scope.alertClass = 'hide'; //hide message at the start
+    $scope.numberOfRooms = appInfo.numberOfRooms; //get the number of rooms the program is configed to
+    $scope.rooms = [];
+
+    function buildRooms() {
+        for (var i = 0; i < $scope.numberOfRooms; i++) {
+            var num = i + 1;
+            var room = { //create an object
+                value : num, //set room value to current iteration
+                text : 'Room ' + num
+            };
+            $scope.rooms.push(room);
+        }
+    }
 
     /*help us move between parts in the application*/
     $scope.go = function(path) {
@@ -22,6 +35,7 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
         $scope.alertClass = "hide";
         $scope.errorMessage = "";
     };
+
     /*Open the entry alert on the page, with the given message*/
     $scope.alertOpen = function(message){
         $scope.alertClass = "";
@@ -54,6 +68,7 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
             /*Show Timed modal popup to confirm (1 minute)*/
             angular.element('#successModal').modal('show');
         }
-
     };
+    buildRooms();
+    console.log($scope.rooms.length);
 });

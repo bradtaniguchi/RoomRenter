@@ -2,7 +2,7 @@
 TODO: Add data-toggles and titles to all input fields!-->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3>ClockIn</h3>
+        <h1>ClockIn</h1>
     </div>
     <div class="panel-body">
         <div class="form-group row" data-toggle="tooltip" title="Your email the school gave you">
@@ -29,19 +29,18 @@ TODO: Add data-toggles and titles to all input fields!-->
             <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
             <strong>Error!</strong> Invalid Entry! {{errorMessage}}
     </div>
-    <h4>Rooms go here DYNAMICALLY</h4>
-        <form class="navbar-form navbar-left" role="search">
-            <div class=jumbotron">
-                <h4><Strong>Choose Room:</Strong></h4>
+
+    <h3>Rooms go here DYNAMICALLY</h3>
+            <div class= "well well-sm">
+                <Strong><pre>Choose Room:</pre></Strong>
                 <a class="btn btn-primary btn-lg" href="#" role="button">1</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">2</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">3</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">4</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">5</a>
+                <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button>
             </div>
-        </form>
     </div>
-    &nbsp;&emsp;&emsp;<button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button>
 </div>
 
 

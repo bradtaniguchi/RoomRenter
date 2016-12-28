@@ -1,45 +1,43 @@
 <!--Clock Out View-->
-<h1>ClockOut</h1>
-<div class="well well-lg">
-    <div class="input-group">
-        <span class="input-group-addon">Room 1.</span>
-        <input type="text" class="form-control" aria-label="...">
-        <span class="input-group-addon submit-button" role="button" id="room1">Confirm</span>
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h1>ClockOut</h1>
     </div>
-    <p></p>
-    <div class="input-group">
-        <span class="input-group-addon">Room 2.</span>
-        <input type="text" class="form-control" aria-label="...">
-        <span class="input-group-addon btn-default" role="button" data-ng-click="submit()">Confirm</span>
-    </div>
-    <p></p>
-    <div class="input-group">
-        <span class="input-group-addon">Room 3.</span>
-        <input type="text" class="form-control" aria-label="...">
-        <span class="input-group-addon btn-default" role="button" data-ng-click="submit()">Confirm</span>
-    </div>
-    <p></p>
-    <div class="input-group">
-        <span class="input-group-addon">Room 4.</span>
-        <input type="text" class="form-control" aria-label="...">
-        <span class="input-group-addon btn-default" role="button" data-ng-click="submit()">Confirm</span>
-    </div>
-    <p></p>
-    <div class="input-group">
-        <span class="input-group-addon">Room 5.</span>
-        <input type="text" class="form-control" aria-label="...">
-        <span class="input-group-addon btn-default" role="button" data-ng-click="submit()">Confirm</span>
-    </div>
-    <p></p>
+    <form class="panel-body">
+        <div data-ng-repeat="room in usedRooms track by $index" class="btn-group" data-toggle="buttons">
+            <div class="form-group">
+                <div class="input-group" data-toggle="tooltip" title="The room you were using" >
+                    <span class="input-group-addon">Room {{$index + 1}}.</span>
+                    <input type="text" class="form-control" aria-label="...">
+                    <span class="input-group-addon submit-button btn" title="Clock out of the current room"
+                          role="button" data-ng-click="clockOut(0)">Clockout</span>
+                </div>
+            </div>
+        </div>
+        <div data-ng-class="alertClass" class="alert alert-info">
+            <p>{{emptyMessage}}</p>
+        </div>
+        <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
+                data-ng-click="go('/')">Cancel</button>
+    </form>
 </div>
-<!--
-<div class="col-lg-6">
-    <pre><i>Clockout User</i></pre>
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="">
-        <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Confirm</button>
-      </span>
-    </div><-- /input-group ->
-</div><-- /.col-lg-6->
--->
+<!--modal popup, for successful clockout-->
+<div class="modal fade" id="successModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Sucessful ClockIn</h4>
+            </div>
+            <div class="modal-body">
+                <p>Add Stuff about the login</p> <!--TODO-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        data-ng-click="go('/')">Ok</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -38,11 +38,16 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
 
         /*Check if entries are valid..*/
         if ($scope.toromail == "") {
-            $scope.alertOpen("Wrong Email!");
+            $scope.alertOpen("No Email!");
+        } else if($scope.toromail.length > 64) { //we set a strict limit on the email length
+            $scope.alertOpen("Username is to long! Provide a shorter Username")
+            $scope.toromail = ""; //reset this field for them
         } else if($scope.studentID == 0 || $scope.studentID < 0) {
             $scope.alertOpen("Bad userID!");
+            $scope.studentID = 0; //reset this field for them
         } else if($scope.choosenRoom == 0) {
-            $scope.alertOpen("Pic a valid room!");
+            $scope.alertOpen("Pick a valid room!");
+            $scope.choosenRoom = 0; //reset this field for them
         } else {
             /*The user entered valid entries*/
             console.log("Valid entry, submitting to database.");

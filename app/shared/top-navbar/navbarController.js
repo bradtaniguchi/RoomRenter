@@ -45,9 +45,8 @@ roomRenter.controller("navbarController", function($scope, $location, generalSer
     /*$scope.swapper = function() {
         //var time= new Date();
         document.getElementById("rm1").innerHTML = "hello";
-
-
     }*/
+
     buildRooms();
     console.log($scope.rooms.length);
 });

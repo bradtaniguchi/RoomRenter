@@ -6,14 +6,18 @@
 
 /*Global variable to be used anytime we want to print to console.*/
 var debug = true;
-var numberOfRooms = 5; // set default
+var numberOfRooms = 5; // set default number of rooms
+var adminPassword = "fall2016@dh";
 
 var roomRenter = angular.module('roomRenter', ['ngRoute']);
 //var sqlite3 = require('sqlite3').verbose(); //ONLY WORKS ON NW.JS
 
+/*General application configurations assignment*/
 roomRenter.service('appInfo', function(){
-    this.appVersion = '0.0.7';
+    this.debug = debug;
+    this.appVersion = '0.0.11';
     this.numberOfRooms = numberOfRooms;
+    this.adminPassword = adminPassword;
 });
 
 /*This service will be moved elsewhere at a later time...*/
@@ -22,5 +26,9 @@ roomRenter.service('generalService', function($location){
     this.changeView = function(path) {
         console.log('Changing View' + path);
         $location.path(path);
+        /*Initialize bootstrap tooltips upon page switches*/
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     }
 });

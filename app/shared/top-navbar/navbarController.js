@@ -7,6 +7,8 @@ roomRenter.controller("navbarController", function($scope, $location, generalSer
     $scope.name = 'navbarController name';
     $scope.swapMessage = '';
     $scope.version = appInfo.appVersion;
+    $scope.numberOfRooms = appInfo.numberOfRooms;
+    $scope.rooms = [];
 
     /*Generic navbar functions*/
     $scope.refresh = function() {
@@ -29,4 +31,23 @@ roomRenter.controller("navbarController", function($scope, $location, generalSer
         var secondRoom = 0;
         /*1. get the two rooms, and let the logic in a service to handle it.*/
     }
+    function buildRooms() {
+        for (var i = 0; i < $scope.numberOfRooms; i++) {
+            var num = i + 1;
+            var room = { //create an object
+                value : num, //set room value to current iteration
+                text : 'Room ' + num + ' '
+            };
+            $scope.rooms.push(room);
+        }
+    }
+    //tester for my own knowledge of how to call from JS file - Eric
+    /*$scope.swapper = function() {
+        //var time= new Date();
+        document.getElementById("rm1").innerHTML = "hello";
+
+
+    }*/
+    buildRooms();
+    console.log($scope.rooms.length);
 });

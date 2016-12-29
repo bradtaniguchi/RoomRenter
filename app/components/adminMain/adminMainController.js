@@ -38,11 +38,15 @@ roomRenter.controller('adminMainController', function($scope, generalService, ap
     };
 
         /*help us move between parts in the application*/
-    $scope.go = function(path) {
+    $scope.goModal = function(path) {
         angular.element('#successModal').modal('hide');
         $timeout(function(){
             generalService.changeView(path);
         }, 500);
+    };
+    /*Generic change page manager*/
+    $scope.go = function(path) {
+        generalService.changeView(path);
     };
 
     /*Upon page load, we want to show the modal*/

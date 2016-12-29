@@ -1,14 +1,46 @@
 <!--Admin Main View-->
-<h1>Admin Main View</h1>
-
-<form>
-    <div class="form-group">
-        <label for="UserName">Admin Login</label>
-        <input type="Username" class="form-control" id="Username" aria-describedby="emailHelp" placeholder="User Name">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>Admin Main View</h1>
     </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <div class="panel-body">
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary btn-lg btn-block" data-toggle="tooltip" data-placement="right"
+                    title="Show information about the current rooms in use">Current Rooms</button>
+            <button class="btn btn-primary btn-lg btn-block" data-toggle="tooltip" data-placement="right"
+                    title="Show statistics about room use">Room Statistics</button>
+            <button class="btn btn-primary btn-lg btn-block" data-toggle="tooltip" data-placement="right"
+                    title="Print information in the database to a file, for reporting">Print Database</button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</div>
+<!--Modal popup to ask for login information-->
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-ng-click="go('/')"data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Admin Login</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password</label>
+                    <input data-ng-model="adminPassword" data-ng-change="alertClose()" type="password" class="form-control"
+                           id="adminPassword" placeholder="Password" title="Its the official DH IT 2016 password">
+                </div>
+                <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
+                    <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
+                    <strong>Error!</strong> Invalid Entry! {{errorMessage}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        data-ng-click="go('/')">Cancel</button>
+                <button type="button" class="btn btn-primary"
+                        data-ng-click="adminLogin()">Submit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

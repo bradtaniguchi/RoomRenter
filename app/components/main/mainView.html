@@ -2,7 +2,8 @@
 <!--
 <div class="alert alert-success" role="alert"><em><strong><p>&emsp;" Potential Two Hour Limit "</p></strong></em></div>
 -->
-<div class="page-header">
+<div >
+<div class="page-header" id="opens" data-ng-init="time('/')">
     <div class="well well-sm">
         <h1>Room Renter v.1</h1>
     </div>
@@ -42,17 +43,17 @@
             <div class="panel-heading"><h3>Logo/Pictures</h3></div>
             <img src="assets/RM.png" width="100%" length="100%">
         </div>
-<h3>
+<h3 >
             <br>
             <div class="form-group"></div>
             <div class="form-group"></div>
-        <span class="label label-default">Open Rooms: </span>&nbsp;&nbsp;<button type="submit" data-ng-click="vacant('/')"> <output type="text" id="avail" class="form-control" aria-label="..."/></button>
-        <span class="label label-default">Available Time:</span> <button type="submit" data-ng-click="time('/')"> <output type="text" id="opens" class="form-control" aria-label="..." /></button>
+        <span class="label label-default">Open Rooms: </span>&nbsp;&nbsp; <output type="text"  id="avail" class="form-control" aria-label="..." data-ng-init="vacant('/')"/>
+    <span class="label label-default">Current Time:</span>  <output  type="text" class="form-control" aria-label="..."/>
             <img src="assets/Toro.jpg" width="10%">
     </h3>
     </div>
 </div>
-
+</div>
 <!--
 <p id="demo">A Paragraph</p>
 <button type="button" data-ng-click="home('/')">Try it</button>

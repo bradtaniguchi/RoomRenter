@@ -5,12 +5,12 @@
  * -We also need to decide if this is a valid way of doing things.
  * */
 
-roomRenter.service('database', function (){
+roomRenter.service('database', function ($localForage){
     /*Create database connection here, to be used elsewhere in the service*/
 
-    /*Test to see if we have connected to the database correctly*/
-    this.testGetTables = function(){
-
+    /*Test to see if we have connected to the database correctly, returns type*/
+    this.test = function(){
+        return $localForage.driver();
     };
 
     /*Gets all users logged into the rooms as of right now.*/

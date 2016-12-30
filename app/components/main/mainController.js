@@ -4,6 +4,7 @@
 
 roomRenter.controller("mainController", function($scope, $location, database) {
     $scope.name = "";
+    var openings =5;
     $scope.back = function () {
         window.history.back();
     };
@@ -20,32 +21,16 @@ roomRenter.controller("mainController", function($scope, $location, database) {
         console.log(database.test()); //should return 2 in console!
     };
 
-    $scope.vacant = function() {
-        document.getElementById("avail").innerHTML = "5";
-    };
+    $scope.roomsVacant = function() {
 
-    $scope.time = function() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-
-        h = checkTime(h);
-        m = checkTime(m);
-        s = checkTime(s);
-
-            document.getElementById("opens").innerHTML = h + ' : ' + m + ' : ' + s;
-            //document.getElementById("opens").innerHTML = time.getMinutes();
-           //display();
-        var t = setTimeout(time(), 1000);
-
+        document.getElementById("avail").innerHTML = openings;
     };
       $scope.display=function(){
         var refresh = 1000;
         var mytime = setTimeout(time(), refresh);
     };
 
-    checkTime=function(i){
+    var checkTime = function(i){
         if (i < 10) {i = "0" + i;}  // add zero in front of numbers < 10
         return i;
     }

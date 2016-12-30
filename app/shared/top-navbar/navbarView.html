@@ -45,6 +45,7 @@ NOTE: I think we will have to ng-include this snippet!-->
                 </div>
                 <div class="modal-body">
                     <p>Add more information to this help menu...</p>
+                    <p></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -64,38 +65,53 @@ NOTE: I think we will have to ng-include this snippet!-->
                     <h4 class="modal-title">Swap Rooms</h4>
                 </div>
                 <div class="modal-body">
-                    <p> Click on current Room
+                    <p>Click on the room to swap from:
 
-
-                    <div class="btn-group" role="group" aria-label="First group">
-
-                        <button type="button" data-ng-click="swapRooms()"  id = rm1 class="btn btn-primary">Room 1</button>
-                        <button type="button" data-ng-click="swapRooms()"  id = rm2 class="btn btn-success">Room 2</button>
-                        <button type="button" data-ng-click="swapRooms()"  id = rm3 class="btn btn-info">Room 3</button>
-                        <button type="button" data-ng-click="swapRooms()"  id = rm4 class="btn btn-warning">Room 4</button>
-                        <button type="button" data-ng-click="swapRooms()"  id = rm5 class="btn btn-danger">Room 5</button>
-
+                    <div class="btn-groupone" data-toggle="buttons">
+                        <label class="btn btn-primary">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="rm1" autocomplete="off"> Room 1
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="rm2" autocomplete="off"> Room 2
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="rm3" autocomplete="off"> Room 3
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="rm4" autocomplete="off"> Room 4
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="rm5" autocomplete="off"> Room 5
+                        </label>
                     </div>
-                    </p>
-                    <p>Choose which room you wish to swap to: </p>
-                    <script src="navbarController.js"></script>
-                    <div data-ng-repeat="room in rooms" class="btn-group" data-toggle="buttons">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="input-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" autocomplete="off" name="optradio" value={{room.value}}/>{{room.text}}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                    <p></p>
+                    <p>Click on room to swap to:</p>
+                    <div class="btn-grouptwo" data-toggle="buttons">
+                        <label class="btn btn-danger">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="option1" autocomplete="off"> Room 1
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="option2" autocomplete="off"> Room 2
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="option3" autocomplete="off"> Room 3
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="option4" autocomplete="off"> Room 4
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="option5" autocomplete="off"> Room 5
+                        </label>
                     </div>
-                    {{swapMessage}}
+
                 </div>
+                    </p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Submit</button>
                 </div>
+                    {{swapMessage}}
+            </div>
             </div>
         </div>
     </div>

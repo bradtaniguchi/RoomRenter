@@ -50,3 +50,15 @@ roomRenter.controller("navbarController", function($scope, $location, generalSer
     buildRooms();
     console.log($scope.rooms.length);
 });
+/*
+might need this later.
+ <div class="btn-group" role="group" aria-label="First group">
+
+ <button type="button" data-ng-click="swapRooms()"  id = rm1 class="btn btn-primary">Room 1</button>
+ <button type="button" data-ng-click="swapRooms()"  id = rm2 class="btn btn-success">Room 2</button>
+ <button type="button" data-ng-click="swapRooms()"  id = rm3 class="btn btn-info">Room 3</button>
+ <button type="button" data-ng-click="swapRooms()"  id = rm4 class="btn btn-warning">Room 4</button>
+ <button type="button" data-ng-click="swapRooms()"  id = rm5 class="btn btn-danger">Room 5</button>
+
+ </div>
+ */

@@ -13,10 +13,18 @@
     {
       "name": "Brad Taniguchi",
       "email": "bradtaniguchi.dev@gmail.com"
+    },
+    {
+      "name": "Eric Serrano"
+    },
+    {
+      "name": "Vigeneareay Phriang"
     }
   ],
   "dependencies": {
     "nw": "0.19.2",
+    "angular": "^1.6.1",
+    "angular-route": "^1.6.1",
     "localforage": "^1.4.3",
     "angular-localforage": "^1.3.2"
   },

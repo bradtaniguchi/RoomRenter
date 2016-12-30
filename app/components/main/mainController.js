@@ -21,7 +21,7 @@ roomRenter.controller("mainController", function($scope, $location) {
     };
 
     $scope.roomsVacant = function() {
-        if(openings=5)
+        //if(openings=5)
         {document.getElementById("avail").innerHTML = "5";}
     };
 

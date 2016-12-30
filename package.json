@@ -25,10 +25,10 @@
   },
   "scripts": {
     "bradsQuickFix": "npm install sqlite3 --build-from-source --runtime=node-webkit --target_arch=x64 --target=0.19.2",
-    "prebuildWin" : "npm i -g nw-gyp",
-    "prebuildLinux" : "npm i -g nw-gyp",
+    "prebuildWin" : "nw-gyp",
+    "prebuildLinux" : "nw-gyp",
     "buildWin" : "npm i sqlite3 --python=C:\\Python27\\python.exe --build-from-source --runtime=node-webkit --target_arch=x64 --target=0.19.2",
-    "buildLinux" : "npm i sqlite3 --build-from-source --runtime=node-webkit --target_arch=x64 --target=0.19.2"
+    "buildLinux" : "npm i nw && npm i sqlite3 --build-from-source --runtime=node-webkit --target_arch=x64 --target=0.19.2"
   },
   "bugs": {
     "url": "https://github.com/bradtaniguchi/RoomRenter/issues"

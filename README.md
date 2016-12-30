@@ -65,8 +65,11 @@ You will need to install python 2.7 and nodejs to support this program. Python2.
 some critical dependencies. With these two external dependencies installed the program can
 install and compile the rest. This may take some time.
 
-Installation can be done with a single nodejs command:
+Installation can be done with a single nodejs command, depending on platform:
 
-`npm run build`
+`npm run buildLinux`
+or  
+`npm run buildWin`
+
 
 If it looks like it freezes at `node scripts /install.js` give it more time.

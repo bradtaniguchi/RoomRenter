@@ -9,7 +9,7 @@ TODO: Add data-toggles and titles to all input fields!-->
             <label for="toromail" class="col-xs-2 col-form-label">Toro Username</label>
             <div class="col-xs-10">
                 <div class="input-group">
-                    <input data-ng-model="toromail" placeholder="username"
+                    <input data-ng-model="toromail" placeholder="username1"
                            type="text" class="form-control" aria-describedby="Username" id="toromail"/>
                     <span class="input-group-addon">@toromail.csudh.edu</span>
                 </div>
@@ -18,7 +18,7 @@ TODO: Add data-toggles and titles to all input fields!-->
         <div class="form-group row" data-toggle="tooltip" title="Your ID that is on your studentID">
             <label for="studentID" class="col-xs-2 col-form-label">StudentID Number</label>
             <div class="col-xs-10">
-                <input data-ng-model="studentID" class="form-control" type="number" id="studentID"/>
+                <input data-ng-model="studentID" type="number" class="form-control" id="studentID"/>
             </div>
         </div>
         <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
@@ -40,11 +40,11 @@ TODO: Add data-toggles and titles to all input fields!-->
             </div>
         </div>
         <br/><br>
-        <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button>
+        <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button><BR>
         <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
             <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
-            <strong>Error!</strong> Invalid Entry! {{errorMessage}}
-        </div>
+            <strong>Error!</strong> Invalid Entry! {{errorMessage}}</div>
+
     </form>
 </div>
 <!--modal popup, for successful entry-->

@@ -17,6 +17,7 @@ roomRenter.controller("navbarController", function($scope, $location, generalSer
 
     $scope.go = function(path) {
         generalService.changeView(path);
+
     };
     $scope.back = function () {
         window.history.back();

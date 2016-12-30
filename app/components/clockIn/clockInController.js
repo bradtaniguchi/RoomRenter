@@ -4,7 +4,7 @@
 
 roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo){
     $scope.toromail = "";
-    $scope.studentID = 0;
+    $scope.studentID;
     $scope.choosenRoom = 1; //temp hardcode
     $scope.errorMessage = "";
     $scope.alertClass = 'hide'; //hide message at the start
@@ -51,23 +51,26 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
         console.log("room: " + currChoosenRoom);
 
         /*Check if entries are valid..*/
-        if ($scope.toromail == "") {
-            $scope.alertOpen("No Email!");
-        } else if($scope.toromail.length > 64) { //we set a strict limit on the email length
-            $scope.alertOpen("Username is to long! Provide a shorter Username")
-            $scope.toromail = ""; //reset this field for them
-        } else if($scope.studentID == 0 || $scope.studentID < 0) {
-            $scope.alertOpen("Bad userID!");
-            $scope.studentID = 0; //reset this field for them
-        } else if($scope.choosenRoom == 0) {
-            $scope.alertOpen("Pick a valid room!");
-            $scope.choosenRoom = 0; //reset this field for them
-        } else {
-            /*The user entered valid entries*/
-            console.log("Valid entry, submitting to database.");
-            /*Show Timed modal popup to confirm (1 minute)*/
-            angular.element('#successModal').modal('show');
-        }
+
+            if ($scope.toromail == "") {
+                $scope.alertOpen("No Email!");
+            }
+              else if ($scope.toromail.length > 21) { //we set a strict limit on the email length
+                $scope.alertOpen("Username is to long! Provide a shorter Username")
+                $scope.toromail = ""; //reset this field for them
+            } else if ($scope.studentID == '' || $scope.studentID <= 0) {
+                $scope.alertOpen("Bad userID!");
+                $scope.studentID = 0; //reset this field for them
+            } else if ($scope.choosenRoom == 0) {
+                $scope.alertOpen("Pick a valid room!");
+                $scope.choosenRoom = 0; //reset this field for them
+            } else {
+                /*The user entered valid entries*/
+                console.log("Valid entry, submitting to database.");
+                /*Show Timed modal popup to confirm (1 minute)*/
+                angular.element('#successModal').modal('show');
+            }
+
     };
     buildRooms();
     console.log($scope.rooms.length);

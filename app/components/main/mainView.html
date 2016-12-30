@@ -3,37 +3,27 @@
 <div class="alert alert-success" role="alert"><em><strong><p>&emsp;" Potential Two Hour Limit "</p></strong></em></div>
 -->
 
-
 <div class="page-header">
     <div class="well well-sm">
         <h1>Room Renter v.1</h1>
     </div>
 </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>User Tools</h3>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>User Tools</h3>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group" role="group" aria-label="Clock In " title="Clock Into a Room">
+                    <button data-ng-click="go('/ClockIn')" class="btn btn-default btn-lg">Clock In &nbsp;</button>
                 </div>
-                <div class="panel-body">
-                    <div class="btn-group" role="group" aria-label="Clock In " title="Clock Into a Room">
-                        <button data-ng-click="go('/ClockIn')" class="btn btn-default btn-lg">Clock In &nbsp;</button>
-                    </div>
-                    <br><br>
-                    <div class="btn-group" role="group" aria-label="Clock Out" title="Clock Out of a Room">
-                        <button data-ng-click="go('/ClockOut')" class="btn btn-default btn-lg">Clock Out</button>
-                    </div>
+                <br><br>
+                <div class="btn-group" role="group" aria-label="Clock Out" title="Clock Out of a Room">
+                    <button data-ng-click="go('/ClockOut')" class="btn btn-default btn-lg">Clock Out</button>
                 </div>
             </div>
-
         </div>
-    </div>
-</div>
-<!--
-<p id="demo">A Paragraph</p>
-<button type="button" data-ng-click="home('/')">Try it</button>
-
--->
         <div class="well well-sm">
             <h3>Test Buttons, used to navigate during dev</h3>
             <ul class="list-group">
@@ -47,6 +37,7 @@
                 <li class="list-group-item" role="button" data-ng-click="testDatabase()"><a>TESTDATABASE</a></li>
             </ul>
         </div>
+    </div>
     <div class="col-sm-6">
         <div class="panel panel-default">
             <div class="panel-heading"><h3>Logo/Pictures</h3></div>
@@ -54,10 +45,10 @@
         </div>
         <h3>
             <span class="label label-default">Open Rooms: </span>
-            <output id="avail" class="form-control" data-ng-init="roomsVacant('/')"></output>
+            <output id="avail" class="form-control" data-ng-init="vacant('/')"></output>
             <span class="label label-default">Current Time:</span>
-            <output class="form-control" id="currentTime"></output>
+            <output class="form-control" id="opens" data-ng-init="time('/')"></output>
             <img src="assets/Toro.jpg" width="10%">
         </h3>
     </div>
-
+</div>

@@ -2,7 +2,7 @@
  * Created by brad on 12/16/16.
  */
 
-roomRenter.controller("mainController", function($scope, $location) {
+roomRenter.controller("mainController", function($scope, $location, database) {
     $scope.name = "";
     $scope.back = function () {
         window.history.back();
@@ -17,7 +17,7 @@ roomRenter.controller("mainController", function($scope, $location) {
     };
 
     $scope.testDatabase = function () {
-        console.log(database.testGetTables()); //should return 2 in console!
+        console.log(database.test()); //should return 2 in console!
     };
 
     $scope.roomsVacant = function () {
@@ -25,9 +25,7 @@ roomRenter.controller("mainController", function($scope, $location) {
         document.getElementById("avail").innerHTML = 5;
     };
 
-
-});
-
+})
  thisTime = function(){
 
      var today = new Date();

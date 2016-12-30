@@ -10,7 +10,6 @@ var numberOfRooms = 5; // set default number of rooms
 var adminPassword = "fall2016@dh";
 
 var roomRenter = angular.module('roomRenter', ['ngRoute']);
-//var sqlite3 = require('sqlite3').verbose(); //ONLY WORKS ON NW.JS
 
 /*General application configurations assignment*/
 roomRenter.service('appInfo', function(){

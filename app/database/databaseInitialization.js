@@ -7,19 +7,10 @@
 
 roomRenter.service('database', function (){
     /*Create database connection here, to be used elsewhere in the service*/
-    var filename = 'RoomRenter.db';
-    var db = new sqlite3.Database(filename);
 
     /*Test to see if we have connected to the database correctly*/
     this.testGetTables = function(){
-        var counter = 0;
-        db.serialize(function(){ //open the database
-            db.each(".tables", function(){
-                counter = counter + 1;
-            });
-        });
-        db.close(); //close the database
-        return counter; //should return 2
+
     };
 
     /*Gets all users logged into the rooms as of right now.*/

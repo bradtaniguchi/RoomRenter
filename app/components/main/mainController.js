@@ -4,6 +4,7 @@
 
 roomRenter.controller("mainController", function($scope, $location) {
     $scope.name = "";
+    var openings =5;
     $scope.back = function () {
         window.history.back();
     };
@@ -21,8 +22,8 @@ roomRenter.controller("mainController", function($scope, $location) {
     };
 
     $scope.roomsVacant = function() {
-        //if(openings=5)
-        {document.getElementById("avail").innerHTML = "5";}
+
+        document.getElementById("avail").innerHTML = openings;
     };
 
 });

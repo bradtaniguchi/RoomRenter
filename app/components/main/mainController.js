@@ -2,7 +2,7 @@
  * Created by brad on 12/16/16.
  */
 
-roomRenter.controller("mainController", function($scope, $location, database) {
+roomRenter.controller("mainController", function($scope, $location, database, $localForage) {
     $scope.name = "";
     var openings =5;
     $scope.back = function () {
@@ -18,7 +18,17 @@ roomRenter.controller("mainController", function($scope, $location, database) {
     };
 
     $scope.testDatabase = function () {
-        console.log(database.test()); //should return 2 in console!
+        alert(database.test()); //should return 2 in console!
+    };
+
+    $scope.testDatabaseLogic = function(){
+        console.log("testing database logic...");
+        /*add two users*/
+        database.addUser("usernameTEST", 25);
+        console.log("Now getting the user object");
+        database.testGetUser("usernameTEST");
+
+
     };
 
     $scope.roomsVacant = function() {

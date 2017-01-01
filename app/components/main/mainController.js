@@ -2,7 +2,7 @@
  * Created by brad on 12/16/16.
  */
 
-roomRenter.controller("mainController", function($scope, $location, database) {
+ roomRenter.controller("mainController", function($scope, $location, database, $timeout, $interval) {
     $scope.name = "";
     $scope.back = function () {
         window.history.back();
@@ -25,33 +25,19 @@ roomRenter.controller("mainController", function($scope, $location, database) {
         document.getElementById("avail").innerHTML = 5;
     };
 
+    $scope.timeInMs = 0;
+
+         var countUp = function() {
+             $scope.timeInMs+= 500;
+             $timeout(countUp, 500);
+     }
+
+     $timeout(countUp, 500);
+
+         var tick = function() {
+             $scope.clock = Date.now();
+         }
+     tick();
+     $interval(tick, 1000);
 })
- thisTime = function(){
 
-     var today = new Date();
-     var h = today.getHours();
-     var m = today.getMinutes();
-     var s = today.getSeconds();
-
-     h = militaryConversion(h);
-     h = checkDigits(h);
-     m = checkDigits(m);
-     s = checkDigits(s);
-
-     document.getElementById('currentTime').innerHTML = h + ' : ' + m + ' : ' + s;
-     var t = setTimeout(thisTime, 1000);
- };
- function checkDigits(i) {
-     if (i < 10) {
-         i = "0" + i
-     }
-     ;  // add zero in front of numbers < 10
-     return i;
- }
-
- function militaryConversion(i) {
-     if (i > 12) {
-         i = i - 12;
-     }
-     return i;
- }

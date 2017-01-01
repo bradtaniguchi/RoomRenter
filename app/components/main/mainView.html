@@ -47,8 +47,19 @@
             <span class="label label-default">Open Rooms: </span>
             <output id="avail" class="form-control" data-ng-init="roomsVacant('/')"></output>
             <span class="label label-default">Current Time:</span>
-            <output class="form-control" id="currentTime"></output>
+            <output class="form-control">
+                <div ng-app="", ng-controller="mainController">
+                    <span hidden> {{timeInMs}}</span>
+                </div>
+
+                <div ng-app="">
+                    <div ng-controller='mainController'>
+                        <p>{{ clock | date:'HH:mm:ss'}}</p>
+                    </div>
+                </div>
+            </output>
             <img src="assets/Toro.jpg" width="10%">
         </h3>
     </div>
 </div>
+

@@ -5,7 +5,7 @@
 roomRenter.controller("navbarController", function($scope, $location, generalService, appInfo){
     //a simple debugging variable to make sure we are in the right controller
     $scope.name = 'navbarController name';
-    $scope.swapMessage = '';
+    $scope.swapMessage = '...';
     $scope.version = appInfo.appVersion;
     $scope.numberOfRooms = appInfo.numberOfRooms;
     $scope.rooms = [];

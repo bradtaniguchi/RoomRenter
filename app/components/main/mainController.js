@@ -33,11 +33,11 @@
      }
 
      $timeout(countUp, 500);
-
          var tick = function() {
              $scope.clock = Date.now();
          }
      tick();
      $interval(tick, 1000);
+
 })
 

@@ -23,7 +23,7 @@ TODO: Add data-toggles and titles to all input fields!-->
         </div>
         <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
                 <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
-                <strong>Error!</strong> Invalid Entry! {{errorMessage}}
+                <strong>Error!</strong> {{errorMessage}}
         </div>
         <div class= "well well-sm">
             <Strong>Choose a Room:</Strong>
@@ -33,17 +33,18 @@ TODO: Add data-toggles and titles to all input fields!-->
                 <div class="col-lg-6">
                     <div class="input-group">
                         <label class="btn btn-primary">
-                            <input type="radio" autocomplete="off" name="optradio" value={{room.value}}/>{{room.text}}
+                            <input type="radio" autocomplete="off"  name="optradio" value={{room.value}}/>{{room.text}}
+
                         </label>
                     </div>
                 </div>
             </div>
         </div>
         <br/><br>
-        <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button><BR>
+        <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button><p/>
         <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
             <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
-            <strong>Error!</strong> Invalid Entry! {{errorMessage}}</div>
+            <strong>Error!</strong>! {{errorMessage}}</div>
 
     </form>
 </div>

@@ -44,22 +44,21 @@
             <img src="assets/RM.png" width="100%">
         </div>
         <h3>
-            <span class="label label-default">Open Rooms: </span>
-            <output id="avail" class="form-control" data-ng-init="roomsVacant('/')"></output>
             <span class="label label-default">Current Time:</span>
+        </h3>
             <output class="form-control">
                 <div ng-app="", ng-controller="mainController">
                     <span hidden> {{timeInMs}}</span>
                 </div>
-
                 <div ng-app="">
                     <div ng-controller='mainController'>
                         <p>{{ clock | date:'hh:mm:ss'}}</p>
                     </div>
                 </div>
             </output>
-            <img src="assets/Toro.jpg" width="10%">
-        </h3>
+        <h3><span class="label label-default">Open Rooms: </span></h3>
+        <output class="form-control">{{roomsVacant}}</output><br>
+        <img src="assets/Toro.jpg" width="10%">
     </div>
 </div>
 

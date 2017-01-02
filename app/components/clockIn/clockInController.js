@@ -54,8 +54,7 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
 
             if ($scope.toromail == "") {
                 $scope.alertOpen("No Email!");
-            }
-              else if ($scope.toromail.length > 21) { //we set a strict limit on the email length
+            } else if ($scope.toromail.length > 21) { //we set a strict limit on the email length
                 $scope.alertOpen("Username is to long! Provide a shorter username")
                 $scope.toromail = ""; //reset this field for them
             } else if ($scope.studentID == null || $scope.studentID <= 0) { //changed a value to null

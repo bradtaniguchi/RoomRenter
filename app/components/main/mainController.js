@@ -1,4 +1,4 @@
- /**
+/**
  * Created by brad on 12/16/16.
  */
 
@@ -6,35 +6,33 @@ roomRenter.controller("mainController", function($scope, $location, database, $t
     $scope.name = "";
     $scope.timeInMs = 0;
     $scope.roomsVacant = 5;
-    $scope.timeInMs = 0;
 
-    $scope.back = function () {
+    $scope.back = function() {
         window.history.back();
     };
 
-    $scope.go = function (path) {
+    $scope.go = function(path) {
         $location.path(path);
     };
 
-    $scope.isActivePath = function (route) {
+    $scope.isActivePath = function(route) {
         return ($location.path()).indexOf(route) >= 0;
     };
 
-    $scope.testDatabase = function () {
+    $scope.testDatabase = function() {
         console.log(database.test()); //should return 2 in console!
     };
 
     var countUp = function() {
-        $scope.timeInMs+= 500;
+        $scope.timeInMs += 500;
         $timeout(countUp, 500);
     };
 
-     $timeout(countUp, 500);
-         var tick = function() {
-             $scope.clock = Date.now();
-         }
-     tick();
-     $interval(tick, 1000);
+    $timeout(countUp, 500);
+    var tick = function() {
+        $scope.clock = Date.now();
+    }
+    tick();
+    $interval(tick, 1000);
 
 })
-

@@ -9,11 +9,14 @@ roomRenter.controller('clockOutController', function ($scope, generalService, ap
     $scope.usedRooms = [];  //the rooms currently in use, thus the ones we are to display
     $scope.alertClass = ""; //shows the alert message if the rooms are empty
     $scope.emtpyMessage = ""; //only shows if there are no rooms
+    $scope.numberOfRooms = appInfo.numberOfRooms;
+    $scope.rooms = [];
 
     /*To provide navagation from this page*/
     $scope.go = function(path) {
         generalService.changeView(path);
     };
+
 
     /*Close the entry alert on the page*/
     $scope.alertClose = function() {
@@ -54,6 +57,5 @@ roomRenter.controller('clockOutController', function ($scope, generalService, ap
 
         /*open modal*/
     };
-
     getUsedRooms();
 });

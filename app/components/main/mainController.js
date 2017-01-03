@@ -1,47 +1,42 @@
- /**
+/**
  * Created by brad on 12/16/16.
  */
 
-roomRenter.controller("mainController", function($scope, $location, database, $localForage) {
+roomRenter.controller("mainController", function($scope, $location, database, $timeout, $interval) {
     $scope.name = "";
-    var openings =5;
-    $scope.back = function () {
+    $scope.timeInMs = 0;
+    $scope.roomsVacant = 5;
+
+    $scope.back = function() {
         window.history.back();
     };
 
-    $scope.go = function (path) {
+    $scope.go = function(path) {
         $location.path(path);
     };
 
-    $scope.isActivePath = function (route) {
+    $scope.isActivePath = function(route) {
         return ($location.path()).indexOf(route) >= 0;
     };
 
+    /*temp test database function*/
     $scope.testDatabase = function () {
-        alert(database.test('BradT')); //should return 2 in console!
+        database.test('BradT');
     };
 
-    $scope.testDatabaseLogic = function(){
-        console.log("testing database logic...");
-        /*add two users*/
-        database.addUser("usernameTEST", 25);
-        console.log("Now getting the user object");
-        database.testGetUser("usernameTEST");
-
-
+    $scope.testDatabase = function() {
+        console.log(database.test()); //should return 2 in console!
     };
 
-    $scope.roomsVacant = function() {
-
-        document.getElementById("avail").innerHTML = openings;
-    };
-      $scope.display=function(){
-        var refresh = 1000;
-        var mytime = setTimeout(time(), refresh);
+    var countUp = function() {
+        $scope.timeInMs += 500;
+        $timeout(countUp, 500);
     };
 
-    var checkTime = function(i){
-        if (i < 10) {i = "0" + i;}  // add zero in front of numbers < 10
-        return i;
-    }
+    $timeout(countUp, 500);
+    var tick = function() {
+        $scope.clock = Date.now();
+    };
+    tick();
+    $interval(tick, 1000);
 });

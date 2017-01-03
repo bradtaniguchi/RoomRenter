@@ -2,7 +2,6 @@
 <!--
 <div class="alert alert-success" role="alert"><em><strong><p>&emsp;" Potential Two Hour Limit "</p></strong></em></div>
 -->
-
 <div class="page-header">
     <div class="well well-sm">
         <h1>Room Renter v.1</h1>
@@ -18,7 +17,8 @@
                 <div class="btn-group" role="group" aria-label="Clock In " title="Clock Into a Room">
                     <button data-ng-click="go('/ClockIn')" class="btn btn-default btn-lg">Clock In &nbsp;</button>
                 </div>
-                <br><br>
+                <br>
+                <br>
                 <div class="btn-group" role="group" aria-label="Clock Out" title="Clock Out of a Room">
                     <button data-ng-click="go('/ClockOut')" class="btn btn-default btn-lg">Clock Out</button>
                 </div>
@@ -27,29 +27,52 @@
         <div class="well well-sm">
             <h3>Test Buttons, used to navigate during dev</h3>
             <ul class="list-group">
-                <li class="list-group-item" role="button" data-ng-click="go('/')"><a>Home</a></li>
-                <li class="list-group-item" role="button" data-ng-click="go('/ClockIn')"><a>ClockIn</a></li>
-                <li class="list-group-item" role="button" data-ng-click="go('/ClockOut')"><a>ClockOut</a></li>
-                <li class="list-group-item" role="button" data-ng-click="go('/Admin')"><a>AdminMain</a></li>
-                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Export')"><a>AdminExport</a></li>
-                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Stat')"><a>AdminStat</a></li>
-                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Time')"><a>AdminTime</a></li>
-                <li class="list-group-item" role="button" data-ng-click="testDatabase()"><a>testDatabaseConn</a></li>
-                <li class="list-group-item" role="button" data-ng-click="testDatabaseLogic()"><a>testDatabaseLogic</a></li>
+                <li class="list-group-item" role="button" data-ng-click="go('/')">
+                    <a>Home</a>
+                </li>
+                <li class="list-group-item" role="button" data-ng-click="go('/ClockIn')">
+                    <a>ClockIn</a>
+                </li>
+                <li class="list-group-item" role="button" data-ng-click="go('/ClockOut')">
+                    <a>ClockOut</a>
+                </li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin')">
+                    <a>AdminMain</a>
+                </li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Export')">
+                    <a>AdminExport</a>
+                </li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Stat')">
+                    <a>AdminStat</a>
+                </li>
+                <li class="list-group-item" role="button" data-ng-click="go('/Admin/Time')">
+                    <a>AdminTime</a>
+                </li>
+                <li class="list-group-item" role="button" data-ng-click="testDatabase()">
+                    <a>TESTDATABASE</a>
+                </li>
             </ul>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>Logo/Pictures</h3></div>
+            <div class="panel-heading">
+                <h3>Logo/Pictures</h3>
+            </div>
             <img src="assets/RM.png" width="100%">
         </div>
         <h3>
-            <span class="label label-default">Open Rooms: </span>
-            <output id="avail" class="form-control" data-ng-init="vacant('/')"></output>
             <span class="label label-default">Current Time:</span>
-            <output class="form-control" id="opens" data-ng-init="time('/')"></output>
-            <img src="assets/Toro.jpg" width="10%">
         </h3>
+        <output class="form-control">
+            {{ clock | date:'hh:mm:ss'}}
+        </output>
+        <h3>
+            <span class="label label-default">Open Rooms: </span>
+        </h3>
+        <output class="form-control">{{roomsVacant}}</output>
+        <br>
+        <img src="assets/Toro.jpg" width="10%">
     </div>
 </div>
+

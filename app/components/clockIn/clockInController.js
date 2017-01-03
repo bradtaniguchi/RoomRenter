@@ -2,21 +2,29 @@
  * Created by brad on 12/22/16.
  */
 
-roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo){
+roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo) {
     $scope.toromail = "";
-    $scope.studentID = 0;
-    $scope.choosenRoom = 1; //temp hardcode
+    $scope.choosenRoom = false;  //temp hardcode
     $scope.errorMessage = "";
     $scope.alertClass = 'hide'; //hide message at the start
     $scope.numberOfRooms = appInfo.numberOfRooms; //get the number of rooms the program is configed to
     $scope.rooms = [];
 
+    //set's which radio button has been clicked
+    $scope.setDefault = function(room) {
+        angular.forEach($scope.rooms, function(p) {
+            p.isDefault = false; //set them all to false
+        });
+        room.isDefault = true; //set the clicked one to true
+        $scope.choosenRoom = $scope.isDefault;
+    };
+
     function buildRooms() {
         for (var i = 0; i < $scope.numberOfRooms; i++) {
             var num = i + 1;
             var room = { //create an object
-                value : num, //set room value to current iteration
-                text : 'Room ' + num
+                value: num, //set room value to current iteration
+                text: 'Room ' + num
             };
             $scope.rooms.push(room);
         }
@@ -25,7 +33,7 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
     /*help us move between parts in the application*/
     $scope.go = function(path) {
         angular.element('#successModal').modal('hide');
-        $timeout(function(){
+        $timeout(function() {
             generalService.changeView(path);
         }, 500);
     };
@@ -37,7 +45,7 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
     };
 
     /*Open the entry alert on the page, with the given message*/
-    $scope.alertOpen = function(message){
+    $scope.alertOpen = function(message) {
         $scope.alertClass = "";
         $scope.errorMessage = message;
     };
@@ -51,17 +59,18 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
         console.log("room: " + currChoosenRoom);
 
         /*Check if entries are valid..*/
+
         if ($scope.toromail == "") {
             $scope.alertOpen("No Email!");
-        } else if($scope.toromail.length > 64) { //we set a strict limit on the email length
-            $scope.alertOpen("Username is to long! Provide a shorter Username")
+        } else if ($scope.toromail.length > 21) { //we set a strict limit on the email length
+            $scope.alertOpen("Username is to long! Provide a shorter username")
             $scope.toromail = ""; //reset this field for them
-        } else if($scope.studentID == 0 || $scope.studentID < 0) {
+        } else if ($scope.studentID == null || $scope.studentID <= 0) { //changed a value to null
             $scope.alertOpen("Bad userID!");
-            $scope.studentID = 0; //reset this field for them
-        } else if($scope.choosenRoom == 0) {
+            $scope.studentID = null; //reset this field for them
+        } else if ($scope.choosenRoom == false) {
             $scope.alertOpen("Pick a valid room!");
-            $scope.choosenRoom = 0; //reset this field for them
+            //$scope.choosenRoom = 1; //reset this field for them
         } else {
             /*The user entered valid entries*/
             console.log("Valid entry, submitting to database.");

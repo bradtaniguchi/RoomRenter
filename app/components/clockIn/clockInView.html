@@ -9,7 +9,7 @@ TODO: Add data-toggles and titles to all input fields!-->
             <label for="toromail" class="col-xs-2 col-form-label">Toro Username</label>
             <div class="col-xs-10">
                 <div class="input-group">
-                    <input data-ng-model="toromail" placeholder="username"
+                    <input data-ng-model="toromail" placeholder="username1"
                            type="text" class="form-control" aria-describedby="Username" id="toromail"/>
                     <span class="input-group-addon">@toromail.csudh.edu</span>
                 </div>
@@ -18,12 +18,13 @@ TODO: Add data-toggles and titles to all input fields!-->
         <div class="form-group row" data-toggle="tooltip" title="Your ID that is on your studentID">
             <label for="studentID" class="col-xs-2 col-form-label">StudentID Number</label>
             <div class="col-xs-10">
-                <input data-ng-model="studentID" class="form-control" type="number" id="studentID"/>
+                <input data-ng-model="studentID" type="number" class="form-control" id="studentID"/>
             </div>
         </div>
         <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
-                <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
-                <strong>Error!</strong> Invalid Entry! {{errorMessage}}
+            <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
+            <strong>Error!</strong> {{errorMessage}}
+
         </div>
         <div class= "well well-sm">
             <Strong>Choose a Room:</Strong>
@@ -33,17 +34,19 @@ TODO: Add data-toggles and titles to all input fields!-->
                 <div class="col-lg-6">
                     <div class="input-group">
                         <label class="btn btn-primary">
-                            <input type="radio" autocomplete="off" name="optradio" value={{room.value}}/>{{room.text}}
+                            <input type="radio" autocomplete="off" data-ng-model="choosenRoom"
+                                   data-ng-click="setDefault(room)"  name="optradio" value={{room.value}}/>{{room.text}}
+                                    <!--must click inside the radio button to satisfy the if else statements-->
                         </label>
                     </div>
                 </div>
             </div>
         </div>
-        <br/><br>
-        <button class="btn btn-default btn-lg" data-ng-click="submit()">Submit</button>
+        <br/>
+        <button class="btn btn-default btn-lg" data-ng-click="submit()">Confirm</button>
         <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
             <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
-            <strong>Error!</strong> Invalid Entry! {{errorMessage}}
+            <strong>Error!</strong>! {{errorMessage}}
         </div>
     </form>
 </div>
@@ -58,14 +61,18 @@ TODO: Add data-toggles and titles to all input fields!-->
                 <h4 class="modal-title">Sucessful ClockIn</h4>
             </div>
             <div class="modal-body">
-                <p>Add Stuff about the login</p> <!--TODO-->
+                <p>Add Stuff about the login</p>
+                <!--TODO-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         data-ng-click="go('/')">Ok</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 

@@ -18,7 +18,7 @@ roomRenter.controller("mainController", function($scope, $location, database, $l
     };
 
     $scope.testDatabase = function () {
-        alert(database.test()); //should return 2 in console!
+        alert(database.test('BradT')); //should return 2 in console!
     };
 
     $scope.testDatabaseLogic = function(){

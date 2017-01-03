@@ -47,34 +47,53 @@ roomRenter.factory('Entry', function(appInfo){
     };
 });
 roomRenter.service('database', function ($localForage, User, Entry){
+    var clockedInUsers = "clockedInUsers"; //a key that we MUST reserve in the database, for quicker lookups.
     /*Create database connection here, to be used elsewhere in the service*/
 
-
+    /*Checks to see if the username is valid*/
+    function isValidName(username) {
+        return (username != clockedInUsers); //make sure the username doesn't mask the reserved word.
+    }
     /*Test to see if we have connected to the database correctly, returns type of database connection*/
     this.test = function(){
         return $localForage.driver();
     };
     /*This deletes the datastore, use with caution!*/
     this.clear = function() {
-        localForage.clear();
+        $localForage.clear();
     };
     /*Gets all users logged into the rooms as of right now.*/
-    this.getUsersLoggedIn = function(){};
+    this.getUsersLoggedIn = function(){
+        return $localForage.getItem(clockedInUsers);
+    };
 
     /*We get a username, and see if they exist in the USER table. Return TRUE or FALSE*/
-    this.checkIfExistingUser = function(username){};
+    this.checkIfExistingUser = function(username, callback){
+        $localForage.getItem(username).then(function(user){
+            return (user != null);
+        });
+    };
 
     /*We get a username AND ID, IF they don't exist, we add them to the USER table.*/
-    this.addUser = function(username, userID){
-        /*TODO: check first, but for now just create the user*/
-        console.log("adding user: " + username + " " + userID);
-        //$localForage.setItem(username, User(username, userID)).then(function(){
-        $localForage.setItem(username, {"username" :username, "id" : userID}).then(function(){
-            $localForage.getItem(username).then(function(data) {
-                console.log(data);
+    this.addUser = function(username, userID, callback){
+        /*If they don't exist, lets create them*/
+        if(checkIfExistingUser()) {//user doesn't exist
+            console.log("User doesn't exist, creating user: " + username + " " + userID);
+            //$localForage.setItem(username, User(username, userID)).then(function(){
+            $localForage.setItem(username, {
+                "username" :username,
+                "id" : userID,
+                "entries": {}}
+                ).then(function(){
+                $localForage.getItem(username).then(function(data) {
+                    console.log(data);
+                    callback(data);
+                });
             });
-        });
-
+        } else {
+            console.log("User already exists!");
+            callback();
+        }
     };
     /*TODO: remove this function later*/
     this.testGetUser = function(username) {
@@ -105,8 +124,16 @@ roomRenter.service('database', function ($localForage, User, Entry){
         });
     };
 
-    /*Adds the user with the given EMAIL, to the ENTRY database, IF and ONLY IF the user exists in the USER table.*/
-    this.clockInEntry = function() {};
+    /*Does the main work.
+    * 1. We check if the user exists, if they don't we create them using addUser.
+    * 2. Next we use this user object and add an entry to them.*/
+    this.clockIn = function(username, userID) {
+        if(!checkIfExistingUser(username)) {
+            addUser(username, userID, function(){
+
+            }); //add the user to the database
+        }
+    };
 
     /*Modifies a the USER table entry with a Clock out time parameter.*/
     this.clockOutEntry = function() {};

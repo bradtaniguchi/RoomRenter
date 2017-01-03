@@ -1,49 +1,62 @@
 <!--Clock Out View-->
 <div class="panel panel-default">
     <div class="panel panel-heading">
-        <h1>ClockOut</h1>
+        <h1>ClockOut
+        </h1>
     </div>
-    <form class="panel-body">
-
-        <p> Choose room to clockout of</p>
-        <p></p>
-        <div data-ng-repeat="room in usedRooms track by $index" class="btn-group" data-toggle="buttons">
+    <form class="panel-body" ng-submit="submit()" ng-controller="clockOutController">
+        <p> Choose room to clockout of:
+        </p>
+        <p>
+        </p>
+        <div  class="radio-group" data-toggle="buttons">
             <div class="form-group">
-                <div class="input-group" data-toggle="tooltip" title="The room you were using" >
-                    <span class="input-group-addon">Room {{$index + 1}}.</span>
-                    <input type="text" class="form-control" aria-label="...">
-                    <span class="input-group-addon submit-button btn" id= exit title="Clock out of the current room"
-                          role="button" data-ng-click="clockOut(0)">Clockout</span>
-                </div>
+                <p>Select User:
+                    <span class="radioValue">{{roomSelected}}
+          </span>
+                </p>
+                <md-radio-group class="md-primary" data-toggle="tooltip" title="The room you were using"  >
+                    <input class="input">
+                    </input>&nbsp;
+                    <md-radio-button data-ng-repeat="room in roomData track by $index">
+                        <input type="radio" class="form-rol" name="logoutUser" ng-value="$index+1"
+                               ng-change="RadioChange($index+1)"  ng-model="room" ng-disabled=" room.isDisabled "
+                               ng-class="{'md-align-top-left': $index==1}" aria-label="...">{{$index+1}}
+                    </md-radio-button>
+                    <!-- seems like disabling can help in the clocking in feature where they can't select rooms that are already occupied-->
+                </md-radio-group>
             </div>
         </div>
         <div data-ng-class="alertClass" class="alert alert-info">
-            <p>{{emptyMessage}}</p>
+            <p>{{emptyMessage}}
+            </p>
         </div>
         <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
-                data-ng-click="go('/')">Cancel</button>
+                data-ng-click="go('/')">Cancel
+        </button>
     </form>
 </div>
-<<<<<<< HEAD
-
-=======
 <!--modal popup, for successful clockout-->
 <div class="modal fade" id="successModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">&times;
+          </span>
                 </button>
-                <h4 class="modal-title">Sucessful ClockIn</h4>
+                <h4 class="modal-title">Sucessful ClockIn
+                </h4>
             </div>
             <div class="modal-body">
-                <p>Add Stuff about the login</p>
+                <p>Add Stuff about the login
+                </p>
                 <!--TODO-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        data-ng-click="go('/')">Ok</button>
+                        data-ng-click="go('/')">Ok
+                </button>
             </div>
         </div>
         <!-- /.modal-content -->

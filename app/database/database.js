@@ -26,7 +26,12 @@ roomRenter.service('database', function($localForage){
             });
         });
     };
-
+    /*Gets all the users currently defined in the clockedInUsers key array*/
+    this.getUsersLoggedIn = function(callback) {
+        $localForage.getItem(clockedInUsers).then(function(users){
+            callback(users);
+        });
+    };
     /*Clears the local memory, use with caution!*/
     this.clearData = function(callback) {
         console.log("Cleared memory!");

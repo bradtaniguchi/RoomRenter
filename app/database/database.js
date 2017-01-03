@@ -15,6 +15,18 @@ roomRenter.service('database', function($localForage){
     function isValidName(username){
         return (username != clockedInUsers)
     }
+    /*Updates a user's userID*/
+    this.updateUserID = function(username, newUserID, callback) {
+        console.log("Updating username: " + username);
+        /*Get the user object from the database*/
+        $localForage.getItem(username).then(function(User){ //add error handling
+            User.userID = newUserID;
+            $localForage.setItem(User.username, User).then(function(User){
+                callback(User); //returns the new user (I think?)
+            });
+        });
+    };
+
     /*Clears the local memory, use with caution!*/
     this.clearData = function(callback) {
         console.log("Cleared memory!");

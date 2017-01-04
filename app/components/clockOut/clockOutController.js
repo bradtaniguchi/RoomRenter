@@ -66,7 +66,7 @@ roomRenter.controller('clockOutController', function ($scope, generalService, ap
         { value: '5' }
     ];
 
-    $scope.RadioChange = function ( s) {
+    $scope.RadioChange = function (s) {
         $scope.roomSelected = s;
     };
 });

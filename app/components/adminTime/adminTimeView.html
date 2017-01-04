@@ -1,3 +1,25 @@
 <!--Admin Stat View-->
 <h1>Admin Time View</h1>
-NEEDS WORK
+<div class="row">
+    <div class="col-sm-4">
+        Clocked in user:
+        <br>
+        <span ng-controller="adminTimeController">
+				<span ng-repeat="room in roomData">
+					<input type="text">
+					</span>
+				</span>
+    </div>
+    <div class="col-sm-4">
+
+        Elapsed Time:
+        <br>
+        <span ng-controller="adminTimeController">
+						<span ng-repeat="room in roomData">
+							<input type="time"></input>
+							<br>
+							</span>
+						</span>
+    </div>
+</div>
+</div>

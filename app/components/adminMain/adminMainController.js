@@ -2,7 +2,7 @@
  * Created by brad on 12/22/16.
  */
 
-roomRenter.controller('adminMainController', function($scope, generalService, appInfo, $timeout) {
+roomRenter.controller('adminMainController', function($scope, generalService, appInfo, $timeout, database) {
     $scope.numberOfRooms = appInfo.numberOfRooms; //get the number of Rooms
     $scope.adminPassword = "";
     $scope.alertClass = "hide"; //The default value to show the alert when loging in as the admin
@@ -11,6 +11,12 @@ roomRenter.controller('adminMainController', function($scope, generalService, ap
         console.log("Showing login");
         angular.element('#loginModal').modal('show');
     }
+
+    /*Call the database function to clear the local data.*/
+    $scope.clearDatabase = function() {
+        database.clearDatabase();
+    };
+
     /*When the user clicks on the Login Button on the modal popup. We check their password*/
     $scope.adminLogin = function() {
         if ($scope.adminPassword == appInfo.adminPassword || appInfo.debug) {

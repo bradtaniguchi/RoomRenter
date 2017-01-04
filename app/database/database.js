@@ -33,10 +33,13 @@ roomRenter.service('database', function($localForage){
         });
     };
     /*Clears the local memory, use with caution!*/
-    this.clearData = function(callback) {
+    this.clearDatabase = function(callback) {
         console.log("Cleared memory!");
         $localForage.clear().then(function() {
-            callback();
+            buildOccupiedRooms(); //build the local key again
+            if(callback !== undefined) {
+                callback();
+            } //call the callback if given
         });
     };
     /*quick test of functionality*/

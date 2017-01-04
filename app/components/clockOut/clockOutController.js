@@ -2,14 +2,13 @@
  * Created by brad on 12/22/16.
  */
 
+
 roomRenter.controller('clockOutController', function ($scope, generalService, appInfo) {
-    $scope.room = "";
+    $scope.room = 0;
     $scope.numberOfRooms = appInfo.numberOfRooms;
     $scope.usedRooms = [];  //the rooms currently in use, thus the ones we are to display
     $scope.alertClass = ""; //shows the alert message if the rooms are empty
     $scope.emtpyMessage = ""; //only shows if there are no rooms
-    $scope.numberOfRooms = appInfo.numberOfRooms;
-    $scope.rooms = [];
 
     /*To provide navagation from this page*/
     $scope.go = function(path) {
@@ -55,23 +54,8 @@ roomRenter.controller('clockOutController', function ($scope, generalService, ap
 
         /*open modal*/
     };
+
+
+
     getUsedRooms();
-
-    //this function makes the rooms
-    $scope.roomData = [
-        { value: '1' },
-        { value: '2' },
-        { value: '3' },
-        { value: '4' },
-        { value: '5' }
-    ];
-
-    $scope.RadioChange = function (s) {
-        $scope.roomSelected = s;
-    };
 });
-
-
-
-
-

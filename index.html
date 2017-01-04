@@ -12,40 +12,46 @@
     <link rel="stylesheet" href="assets/css/theme.css">
     <!-- displaying the time function-->
 </head>
-<body class="container" data-ng-app="roomRenter" >
-<!--include the navbar html-->
-<div ng-controller="navbarController">
-    <div ng-include="'app/shared/top-navbar/navbarView.html'"></div>
-</div>
-<!--primary view-->
-<div ng-view></div>
-<!--any multi page footers go here-->
-<!--JAVASCRIPT FILES GO BELOW-->
-<script type="text/javascript" src="assets/lib/jquery-3.1.1.min.js"></script>
-<!--cdn our bootstrap js, just to keep things clean-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<!--bootstrap-tooltip-->
-<script type="text/javascript" src="assets/lib/bootstrap-tooltip.js"></script>
-<!--include our angularjs file-->
-<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-<!--and our angular-route file-->
-<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
-<!--CUSTOM JAVASCRIPT FILES GO HERE-->
-<script type="text/javascript" src="app.module.js"></script>
-<script type="text/javascript" src="app.routes.js"></script>
-<!--Controllers are included here, include all of them for now-->
-<script type="text/javascript" src="app/components/adminExport/adminExportController.js"></script>
-<script type="text/javascript" src="app/components/adminMain/adminMainController.js"></script>
-<script type="text/javascript" src="app/components/adminStat/adminStatController.js"></script>
-<script type="text/javascript" src="app/components/adminTime/adminTimeController.js"></script>
-<script type="text/javascript" src="app/components/clockIn/clockInController.js"></script>
-<script type="text/javascript" src="app/components/clockOut/clockOutController.js"></script>
-<script type="text/javascript" src="app/components/main/mainController.js"></script>
-<script type="text/javascript" src="app/shared/top-navbar/navbarController.js"></script>
-<!--database config files-->
-<script type="text/javascript" src="app/database/databaseInitialization.js"></script>
-<script type="text/javascript" src="node_modules/localforage/dist/localforage.nopromises.min.js"></script>
-<script type="text/javascript" src="node_modules/angular-localforage/dist/angular-localForage.min.js"></script>
+<body class="container" data-ng-app="roomRenter">
+    <!--include the navbar html-->
+    <div ng-controller="navbarController">
+        <div ng-include="'app/shared/top-navbar/navbarView.html'"></div>
+    </div>
+
+    <!--primary view-->
+    <div ng-view></div>
+
+    <!--any multi page footers go here-->
+    <!--JAVASCRIPT FILES GO BELOW-->
+    <script type="text/javascript" src="assets/lib/jquery-3.1.1.min.js"></script>
+    <!--cdn our bootstrap js, just to keep things clean-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--bootstrap-tooltip-->
+    <script type="text/javascript" src="assets/lib/bootstrap-tooltip.js"></script>
+
+    <!--include our angularjs file-->
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <!--and our angular-route file-->
+    <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+
+    <!--CUSTOM JAVASCRIPT FILES GO HERE-->
+    <script type="text/javascript" src="app.module.js"></script>
+    <script type="text/javascript" src="app.routes.js"></script>
+
+    <!--Controllers are included here, include all of them for now-->
+    <script type="text/javascript" src="app/components/adminExport/adminExportController.js"></script>
+    <script type="text/javascript" src="app/components/adminMain/adminMainController.js"></script>
+    <script type="text/javascript" src="app/components/adminStat/adminStatController.js"></script>
+    <script type="text/javascript" src="app/components/adminTime/adminTimeController.js"></script>
+    <script type="text/javascript" src="app/components/clockIn/clockInController.js"></script>
+    <script type="text/javascript" src="app/components/clockOut/clockOutController.js"></script>
+    <script type="text/javascript" src="app/components/main/mainController.js"></script>
+    <script type="text/javascript" src="app/shared/top-navbar/navbarController.js"></script>
+
+    <!--database config files-->
+    <script type="text/javascript" src="app/database/database.js"></script>
+    <script type="text/javascript" src="node_modules/localforage/dist/localforage.nopromises.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-localforage/dist/angular-localForage.min.js"></script>
 </body>
 </html>

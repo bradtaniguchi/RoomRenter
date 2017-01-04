@@ -1,44 +1,32 @@
 <!--Clock Out View-->
 <div class="panel panel-default">
     <div class="panel panel-heading">
-        <h1>ClockOut
-        </h1>
+        <h1>ClockOut</h1>
     </div>
-    <form class="panel-body" ng-submit="submit()" ng-controller="clockOutController">
-        <p> Choose the room to clockout from:
-        </p>
-        <p>
-        </p>
-        <div  class="radio-group" data-toggle="buttons">
+    <form class="panel-body">
+        <div data-ng-repeat="room in usedRooms track by $index" class="btn-group" data-toggle="buttons">
             <div class="form-group">
+
                 <p>Select User:
                     <span class="radioValue">{{roomSelected.value}}
           </span>
                 </p>
-                <md-radio-group class="md-primary" data-toggle="tooltip" title="The room you were using"  >
-                    </input>&nbsp;
-                    <md-radio-button data-ng-repeat="locus in roomData | filter:{value : filter} ">
 
 
-                        <input type="radio" class="form-rol" name="logoutUser" ng-model="roomData" ng-disabled="locus.isDisabled"
-                               ng-click="RadioChange(locus)"
-                               aria-label="...">{{locus.value}}
-                    </md-radio-button><input class="input">
-                    <!-- seems like disabling can help in the clocking in feature where they can't select rooms that are already occupied-->
-                </md-radio-group>
+                <div class="input-group" data-toggle="tooltip" title="The room you were using" >
+                    <span class="input-group-addon">Room {{$index + 1}}.</span>
+                    <input type="text" class="form-control" aria-label="...">
+                    <span class="input-group-addon submit-button btn" title="Clock out of the current room"
+                          role="button" data-ng-click="clockOut(0)">Clockout</span>
+                </div>
+
             </div>
         </div>
         <div data-ng-class="alertClass" class="alert alert-info">
-            <p>{{emptyMessage}}
-            </p>
+            <p>{{emptyMessage}}</p>
         </div>
         <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
-                data-ng-click="go('/')">Cancel
-        </button>
-        &emsp;
-        <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
-                data-ng-click="go('/')">Confirm
-        </button>
+                data-ng-click="go('/')">Cancel</button>
     </form>
 </div>
 <!--modal popup, for successful clockout-->
@@ -47,25 +35,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;
-          </span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Sucessful ClockIn
-                </h4>
+                <h4 class="modal-title">Sucessful ClockIn</h4>
             </div>
             <div class="modal-body">
-                <p>Add Stuff about the login
-                </p>
-                <!--TODO-->
+                <p>Add Stuff about the login</p> <!--TODO-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        data-ng-click="go('/')">Ok
-                </button>
+                        data-ng-click="go('/')">Ok</button>
             </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

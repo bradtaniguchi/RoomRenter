@@ -19,6 +19,11 @@ roomRenter.controller("mainController", function($scope, $location, database, $t
         return ($location.path()).indexOf(route) >= 0;
     };
 
+    /*temp test database function*/
+    $scope.testDatabase = function () {
+        database.test('BradT');
+    };
+
     $scope.testDatabase = function() {
         console.log(database.test()); //should return 2 in console!
     };
@@ -31,8 +36,7 @@ roomRenter.controller("mainController", function($scope, $location, database, $t
     $timeout(countUp, 500);
     var tick = function() {
         $scope.clock = Date.now();
-    }
+    };
     tick();
     $interval(tick, 1000);
-
-})
+});

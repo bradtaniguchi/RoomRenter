@@ -2,22 +2,14 @@
  * Created by brad on 12/22/16.
  */
 
-roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo) {
+roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo, database) {
     $scope.toromail = "";
-    $scope.choosenRoom = false;  //temp hardcode
     $scope.errorMessage = "";
+    $scope.chosenRoom = 0;
     $scope.alertClass = 'hide'; //hide message at the start
     $scope.numberOfRooms = appInfo.numberOfRooms; //get the number of rooms the program is configed to
     $scope.rooms = [];
 
-    //set's which radio button has been clicked
-    $scope.setDefault = function(room) {
-        angular.forEach($scope.rooms, function(p) {
-            p.isDefault = false; //set them all to false
-        });
-        room.isDefault = true; //set the clicked one to true
-        $scope.choosenRoom = $scope.isDefault;
-    };
 
     function buildRooms() {
         for (var i = 0; i < $scope.numberOfRooms; i++) {
@@ -29,7 +21,10 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
             $scope.rooms.push(room);
         }
     }
-
+    /*manually update scope since I am to dumb to figure out how to make it work the correct way*/
+    $scope.selectRoom = function(roomNumber) {
+        $scope.chosenRoom = roomNumber;
+    };
     /*help us move between parts in the application*/
     $scope.go = function(path) {
         angular.element('#successModal').modal('hide');
@@ -54,6 +49,7 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
         var currEmail = $scope.toromail;
         var currStudentID = $scope.studentID;
         var currChoosenRoom = $scope.choosenRoom;
+        var timeIn = new Date().toUTCString(); //change this later
         console.log("email: " + currEmail);
         console.log("id: " + currStudentID);
         console.log("room: " + currChoosenRoom);
@@ -73,7 +69,13 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
             //$scope.choosenRoom = 1; //reset this field for them
         } else {
             /*The user entered valid entries*/
-            console.log("Valid entry, submitting to database.");
+            console.log("Valid entry, getting user from the database");
+            database.getUser(currEmail, currStudentID, function(User){
+                database.clockIn(User, currChoosenRoom, timeIn, function(User){
+                    console.log("Clocked in user: " + JSON.stringify(User));
+                    angular.element('#successModal').modal('show');
+                })
+            });
             /*Show Timed modal popup to confirm (1 minute)*/
             angular.element('#successModal').modal('show');
         }

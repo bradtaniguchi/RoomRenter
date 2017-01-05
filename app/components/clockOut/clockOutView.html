@@ -4,13 +4,13 @@
         <h1>ClockOut</h1>
     </div>
     <form class="panel-body">
-        <div data-ng-repeat="room in usedRooms track by $index" class="btn-group" data-toggle="buttons">
+        <div data-ng-repeat="room in usedRooms track by room.roomNumber" class="btn-group" data-toggle="buttons">
             <div class="form-group">
                 <div class="input-group" data-toggle="tooltip" title="The room you were using" >
-                    <span class="input-group-addon">Room {{$index + 1}}.</span>
-                    <input type="text" class="form-control" aria-label="...">
+                    <span class="input-group-addon">Room {{room.roomNumber}}.</span>
+                    <output> {{room.username}} |some boring text </output>
                     <span class="input-group-addon submit-button btn" title="Clock out of the current room"
-                          role="button" data-ng-click="clockOut(0)">Clockout</span>
+                          role="button" data-ng-click="clockOut(room.roomNumber)">Clock Out</span>
                 </div>
             </div>
         </div>

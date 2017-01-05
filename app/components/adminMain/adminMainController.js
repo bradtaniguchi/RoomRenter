@@ -9,7 +9,7 @@ roomRenter.controller('adminMainController', function($scope, generalService, ap
 
     function showModal(){
         console.log("Showing login");
-        angular.element('#loginModal').modal('show');
+        angular.element('#loginModal').modal({backdrop: 'static', keyboard: false});
     }
 
     /*Call the database function to clear the local data.*/

@@ -21,15 +21,40 @@
         </div>
         <div class="col-sm-6">
             <div class="well well-lg">
-                <p>Put some fancy explination of each of the buttons here...</p>
+                <p>Put some fancy explanation of each of the buttons here...</p>
             </div>
             <div class="btn-group">
-                <button class="btn btn-outline-danger" data-togle="tooltip" data-placement="down"
-                title="Delete the database, use with care!" data-ng-click="clearDatabase()">ClearDatabase</button>
+                <span data-toggle="modal" data-target="#deleteModal">
+                    <button class="btn btn-outline-danger" data-toggle="tooltip" data-placement="down"
+                    title="Delete the database, use with care!">Delete Database</button>
+                </span>
             </div>
         </div>
     </div>
 </div>
+<!--Modal popup to verify you want to delete the database-->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Delete Database</h4>
+            </div>
+            <div class="modal-body">
+                <h2><b>Are you sure you want to delete the database?</b> You mean backup the database before deletion</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> <!--non functional-->
+                <button type="button" class="btn btn-secondary">Backup and Delete</button> <!--non functional-->
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        data-ng-click="clearDatabase()">Delete EVERYTHING</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Modal to verify if you want to delete the database-->
 <!--Modal popup to ask for login information-->
 <div class="modal fade" id="loginModal">
     <div class="modal-dialog" role="document">

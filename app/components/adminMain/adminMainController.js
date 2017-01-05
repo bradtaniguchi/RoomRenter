@@ -15,6 +15,7 @@ roomRenter.controller('adminMainController', function($scope, generalService, ap
     /*Call the database function to clear the local data.*/
     $scope.clearDatabase = function() {
         database.clearDatabase();
+        alert("Deleted the database!");
     };
 
     /*When the user clicks on the Login Button on the modal popup. We check their password*/

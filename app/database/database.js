@@ -97,16 +97,20 @@ roomRenter.service('database', function($localForage){
             return null;
         }
         $localForage.getItem(username).then(function(User){
-            if(User != undefined) { //user DOES exist
+            console.log("getUser: gettingItem: " + username);
+            if(User != null) { //user DOES exist
+                console.log("User already exists, returning: " + User.username);
                 /*validate their userID, if it is wrong then */
                 callback(User); //returns User object
             } else { //user doesn't exist, lets create them
+                console.log("User doesn't exist, creating : " + username);
                 var newUser = {
                     "username" : username,
                     "userID" : userID,
                     "entries" : []
                 };
                 $localForage.setItem(username, newUser).then(function(User){
+                    console.log("Created User, returning: " + User.username);
                     if(callback !== undefined) {
                         callback(User);
                     } else {

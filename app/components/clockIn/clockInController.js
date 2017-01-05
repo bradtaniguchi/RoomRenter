@@ -1,5 +1,6 @@
 /**
  * Created by brad on 12/22/16.
+ * This controller handles the clockIn page. The User can clock into their corresponding rooms here
  */
 
 roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo, database) {

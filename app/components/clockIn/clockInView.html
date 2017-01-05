@@ -21,27 +21,19 @@ TODO: Add data-toggles and titles to all input fields!-->
                 <input data-ng-model="studentID" type="number" class="form-control" id="studentID"/>
             </div>
         </div>
+        <div class= "well well-sm">
+            <h4><strong>Room Chosen: {{chosenRoom}}</strong></h4>
+        </div>
+        <div class="input-group">
+            <div class="btn-group" role="group" data-ng-repeat="room in rooms">
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-model="$parent.chosenRoom"
+                    data-ng-click="selectRoom(room.value)" data-ng-class="room.buttonClass"
+                data-ng-toggle="tooltip" title="{{room.tooltipMessage}}">{{room.text}}</button>
+            </div>
+        </div>
         <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
             <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
             <strong>Error!</strong> {{errorMessage}}
-
-        </div>
-        <div class= "well well-sm">
-            <Strong>Choose a Room:</Strong>
-        </div>
-        <div class="col-sm-6">
-            <div class="btn-group" data-toggle="buttons">
-                <div class="input-group">
-                    <div data-ng-repeat="room in rooms">
-                        <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-model="$parent.chosenRoom"
-                            data-ng-click="selectRoom(room.value)" data-ng-class="room.buttonClass"
-                        data-ng-toggle="tooltip" title="{{room.tooltipMessage}}">{{room.text}}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <h3>Room Chosen: {{chosenRoom}}</h3>
         </div>
         <br/>
         <button class="btn btn-primary btn-lg" data-ng-click="go('/')">Cancel</button>

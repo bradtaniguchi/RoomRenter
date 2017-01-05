@@ -130,19 +130,34 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
             $scope.studentID = null; //reset this field for them
         } else if ($scope.chosenRoom == 0) {
             $scope.alertOpen("Pick a valid room!");
-            //$scope.choosenRoom = 1; //reset this field for them
         } else {
-            /*The user entered valid entries*/
-            console.log("Valid entry, getting user from the database");
-            database.getUser(currEmail, currStudentID, function(User){
-                console.log("Got user: " + JSON.stringify(User), " Now clocking in...");
-                database.clockIn(User, currChosenRoom, timeIn, function(User){
-                    console.log("Clocked in user: " + JSON.stringify(User));
+            /*The user entered valid entries, check if the user is already clocked in,
+            * if so display the error message*/
+            database.getUsersLoggedIn(function(Users){
+                var goodEntry = true; //If username is not used before flag. We assume it is ok at first.
+                console.log("Inside of getUsersLogged in : " + JSON.stringify(Users));
+                for(var i = 0; i < Users.length; i++) {
+                    if(Users[i] == currEmail) {
+                        /*open alert, user is already clocked into some room, find out to display*/
+                        console.log("Invalid username: " + currEmail + " user is already clocked in");
+                        $scope.alertOpen("Invalid username: " + currEmail + " user is already clocked in");
+                        goodEntry = false;
+                    }
+                }
+                if(goodEntry) {
+                    console.log("Valid entry, getting user from the database");
+                    database.getUser(currEmail, currStudentID, function(User){
+                        console.log("Got user: " + JSON.stringify(User), " Now clocking in...");
+                        database.clockIn(User, currChosenRoom, timeIn, function(User){
+                            console.log("Clocked in user: " + JSON.stringify(User));
+                            angular.element('#successModal').modal('show');
+                        })
+                    });
+                    /*Show Timed modal popup to confirm (1 minute)*/
                     angular.element('#successModal').modal('show');
-                })
+                }
             });
-            /*Show Timed modal popup to confirm (1 minute)*/
-            angular.element('#successModal').modal('show');
+            /*TODO: if the user enters the wrong ID, */
         }
     };
     //buildRooms();

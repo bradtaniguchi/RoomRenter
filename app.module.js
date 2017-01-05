@@ -14,7 +14,7 @@ var roomRenter = angular.module('roomRenter', ['ngRoute', 'LocalForageModule']);
 /*General application configurations assignment*/
 roomRenter.service('appInfo', function(){
     this.debug = debug;
-    this.appVersion = '0.0.11';
+    this.appVersion = '0.0.25';
     this.numberOfRooms = numberOfRooms;
     this.adminPassword = adminPassword;
 });

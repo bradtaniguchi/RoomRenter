@@ -7,10 +7,13 @@
         <div data-ng-repeat="room in usedRooms track by room.roomNumber" class="btn-group" data-toggle="buttons">
             <div class="form-group">
                 <div class="input-group" data-toggle="tooltip" title="The room you were using" >
-                    <span class="input-group-addon">Room {{room.roomNumber}}.</span>
-                    <output> {{room.username}} |some boring text </output>
-                    <span class="input-group-addon submit-button btn" title="Clock out of the current room"
-                          role="button" data-ng-click="clockOut(room.roomNumber)">Clock Out</span>
+                    <span class="input-group-addon" >Room {{room.roomNumber}}.</span>
+                    <input type="text" class="form-control" title="username" value="{{room.username}} | timeIn" readonly>
+                    <span class="input-group-btn">
+                     <button class="btn btn-default" title="Clock out of the current room" data-toggle="modal"
+                             data-target="#successModal" role="button"
+                             data-ng-click="clockOut(room.username, room.roomNumber)">Clock Out</button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -26,17 +29,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-ng-click="go('/')">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Sucessful ClockIn</h4>
+                <h4 class="modal-title">Successful ClockIn</h4>
             </div>
             <div class="modal-body">
-                <p>Add Stuff about the login</p> <!--TODO-->
+                <p>{{clockOutMessage}}</p>
+                <br/>
+                <p></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        data-ng-click="go('/')">Ok</button>
+                        data-ng-click="goModal('/')">Ok</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

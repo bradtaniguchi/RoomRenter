@@ -3,16 +3,27 @@
  */
 
 
-roomRenter.controller('clockOutController', function ($scope, generalService, appInfo, database) {
+roomRenter.controller('clockOutController', function ($scope, $timeout, generalService, appInfo, database) {
     $scope.room = 0;
     $scope.numberOfRooms = appInfo.numberOfRooms;
     $scope.usedRooms = [];  //the rooms currently in use, thus the ones we are to display
     $scope.alertClass = ""; //shows the alert message if the rooms are empty
     $scope.emtpyMessage = ""; //only shows if there are no rooms
+    $scope.clockOutMessage = ""; //shows when the user clocks out of their room.
 
+    $scope.clockOutStartTime = "";
+    $scope.clockOutEndTime = "";
+    $scope.clockOutTime = "";
     /*To provide navigation from this page*/
     $scope.go = function(path) {
         generalService.changeView(path);
+    };
+    $scope.goModal = function(path) {
+        /*First lets remove the modal from the screen*/
+        angular.element('#successModal').modal('hide');
+        $timeout(function() {
+            generalService.changeView(path);
+        }, 500);
     };
 
     /*Close the entry alert on the page*/
@@ -61,12 +72,19 @@ roomRenter.controller('clockOutController', function ($scope, generalService, ap
     /*This is when the user clicks on the Clockout button.
     * We call a database function to clock the user out, and then open a confirm modal.
     * This modal will just clarify the information we got from the database.*/
-    $scope.clockOut = function(room) {
-        console.log("Clocking out of room :" + room);
-        /*call database service here*/
-
+    $scope.clockOut = function(username, roomNumber) {
+        console.log("User" + username + " is clocking out of room: " + roomNumber);
+        /*We need to get the User and their information from the database*/
+        database.getUserLoggedIn(username, function(User){
+            /*Now that we have their User object we need to call the database service to clock out our user.*/
+            var timeOut = new Date().toUTCString();
+            database.clockOut(User, timeOut, function(){ //capture the error here if there is one!
+                console.log("Clocked out user: " + username);
+                $scope.clockOutMessage = "Clocked User " + username + " out of room " + roomNumber;
+                /*TODO: Upgrade the database to return the TIME they spent in the room, then display it here*/
+            });
+        });
         /*open modal*/
     };
-
     getUsedRooms();
 });

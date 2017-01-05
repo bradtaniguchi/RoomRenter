@@ -14,12 +14,11 @@
 </head>
 <body class="container" data-ng-app="roomRenter">
     <!--include the navbar html-->
-    <div ng-controller="navbarController">
-        <div ng-include="'app/shared/top-navbar/navbarView.html'"></div>
+    <div data-ng-controller="navbarController">
+        <div data-ng-include="'app/shared/top-navbar/navbarView.html'"></div>
     </div>
-
     <!--primary view-->
-    <div ng-view></div>
+    <div data-ng-view></div>
 
     <!--any multi page footers go here-->
     <!--JAVASCRIPT FILES GO BELOW-->

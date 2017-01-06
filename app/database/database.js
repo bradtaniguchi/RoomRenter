@@ -97,16 +97,20 @@ roomRenter.service('database', function($localForage){
             return null;
         }
         $localForage.getItem(username).then(function(User){
-            if(User != undefined) { //user DOES exist
+            console.log("getUser: gettingItem: " + username);
+            if(User != null) { //user DOES exist
+                console.log("User already exists, returning: " + User.username);
                 /*validate their userID, if it is wrong then */
                 callback(User); //returns User object
             } else { //user doesn't exist, lets create them
+                console.log("User doesn't exist, creating : " + username);
                 var newUser = {
                     "username" : username,
                     "userID" : userID,
                     "entries" : []
                 };
                 $localForage.setItem(username, newUser).then(function(User){
+                    console.log("Created User, returning: " + User.username);
                     if(callback !== undefined) {
                         callback(User);
                     } else {
@@ -241,26 +245,27 @@ roomRenter.service('database', function($localForage){
     * @param {string} timeOut - some parsable date string, this function does not care what format it is in.
     * @param {function} callback - a function to call at the end of this functions execution.*/
     this.clockOut = function(User, timeOut, callback) {
+        console.log("database: clockOut: trying to clockout: " + User.username + " entries length: " + User.entries.length);
         var lastEntry = User.entries.length-1;
         User.entries[lastEntry].timeOut = timeOut;
         /* Get who is logged in and remove this user's username from it as they are clocking out*/
-        database.getUsersLoggedIn(function(usersLoggedIn){
+        database.getUsersLoggedIn(function(usersLoggedIn) {
             var index;
-            for(var i = 0; i < usersLoggedIn.length; i++) {
-                if (usersLoggedIn[i] == User.username) {
-                    index = i;
-                }
-            }
+            index = usersLoggedIn.indexOf(User.username);
             /*remove item with splice, and apply the new changes to the array in database*/
-            $localForage.setItem(clockedInUsers, usersLoggedIn.splice(index, 1));
+            usersLoggedIn.splice(index, 1); //notice this does IN MEMORY
+            $localForage.setItem(clockedInUsers, usersLoggedIn).then(function(){ //add error handling
+                console.log("database/clockOut: removed the user at index:" + index);
+            });
             /*note there is no async callback here, since this is a separate data structure.*/
-        });
-        $localForage.setItem(User.username, User).then(function(data){ //add error handling
-            if(callback != undefined) {
-                callback(data);
-            } else {
-                return data;
-            }
+            $localForage.setItem(User.username, User).then(function(data){ //add error handling
+                console.log("database/clockOut: set the new user value in database : " + JSON.stringify(User));
+                if(callback != undefined) {
+                    callback(data);
+                } else {
+                    return data;
+                }
+            });
         });
     };
     /*Currently a debugging function, to be later repurposed to print the entire database. returns

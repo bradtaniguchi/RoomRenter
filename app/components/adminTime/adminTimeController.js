@@ -3,12 +3,6 @@
  */
 
 roomRenter.controller('adminTimeController', function($scope) {
-    
-$scope.userTime='07:21:00';
-
-    $scope.userLocalTime='08:21:2016:07:21:00';
-    $scope.thisTime=Date.now();
-
 
 $scope.roomNum = [{
 

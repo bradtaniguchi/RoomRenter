@@ -1,3 +1,51 @@
 <!--Admin Stat View-->
 <h1>Admin Time View</h1>
-NEEDS WORK
+<div>
+    <div class="row">
+        <div class="col-sm-4 well">
+            <h2>
+                Clocked in User:</h2>
+            <br>
+            <div ng-controller="adminTimeController">
+                <div ng-repeat="room in roomNum">
+                    <form class="media">
+                        <div class="media-left media-middle">
+                            <img src="assets/Toro.jpg" class="media-object" style="width:35px">
+                        </div>
+                        <div class="media-body">
+                            <p>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" ng-model="" area-describedly="basic-addon2">
+                            <span class="input-group-addon"></span>
+                            </div>
+                    </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4  well highlight">
+            <h2>Elapsed Time: </h2>
+            <br>
+            <div ng-controller="adminTimeController">
+                <div ng-repeat="room in roomNum">
+                    <form clas="media">
+                        <div class="media-left media-middle">
+                            <img src="assets/Toro.jpg" class="media-object" style="width:35px">
+                        </div>
+                        <div class="media-body">
+                            <p>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder=" --:--" aria-describedby="basic-addon2">
+                                <span class="input-group-addon" id="basic-addon2" role="button">Clockout</span>
+                            </div>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>

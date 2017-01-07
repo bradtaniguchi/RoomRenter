@@ -64,15 +64,19 @@
         <h3>
             <span class="label label-default">Current Time:</span>
         </h3>
-        <output class="form-control">
+        <div class="col-xs-3">
+        <output class="form-control" style="width: 80px; height: 35px" >
             {{ clock | date:'hh:mm:ss'}}
         </output>
+        </div>
+    <br>
         <h3>
             <span class="label label-default">Open Rooms: </span>
         </h3>
-        <output class="form-control">{{roomsVacant}}</output>
-        <br>
+        <div class="col-xs-2">
+        <output class="form-control" style="width: 30px; height: 35px">{{roomsVacant}}</output>
+        </div>
+            <br><br>
         <img src="assets/Toro.jpg" width="10%">
     </div>
 </div>
-

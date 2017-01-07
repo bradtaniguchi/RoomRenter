@@ -86,5 +86,6 @@ roomRenter.controller('clockOutController', function ($scope, $timeout, generalS
         });
         /*open modal*/
     };
+
     getUsedRooms();
 });

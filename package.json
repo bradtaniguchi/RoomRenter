@@ -22,18 +22,19 @@
     }
   ],
   "dependencies": {
-    "nw": "0.19.2",
     "angular": "^1.6.1",
+    "angular-localforage": "^1.3.2",
+    "angular-moment": "^1.0.1",
     "angular-route": "^1.6.1",
     "localforage": "^1.4.3",
-    "angular-localforage": "^1.3.2"
+    "moment": "^2.17.1",
+    "nw": "0.19.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/bradtaniguchi/RoomRenter"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "bugs": {
     "url": "https://github.com/bradtaniguchi/RoomRenter/issues"
   },

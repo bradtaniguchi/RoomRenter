@@ -54,10 +54,11 @@ roomRenter.controller('clockOutController', function ($scope, $timeout, generalS
                         database.getRoomLoggedIn(User, function(roomNumber){
                             /*With this information, we need to create a room for the usedRoom array*/
                             console.log("creating room logged in " + roomNumber);
+                            var timeIn = database.getTimeLoggedIn(User); //lets not use async-call
                             var usedRoom = {
                                 "roomNumber" : roomNumber, //this is the room the user is logged into
-                                "username" : User.username //this is the users username, to display who they are
-                                //"usageTime" : 0 //this is how long the user has been in the room, use the start time
+                                "username" : User.username, //this is the users username, to display who they are
+                                "timeIn" : timeIn //this is how long the user has been in the room, use the start time
                             };
                             $scope.usedRooms.push(usedRoom); //push this room onto the page
                         });

@@ -9,7 +9,7 @@ var debug = true;
 var numberOfRooms = 5; // set default number of rooms
 var adminPassword = "fall2016@dh";
 
-var roomRenter = angular.module('roomRenter', ['ngRoute', 'LocalForageModule']);
+var roomRenter = angular.module('roomRenter', ['ngRoute', 'LocalForageModule', 'angularMoment']);
 
 /*General application configurations assignment*/
 roomRenter.service('appInfo', function(){

@@ -181,6 +181,22 @@ roomRenter.service('database', function($localForage){
             return lastEntry.room;
         }
     };
+    /*Utility function that gets the time the user logged into their last room entry
+    * this returns a string, which can be parsed by momentjs.
+    * NOTE: This function does not access the database.*/
+    this.getTimeLoggedIn = function(User, callback) {
+        var lastEntry = {};
+        /*get the 'last entry'*/
+        if (User.entries.length >= 1){
+            lastEntry = User.entries[User.entries.length-1];
+        }
+        /*From the last entry get the time they got in*/
+        if(callback !== undefined) {
+            callback(lastEntry.timeIn);
+        } else {
+            return lastEntry.timeIn;
+        }
+    };
     /*Takes a User object and clocks them into the database
     * @param {Object} User - a user object defined with the following structure:
     * {

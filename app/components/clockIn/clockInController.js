@@ -3,7 +3,7 @@
  * This controller handles the clockIn page. The User can clock into their corresponding rooms here
  */
 
-roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo, database) {
+roomRenter.controller('clockInController', function($scope, $timeout, generalService, appInfo, database, moment) {
     $scope.toromail = "";
     $scope.errorMessage = "";
     $scope.chosenRoom = 0;
@@ -114,7 +114,8 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
         var currEmail = $scope.toromail;
         var currStudentID = $scope.studentID;
         var currChosenRoom = $scope.chosenRoom;
-        var timeIn = new Date().toUTCString(); //change this later
+        //var timeIn = new Date().toUTCString(); //change this later
+        var timeIn = moment().format('MM/DD/YYYY-HH:mm'); //using momentjs
         console.log("email: " + currEmail);
         console.log("id: " + currStudentID);
         console.log("room: " + currChosenRoom);

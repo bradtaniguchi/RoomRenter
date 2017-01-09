@@ -4,9 +4,9 @@
  * Also I utilize callbacks for almost every function.
  */
 
-roomRenter.service('database', function($localForage){
+roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($localForage, moment, appInfo){
     var clockedInUsers = "clockedInUsers";
-    var reserveWords = [clockedInUsers]; //these are keys that are reserved within the database
+    var clockedInTimes = "clockedInTimes"; // reserved key for times and username objects.
     var database = this; //this will be used during callbacks to other functions within this scope
 
     /*checks to see if the username is valid.
@@ -16,10 +16,10 @@ roomRenter.service('database', function($localForage){
     *   reserved words.
     * TODO: update this function to check all reserved words!*/
     function isValidName(username){
-        /*for (var word in reserveWords){
-            if(word == username) return false;
+        /*for (var i = i; i < reserveWords.length; i++) {
+            if(reserveWords[i] == username) return false;
         }*/
-        return (username != clockedInUsers);
+        return (username != clockedInUsers || username != clockedInTimes);
     }
     /*Updates a user's userID
     * @param {string} username - the username of the user, this is the primary key we search for.
@@ -63,27 +63,6 @@ roomRenter.service('database', function($localForage){
             if(callback !== undefined) {
                 callback();
             } //call the callback if given
-        });
-    };
-    /*quick test of functionality*/
-    this.test = function(username) {
-        console.log("Username given: " + username);
-        /*clear memory*/
-        database.clearDatabase(function(){
-            /*Then create get this user, they don't exist and should be created*/
-
-            database.getUser(username, function(User){
-                console.log("Created user: " + JSON.stringify(User));
-                /*Now login...*/
-                database.clockIn(User, 0, 'TIME', function(user){
-
-                    console.log("Logged in??" + user.username + ' entires: ' + user.entries);
-                    $localForage.getItem('BradT').then(function(user) {
-                        console.log("Trying to get the item: " + user.username);
-
-                    }); //manual check
-                });
-            });
         });
     };
     /*This function checks if the user exists, if they don't we create their record.
@@ -182,20 +161,66 @@ roomRenter.service('database', function($localForage){
         }
     };
     /*Utility function that gets the time the user logged into their last room entry
-    * this returns a string, which can be parsed by momentjs.
-    * NOTE: This function does not access the database.*/
+    * this returns a string, which can be parsed by momentjs. This function also returns the User pointer
+    * as the second callback parameter, with the timeIn as the first.
+    * NOTE: This function does not access the database.
+    * @param {object} User - the user object that you want the last available time from
+    * @param {function} callback - function to call and return the data to*/
     this.getTimeLoggedIn = function(User, callback) {
         var lastEntry = {};
         /*get the 'last entry'*/
-        if (User.entries.length >= 1){
+        if (User.entries.length >= 1) {
             lastEntry = User.entries[User.entries.length-1];
         }
         /*From the last entry get the time they got in*/
         if(callback !== undefined) {
-            callback(lastEntry.timeIn);
+            callback(lastEntry.timeIn, User);
         } else {
             return lastEntry.timeIn;
         }
+    };
+    /*Provides an interface to get the next time out of all the Users right now.
+    * The next time is the time of the OLDEST clockIn by all the users clocked in. This person will be the first to
+    * get removed from their room if there is someone waiting.
+    * We return the best time out of all the users logged in as the first parameter and the User with that time
+    * as the second and null if there are no users logged in.
+    * NOTE: You should check to make sure that all rooms are filled before using this function, as it needs to
+    * query all entries for all users logged in, which might end up being slow.
+    * @param {array} Users - an array of User objects, you must pass to go over to find the next available time.
+    * @param {function} callback - function to callback from, provides the time in momentjs string as the first param
+    * TODO: Don't need this*/
+    this.getNextAvailableTime = function(Users, callback) {
+        /*first get all users loggedin*/
+        database.getUsersLoggedIn(function(Users){
+            /*Lets check to see if there is a user clocked in first, if not return null*/
+            if (Users.length > 0) {
+                /*Lets define the holder of the 'largestTime', or who has been clocked in the longest*/
+                database.getTimeLoggedIn(Users[0], function(firstTime){
+                    /*firstTime is the first User logged in, and their latest time will be the default*/
+                    var oldestClockin = moment().duration(moment().diff(firstTime, appInfo.momentFormat));
+                    var oldestUser = Users[0];
+                    /*for each user we get back, we need to get their latest time, and compare them*/
+                    for(var i = 0; i < Users; i++) {
+                        /*Now we need to get the time the user is logged in, and utilize the fact we get the User
+                        * as the second callback parameter*/
+                        database.getTimeLoggedIn(Users[i], function(time, User){
+                            /*compare the time they clocked in, with the current time and get the duration*/
+                            var duration = moment().duration(moment().diff(time, appInfo.momentFormat));
+                            /*If the 'oldestClockin' is less than the duration, then change the oldest*/
+                            if(oldestClockin < duration) {
+                                oldestClockin = duration;
+                                oldestUser = User;
+                            } //otherwise continue.
+                        });
+                    }
+                    /*By now we should have the oldest clockin duration, where we return the time and the User object
+                    We return the User object as a second parameter to identify who the oldest time goes to.*/
+                    callback(oldestClockin, oldestUser);
+                });
+            } else { // there are 0 users logged in
+                callback(null);
+            }//note no other way for a callback, need to migrate all of the database api to utilize callbacks only
+        });
     };
     /*Takes a User object and clocks them into the database
     * @param {Object} User - a user object defined with the following structure:
@@ -232,6 +257,18 @@ roomRenter.service('database', function($localForage){
                 console.log("set new user to clockedInUsers");
             });
             /*note there is no async callback here, since this is a separate data structure.*/
+        });
+        /* Maintain the other reserved key of clockedInTime objects, by getting the key and adding our data to it*/
+        $localForage.getItem(clockedInTimes).then(function(userAndTimes){
+            /*Add the new date time to the array*/
+            var newEntry = {
+                "username" : User.username,
+                "timeIn": timeIn
+            };
+            userAndTimes.push(newEntry);
+            $localForage.setItem(clockedInTimes, userAndTimes).then(function(data){//add error handling
+                console.log("clockin: set the userAndTimes in the database" + JSON.stringify(data));
+            });
         });
         $localForage.setItem(User.username, User).then(function(data){ //add error handling
             console.log("clockin: set the Item in the database!");
@@ -272,6 +309,17 @@ roomRenter.service('database', function($localForage){
             usersLoggedIn.splice(index, 1); //notice this does IN MEMORY
             $localForage.setItem(clockedInUsers, usersLoggedIn).then(function(){ //add error handling
                 console.log("database/clockOut: removed the user at index:" + index);
+            });
+            /*also remove the entry with the same username in the database*/
+            $localForage.getItem(clockedInTimes, function (clockedInTimesArray) {
+                /*For each object in the clockedInTimes array find */
+                for(var i = 0 ; i < clockedInTimesArray.length; i++){
+                    if(clockedInTimesArray[i].username == User.username) {
+                        clockedInTimesArray.splice(clockedInTimesArray.indexOf(User.username), 1);
+                        $localForage.setItem(clockedInTimes, clockedInTimesArray);
+                        break;
+                    }
+                }
             });
             /*note there is no async callback here, since this is a separate data structure.*/
             $localForage.setItem(User.username, User).then(function(data){ //add error handling
@@ -324,12 +372,22 @@ roomRenter.service('database', function($localForage){
                 console.log("The " + clockedInUsers + " key doesn't exist!");
                 var array = [];
                 $localForage.setItem(clockedInUsers, array);
-                console.log("Created the " + clockedInUsers + "key, we are ok!");
+                console.log("Created the " + clockedInUsers + " key, we are ok!");
             } else {
                 console.log("The " + clockedInUsers + " key already exists, we are ok!");
+            }
+        });
+        $localForage.getItem(clockedInTimes).then(function(data) {
+            if (data == null) {
+                console.log("The " + clockedInTimes + "key doesn't exist!");
+                var array = [];
+                $localForage.setItem(clockedInTimes, array);
+                console.log("Created the " + clockedInTimes + " key we are ok!");
+            } else {
+                console.log("The " + clockedInTimes + " key already exists, we are ok!");
             }
         });
     }
     /*Check our data structure*/
     buildOccupiedRooms();
-});
+}]);

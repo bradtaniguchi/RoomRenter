@@ -115,7 +115,7 @@ roomRenter.controller('clockInController', function($scope, $timeout, generalSer
         var currStudentID = $scope.studentID;
         var currChosenRoom = $scope.chosenRoom;
         //var timeIn = new Date().toUTCString(); //change this later
-        var timeIn = moment().format('MM/DD/YYYY-HH:mm'); //using momentjs
+        var timeIn = moment().format(appInfo.momentFormat); //using momentjs
         console.log("email: " + currEmail);
         console.log("id: " + currStudentID);
         console.log("room: " + currChosenRoom);

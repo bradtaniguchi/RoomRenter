@@ -179,49 +179,18 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
             return lastEntry.timeIn;
         }
     };
-    /*Provides an interface to get the next time out of all the Users right now.
-    * The next time is the time of the OLDEST clockIn by all the users clocked in. This person will be the first to
-    * get removed from their room if there is someone waiting.
-    * We return the best time out of all the users logged in as the first parameter and the User with that time
-    * as the second and null if there are no users logged in.
-    * NOTE: You should check to make sure that all rooms are filled before using this function, as it needs to
-    * query all entries for all users logged in, which might end up being slow.
-    * @param {array} Users - an array of User objects, you must pass to go over to find the next available time.
-    * @param {function} callback - function to callback from, provides the time in momentjs string as the first param
-    * TODO: Don't need this*/
-    this.getNextAvailableTime = function(Users, callback) {
-        /*first get all users loggedin*/
-        database.getUsersLoggedIn(function(Users){
-            /*Lets check to see if there is a user clocked in first, if not return null*/
-            if (Users.length > 0) {
-                /*Lets define the holder of the 'largestTime', or who has been clocked in the longest*/
-                database.getTimeLoggedIn(Users[0], function(firstTime){
-                    /*firstTime is the first User logged in, and their latest time will be the default*/
-                    var oldestClockin = moment().duration(moment().diff(firstTime, appInfo.momentFormat));
-                    var oldestUser = Users[0];
-                    /*for each user we get back, we need to get their latest time, and compare them*/
-                    for(var i = 0; i < Users; i++) {
-                        /*Now we need to get the time the user is logged in, and utilize the fact we get the User
-                        * as the second callback parameter*/
-                        database.getTimeLoggedIn(Users[i], function(time, User){
-                            /*compare the time they clocked in, with the current time and get the duration*/
-                            var duration = moment().duration(moment().diff(time, appInfo.momentFormat));
-                            /*If the 'oldestClockin' is less than the duration, then change the oldest*/
-                            if(oldestClockin < duration) {
-                                oldestClockin = duration;
-                                oldestUser = User;
-                            } //otherwise continue.
-                        });
-                    }
-                    /*By now we should have the oldest clockin duration, where we return the time and the User object
-                    We return the User object as a second parameter to identify who the oldest time goes to.*/
-                    callback(oldestClockin, oldestUser);
-                });
-            } else { // there are 0 users logged in
-                callback(null);
-            }//note no other way for a callback, need to migrate all of the database api to utilize callbacks only
+
+    /*This function provides an interface to get the clockedInTimes data object. It will return with the
+    * following format(where timeformat is the time format specified in the appInfo service):
+    * [{'username': 'bradt', 'timeIn': 'TIMEFORMAT'}]
+    * @param {function} callback - function to callback to, will return the clockedInTimes array as the first
+    * parameter in the callback.*/
+    this.getClockedInTimes = function(callback) {
+        $localForage.getItem(clockedInTimes).then(function(clockedInTimesArray){ //catch errors here
+            callback(clockedInTimesArray);
         });
     };
+
     /*Takes a User object and clocks them into the database
     * @param {Object} User - a user object defined with the following structure:
     * {

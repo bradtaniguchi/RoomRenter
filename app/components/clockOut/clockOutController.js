@@ -78,7 +78,8 @@ roomRenter.controller('clockOutController', function ($scope, $timeout, generalS
         /*We need to get the User and their information from the database*/
         database.getUserLoggedIn(username, function(User){
             /*Now that we have their User object we need to call the database service to clock out our user.*/
-            var timeOut = new Date().toUTCString();
+            //var timeOut = new Date().toUTCString();
+            var timeOut = moment(); //moment object
             database.clockOut(User, timeOut, function(){ //capture the error here if there is one!
                 console.log("Clocked out user: " + username);
                 $scope.clockOutMessage = "Clocked User " + username + " out of room " + roomNumber;

@@ -17,7 +17,7 @@ roomRenter.service('appInfo', function(){
     this.appVersion = '0.1.1';
     this.numberOfRooms = numberOfRooms;
     this.adminPassword = adminPassword;
-    this.momentFormat = 'MM/DD/YYYY-HH:mm'; //how we keep track of date/time in the database and UI.
+    this.momentFormat = 'YYYY-MM-DD HH:mm:ss'; //how we keep track of date/time in the database and UI.
 });
 
 /*This service will be moved elsewhere at a later time...*/

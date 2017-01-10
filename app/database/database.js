@@ -2,6 +2,9 @@
  * Created by brad on 1/3/17.
  * New database file written from the ground up to focus on NoSQL.
  * Also I utilize callbacks for almost every function.
+ * TODO: Remove all the non-callback returns, as they don't work.
+ * TODO: Change the API A little, to provide 'expected' data back, instead of forcing the Controllers
+ *  to do it...
  */
 
 roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($localForage, moment, appInfo){

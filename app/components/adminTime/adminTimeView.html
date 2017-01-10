@@ -21,14 +21,16 @@
                     </form>
                 </div>
             </div>
-            <div class="col-sm-4 well highlight">
+            <div data-ng-class="wellClass" class="col-sm-4 well highlight">
                 <h4>Elapsed Time: </h4>
                 <div ng-repeat="room in usedRooms track by room.roomNumber">
                     <div class="form-group">
                         <div class="input-group">
                             <input type="text" class="form-control" title="Time the user has been in the room"
                                    value="{{room.duration}}" readonly>
-                            <span class="input-group-addon" id="basic-addon2" role="button">Clockout</span>
+                            <span class="input-group-addon" role="button" title="Clock out of current room"
+                                  data-toggle="modal" data-target="#successModal" role="button"
+                                  data-ng-click="clockOut(room.username, room.roomNumber)">Clockout</span>
                         </div>
                     </div>
                 </div>
@@ -38,5 +40,8 @@
         <div data-ng-class="alertClass" class="alert alert-info">
             <p>{{emptyMessage}}</p>
         </div>
+        <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
+                data-ng-click="go('/')">Go Back</button>
     </div> <!--end panel body-->
 </div>
+<div data-ng-include="'app/shared/success-modal/successModal.html'"></div>

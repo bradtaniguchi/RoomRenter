@@ -7,7 +7,7 @@ roomRenter.controller("mainController", function($scope, $location, database, $t
     $scope.timeInMs = 0;
     /*get the number of rooms clocked into*/
     $scope.roomsVacant = 0;
-    $scope.nextAvailableTime = 0;
+    $scope.nextAvailableTime = 'Now';
 
     $scope.back = function() {
         window.history.back();
@@ -34,11 +34,14 @@ roomRenter.controller("mainController", function($scope, $location, database, $t
         * NOTE: We are using the extended key version which provides their last clockIn times*/
         database.getClockedInTimes(function(clockedInTimes) {
             /*Now we need to calculate the oldest 'time' out of all the given ones
-            * For now we will ASSUME that the first item in the array is the oldest, and use that */
+            * For now we will ASSUME that the first item in the array is the oldest, and use that
+            * TODO: add another case were the amount of users clocked in isn't max, then just go to else area*/
             if(clockedInTimes != null && clockedInTimes.length > 0) {
                 $scope.nextAvailableTime = moment.utc(moment.duration(moment()
                     .diff(clockedInTimes[0].timeIn, appInfo.momentFormat)).asMilliseconds())
                     .format("HH:mm");
+            } else {
+                $scope.nextAvailableTime = 'Now';
             }
         });
     };

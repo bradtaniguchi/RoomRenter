@@ -8,7 +8,7 @@ roomRenter.controller('clockOutController', function ($scope, $timeout, generalS
     $scope.numberOfRooms = appInfo.numberOfRooms;
     $scope.usedRooms = [];  //the rooms currently in use, thus the ones we are to display
     $scope.alertClass = ""; //shows the alert message if the rooms are empty
-    $scope.emtpyMessage = ""; //only shows if there are no rooms
+    $scope.emptyMessage= ""; //only shows if there are no rooms
     $scope.clockOutMessage = ""; //shows when the user clocks out of their room.
 
     $scope.clockOutStartTime = "";

@@ -6,23 +6,15 @@
     <form class="panel-body">
         <div data-ng-repeat="room in usedRooms track by room.roomNumber" class="btn-group" data-toggle="buttons">
             <div class="form-group">
-
-                <p>Select User:
-                    <span class="radioValue">{{roomSelected.value}}
-          </span>
-                </p>
-
-
                 <div class="input-group" data-toggle="tooltip" title="The room you were using" >
                     <span class="input-group-addon" >Room {{room.roomNumber}}.</span>
                     <input type="text" class="form-control" title="username" value="{{room.username}} | {{room.timeIn}}" readonly>
                     <span class="input-group-btn">
-                     <button class="btn btn-default" title="Clock out of the current room" data-toggle="modal"
-                             data-target="#successModal" role="button"
-                             data-ng-click="clockOut(room.username, room.roomNumber)">Clock Out</button>
+                        <button class="btn btn-default" title="Clock out of the current room" data-toggle="modal"
+                                data-target="#successModal" role="button"
+                                data-ng-click="clockOut(room.username, room.roomNumber)">Clock Out</button>
                     </span>
                 </div>
-
             </div>
         </div>
         <div data-ng-class="alertClass" class="alert alert-info">

@@ -219,13 +219,13 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
         User.entries.push({
             "room" : room,
             "timeIn": timeIn,
-            "timeOut": null
+            "timeOut": ''
         });
         /* Get who is already clockedIn, and add this user to it */
         database.getUsersLoggedIn(function(usersLoggedIn){
             console.log("clockin: getting usersLoggedIn");
             usersLoggedIn.push(User.username); //push our key into this array, so we know this user is logged in
-            $localForage.setItem(clockedInUsers, usersLoggedIn, function() {
+            $localForage.setItem(clockedInUsers, usersLoggedIn).then(function() {
                 console.log("set new user to clockedInUsers");
             });
             /*note there is no async callback here, since this is a separate data structure.*/
@@ -243,7 +243,7 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
             });
         });
         $localForage.setItem(User.username, User).then(function(data){ //add error handling
-            console.log("clockin: set the Item in the database!");
+            console.log("clockin: set the Item in the database!" + JSON.stringify(data));
             if (callback !== callback) {
                 callback(data);
             } else {
@@ -283,17 +283,20 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
                 console.log("database/clockOut: removed the user at index:" + index);
             });
             /*also remove the entry with the same username in the database*/
-            $localForage.getItem(clockedInTimes, function (clockedInTimesArray) {
+            $localForage.getItem(clockedInTimes).then(function (clockedInTimesArray) {
+                console.log("database/clockOut: Getting the clockedInTimes");
                 /*For each object in the clockedInTimes array find */
                 for(var i = 0 ; i < clockedInTimesArray.length; i++){
                     if(clockedInTimesArray[i].username == User.username) {
-                        clockedInTimesArray.splice(clockedInTimesArray.indexOf(User.username), 1);
-                        $localForage.setItem(clockedInTimes, clockedInTimesArray);
-                        break;
+                        clockedInTimesArray.splice(clockedInTimesArray.indexOf(clockedInTimesArray[i]), 1);
+                        $localForage.setItem(clockedInTimes, clockedInTimesArray).then(function(){
+                            console.log("database/clockOut: Set clockedInTimes " + JSON.stringify(clockedInTimesArray));
+                        });
                     }
                 }
             });
             /*note there is no async callback here, since this is a separate data structure.*/
+            console.log("TEST: trying to set item: " + User.username + " " + JSON.stringify(User));
             $localForage.setItem(User.username, User).then(function(data){ //add error handling
                 console.log("database/clockOut: set the new user value in database : " + JSON.stringify(User));
                 if(callback != undefined) {

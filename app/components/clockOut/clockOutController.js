@@ -3,7 +3,7 @@
  */
 
 
-roomRenter.controller('clockOutController', function ($scope, $timeout, generalService, appInfo, database) {
+roomRenter.controller('clockOutController', function ($scope, $timeout, moment, generalService, appInfo, database) {
     $scope.room = 0;
     $scope.numberOfRooms = appInfo.numberOfRooms;
     $scope.usedRooms = [];  //the rooms currently in use, thus the ones we are to display
@@ -78,8 +78,8 @@ roomRenter.controller('clockOutController', function ($scope, $timeout, generalS
         /*We need to get the User and their information from the database*/
         database.getUserLoggedIn(username, function(User){
             /*Now that we have their User object we need to call the database service to clock out our user.*/
-            //var timeOut = new Date().toUTCString();
-            var timeOut = moment(); //moment object
+            var timeOut = moment().format(appInfo.momentFormat);
+            console.log("TEST2: timeOut: " + timeOut);
             database.clockOut(User, timeOut, function(){ //capture the error here if there is one!
                 console.log("Clocked out user: " + username);
                 $scope.clockOutMessage = "Clocked User " + username + " out of room " + roomNumber;

@@ -26,9 +26,5 @@ roomRenter.service('generalService', function($location){
     this.changeView = function(path) {
         console.log('Changing View' + path);
         $location.path(path);
-        /*Initialize bootstrap tooltips upon page switches*/
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
     }
 });

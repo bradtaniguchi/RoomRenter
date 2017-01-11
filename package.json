@@ -1,6 +1,6 @@
 {
   "name": "RoomRenter",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "description": "A desktop application using nw.js, to provide room rentals for students",
   "author": "Brad Taniguchi",
   "main": "index.html",

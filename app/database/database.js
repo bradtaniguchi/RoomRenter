@@ -10,6 +10,7 @@
 roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($localForage, moment, appInfo){
     var clockedInUsers = "clockedInUsers";
     var clockedInTimes = "clockedInTimes"; // reserved key for times and username objects.
+    var numberOfReservedKeys= 2; //the number of reserved keys in the database
     var database = this; //this will be used during callbacks to other functions within this scope
 
     /*checks to see if the username is valid.
@@ -22,7 +23,7 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
         /*for (var i = i; i < reserveWords.length; i++) {
             if(reserveWords[i] == username) return false;
         }*/
-        return (username != clockedInUsers || username != clockedInTimes);
+        return !(username === clockedInUsers || username === clockedInTimes);
     }
     /*Updates a user's userID
     * @param {string} username - the username of the user, this is the primary key we search for.
@@ -307,33 +308,47 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
             });
         });
     };
-    /*Currently a debugging function, to be later repurposed to print the entire database. returns
-    a string of the database contents.
-    * @param {function} callback - The function to call and return with the data from the database
-    * TODO: finish this function, I am to lazy to finish it right now!
-    this.printDatabase = function(callback) {
-        var string = "";
-        $localForage.length(function(length) {
+    /*
+    * Gets all the Entries from every user ever. It also provides a slightly different return syntax, to provide
+    * an easier time reporting. Returns an array of objects.
+    * @param {function} callback - function to callback to with the data*/
+    this.getEntries = function(callback) {
+        var entries = [];
+        /*get all objects within the database*/
+        $localForage.length().then(function(length) {
             // Loop over each of the items.
             for (var i = 0; i < length; i++) {
                 // Get the key.
-                $localForage.key(i, function(key) {
-                    // Retrieve the data.
-                    $localForage.getItem(key, function(){
-                        if(key != )
-                        var userString = "";
-                        userString = "username " + key.username + "\n";
-                    });
+                $localForage.key(i).then(function(key) {
+                    // Retrieve the data. IF they key is a valid name, and thus not a keyword
+                    if(isValidName(key)) {
+                        $localForage.getItem(key).then(function(User){
+                            console.log('Found User: ' + JSON.stringify(User));
+                            /*Now we need to go thru each of their entries*/
+                            User.entries.forEach(function(entry) {
+                                var returnEntry = {
+                                    "username": User.username, //this is copied
+                                    "room" : entry.room,
+                                    "timeIn" : entry.timeIn,
+                                    "timeOut" : entry.timeOut
+                                };
+                                console.log("  Found Entry: " + JSON.stringify(returnEntry));
+                                /*now push the returnEntry into our entries array*/
+                                entries.push(returnEntry);
+                                /*Now we need to check if we are done with all the entries*/
+                                if (entries.length == length-numberOfReservedKeys) {
+                                    console.log("database/getEntries: got all Users");
+                                    if(typeof callback === "function") callback(entries); //return the amount
+                                }
+                            }); //omg thank god for finding .forEach
+                        });
+                    } else {
+                        console.log("database/getEntries: found a reserved key: " + key);
+                    }
                 });
             }
         });
-
-        if(callback != undefined) {
-            callback(data);
-        } else {
-            return data;
-        }
-    };*/
+    };
 
     /*Add these functions at a later time for reporting*/
     /*Gets all the users logged into the rooms for the WEEK*/

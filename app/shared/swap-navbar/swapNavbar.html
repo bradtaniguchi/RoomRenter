@@ -1,0 +1,38 @@
+<div data-ng-controller="swapController">
+    <div class="modal fade" id="swapRoomsModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Swap Rooms</h4>
+                </div>
+                <div class="modal-body">
+                    <!--step 1. Show who IS clocked In.-->
+                    <p>Click on the room to swap from:</p>
+                    <div class="btn-groupone" data-toggle="buttons">
+                        <label class="btn btn-primary">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="rm1" autocomplete="off"> Room 1
+                        </label>
+                    </div>
+                    <!--step 2. Show all Rooms, with special span icons on buttons with users in it. -->
+                    <p>Click on the room to swap to:</p>
+                    <div class="btn-grouptwo" data-toggle="buttons">
+                        <label class="btn btn-danger">
+                            <input type="radio" data-ng-click="swapRooms()" name="options" id="option1" autocomplete="off"> Room 1
+                        </label>
+                    </div>
+                    <!--show the user what they are choosing, after they have chosen some rooms-->
+                    <div class="input-group" data-ng-if="true">
+                        <h4>Swapping room.. to room ..</h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="go('/')">Swap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

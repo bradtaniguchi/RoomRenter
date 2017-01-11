@@ -10,7 +10,8 @@
 roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($localForage, moment, appInfo){
     var clockedInUsers = "clockedInUsers";
     var clockedInTimes = "clockedInTimes"; // reserved key for times and username objects.
-    var numberOfReservedKeys= 2; //the number of reserved keys in the database
+    var globalEntries = "globalEntries"; //reserved key for the number of individual entries in the database
+    var numberOfReservedKeys= 3; //the number of reserved keys in the database
     var database = this; //this will be used during callbacks to other functions within this scope
 
     /*checks to see if the username is valid.
@@ -23,7 +24,8 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
         /*for (var i = i; i < reserveWords.length; i++) {
             if(reserveWords[i] == username) return false;
         }*/
-        return !(username === clockedInUsers || username === clockedInTimes);
+        return !(username === clockedInUsers || username === clockedInTimes ||
+                username === globalEntries);
     }
     /*Updates a user's userID
     * @param {string} username - the username of the user, this is the primary key we search for.
@@ -243,6 +245,14 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
                 console.log("clockin: set the userAndTimes in the database" + JSON.stringify(data));
             });
         });
+        /* Increment the number of entries we have in the database*/
+        $localForage.getItem(globalEntries).then(function(entries){
+            /*increment the value*/
+            var newEntries = entries + 1;
+            $localForage.setItem(globalEntries, newEntries).then(function(data) {
+                console.log("database/clockin: Incremented the globalEntry number to: " + JSON.stringify(data));
+            });
+        });
         $localForage.setItem(User.username, User).then(function(data){ //add error handling
             console.log("clockin: set the Item in the database!" + JSON.stringify(data));
             if (callback !== callback) {
@@ -314,47 +324,46 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
     * @param {function} callback - function to callback to with the data*/
     this.getEntries = function(callback) {
         var entries = [];
-        /*get all objects within the database*/
-        $localForage.length().then(function(length) {
-            // Loop over each of the items.
-            for (var i = 0; i < length; i++) {
-                // Get the key.
-                $localForage.key(i).then(function(key) {
-                    // Retrieve the data. IF they key is a valid name, and thus not a keyword
-                    if(isValidName(key)) {
-                        $localForage.getItem(key).then(function(User){
-                            console.log('Found User: ' + JSON.stringify(User));
-                            /*Now we need to go thru each of their entries*/
-                            User.entries.forEach(function(entry) {
-                                var returnEntry = {
-                                    "username": User.username, //this is copied
-                                    "room" : entry.room,
-                                    "timeIn" : entry.timeIn,
-                                    "timeOut" : entry.timeOut
-                                };
-                                console.log("  Found Entry: " + JSON.stringify(returnEntry));
-                                /*now push the returnEntry into our entries array*/
-                                entries.push(returnEntry);
-                                /*Now we need to check if we are done with all the entries*/
-                                if (entries.length == length-numberOfReservedKeys) {
-                                    console.log("database/getEntries: got all Users");
-                                    if(typeof callback === "function") callback(entries); //return the amount
-                                }
-                            }); //omg thank god for finding .forEach
-                        });
-                    } else {
-                        console.log("database/getEntries: found a reserved key: " + key);
-                    }
-                });
-            }
+        /*First we need to get all the globalEntries*/
+        $localForage.getItem(globalEntries).then(function(numberOfTotalEntries){
+            /*get all objects within the database*/
+            $localForage.length().then(function(length) {
+                // Loop over each of the keys within the database.
+                for (var i = 0; i < length; i++) {
+                    // Get the key.
+                    $localForage.key(i).then(function(key) {
+                        // Retrieve the data. IF they key is a valid name, and thus not a keyword
+                        if(isValidName(key)) {
+                            $localForage.getItem(key).then(function(User){
+                                console.log('Found User: ' + JSON.stringify(User));
+                                /*Now we need to go thru each of their entries*/
+                                User.entries.forEach(function(entry) {
+                                    var returnEntry = {
+                                        "username": User.username, //this is copied
+                                        "room" : entry.room,
+                                        "timeIn" : entry.timeIn,
+                                        "timeOut" : entry.timeOut
+                                    };
+                                    console.log("  Found Entry: " + JSON.stringify(returnEntry) + "| entries.length:" +
+                                    entries.length + " | globalEntries: " + numberOfTotalEntries);
+                                    /*now push the returnEntry into our entries array*/
+                                    entries.push(returnEntry);
+                                    /*Now we need to check if we have gathered all the entry data for all users
+                                    * provided by the globalEntry variable.*/
+                                    if (entries.length == numberOfTotalEntries) {
+                                        console.log("database/getEntries: got all Users");
+                                        if(typeof callback === "function") callback(entries); //return the amount
+                                    }
+                                }); //omg thank god for finding .forEach
+                            });
+                        } else {
+                            console.log("database/getEntries: found a reserved key: " + key);
+                        }
+                    });
+                }
+            });
         });
     };
-
-    /*Add these functions at a later time for reporting*/
-    /*Gets all the users logged into the rooms for the WEEK*/
-    /*Gets all the users logged into the rooms for the MONTH*/
-    /*Gets all the users logged into the rooms for the ALLTIME*/
-
     /*Checks to see if the key data structured of the occupied rooms is created, if it ISN'T we create it.*/
     function buildOccupiedRooms() {
         $localForage.getItem(clockedInUsers).then(function(data){
@@ -369,12 +378,21 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
         });
         $localForage.getItem(clockedInTimes).then(function(data) {
             if (data == null) {
-                console.log("The " + clockedInTimes + "key doesn't exist!");
+                console.log("The " + clockedInTimes + " key doesn't exist!");
                 var array = [];
                 $localForage.setItem(clockedInTimes, array);
                 console.log("Created the " + clockedInTimes + " key we are ok!");
             } else {
                 console.log("The " + clockedInTimes + " key already exists, we are ok!");
+            }
+        });
+        $localForage.getItem(globalEntries).then(function(data) {
+            if (data == null) {
+                console.log("The " + globalEntries + " key doesn't exist! ");
+                $localForage.setItem(globalEntries, 0);
+                console.log("Created the " + globalEntries + " key, we are ok!");
+            } else {
+                console.log("The " + globalEntries + " key already exists, we are ok!");
             }
         });
     }

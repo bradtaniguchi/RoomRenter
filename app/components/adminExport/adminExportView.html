@@ -7,6 +7,19 @@
         <label>Database Printout</label>
         <div class="well well"><i>Due to engine limitations, we can only allow you to copy text to your clipboard, which
         can be saved elsewhere permanently.</i></div>
-        <textarea class="form-control" rows="5" title="For database Print" readonly>{{message}}</textarea>
+
+        <div data-ng-class="alertClass" class="alert alert-info alert-dismissable">
+            <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
+            <strong>Copied</strong> to clipboard!
+        </div>
+        <div class="form-group">
+            <label for="copy-button">Copy to Clipboard</label>
+            <button class="btn" id="copy-button" data-clipboard-target="#message"
+                data-ng-click="alertOpen()">
+                <span class="glyphicon glyphicon-copy"></span>
+            </button>
+            <br/><br/>
+            <textarea class="form-control" rows="5" title="For database Print" id="message" readonly>{{message}}</textarea>
+        </div>
     </div>
 </div>

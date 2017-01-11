@@ -6,13 +6,6 @@ roomRenter.controller('adminExportController', function($scope, moment, database
     $scope.message = "[Database Message Building...]";
     $scope.alertClass = "hide"; //Default starts as hide
 
-    /*sorting function to pass to sort function.*/
-    var sortBySeconds = function(a,b) {
-        if(moment(a) < moment(b)) return -1;
-        if(moment(a) > moment(b)) return 1;
-        return 0;
-    };
-
     /*Close the entry alert on the page*/
     $scope.alertClose = function() {
         $scope.alertClass = "hide";
@@ -28,7 +21,11 @@ roomRenter.controller('adminExportController', function($scope, moment, database
         /*call the database to get a list of all entries*/
         $scope.message = "[Database Message Building...]"; //change back to default while we load
         database.getEntries(function(entries){
-            entries.sort(sortBySeconds()); //sort the array
+            entries.sort(function(a,b) {
+                if(moment(a.timeIn) < moment(b.timeIn)) return -1;
+                if(moment(a.timeIn) > moment(b.timeIn)) return 1;
+                return 0;
+            }); //sort the array
             $scope.message = "";
             /*With the list of entry objects, 'stringify' them*/
             entries.forEach(function(entry){

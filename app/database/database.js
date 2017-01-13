@@ -255,7 +255,7 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
         });
         $localForage.setItem(User.username, User).then(function(data){ //add error handling
             console.log("clockin: set the Item in the database!" + JSON.stringify(data));
-            if (callback !== callback) {
+            if (callback !== undefined) { //seriously this messed up my life
                 callback(data);
             } else {
                 return data;
@@ -307,7 +307,6 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
                 }
             });
             /*note there is no async callback here, since this is a separate data structure.*/
-            console.log("TEST: trying to set item: " + User.username + " " + JSON.stringify(User));
             $localForage.setItem(User.username, User).then(function(data){ //add error handling
                 console.log("database/clockOut: set the new user value in database : " + JSON.stringify(User));
                 if(callback != undefined) {

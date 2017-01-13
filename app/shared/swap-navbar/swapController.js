@@ -7,11 +7,18 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
     $scope.srcRooms = []; //array of src rooms
     $scope.desRooms = [];
     $scope.numberOfRooms = appInfo.numberOfRooms;
+    $scope.alertClass = "hide"; //default hides the alert
+    $scope.alertMessage = ""; //default no message
+
     /*This is to handle emits from the mainController, when they click on the swap button,
     * we want to build the rooms again*/
     $rootScope.$on("buildButtons", function(){
         $scope.buildButtons();
+        /*Also reset the messages*/
+        $scope.alertClass="hide";
+        $scope.alertMessage = "";
     });
+
     /*Utility function to reset the choices*/
     var resetRoomChoices = function() {
         $scope.srcRoomchosen = {};
@@ -24,11 +31,15 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
         console.log("Swapping room: " + $scope.srcRoomchosen.room + " to " + $scope.desRoomchosen.room);
         if(typeof ($scope.srcRoomchosen.room) === 'undefined' || typeof($scope.desRoomchosen.room) === 'undefined') {
             console.log("Pick both rooms!");
+            $scope.alertClass=""; //show alert
+            $scope.alertMessage = "Make sure you pick both rooms!";
             /*reset choices*/
             resetRoomChoices();
         } else if($scope.srcRoomchosen.room == $scope.desRoomchosen.room){
             /*The user picked both rooms, now make sure they aren't the same one*/
             console.log("Both Rooms are the Same!");
+            $scope.alertClass=""; //show alert
+            $scope.alertMessage = "Both rooms are the same!";
             resetRoomChoices();
         } else {
             /*Next we need to find out if the source desRoom is filled or not, due to bad API I made the only way to do this
@@ -65,6 +76,11 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
                                                     /*We clocked the des user into the Src Room*/
                                                     console.log("Clocked in " + desUser.username + " into room: "+
                                                         $scope.srcRoomchosen.room);
+                                                    $scope.alertClass=""; //show alert
+                                                    $scope.alertMessage="Transferred: " + $scope.srcRoomchosen.username +
+                                                        " to room: " + $scope.srcRoomchosen.room + " and\n" +
+                                                        "Transferred: " + $scope.srcRoomchosen.username + " to room:" +
+                                                        $scope.desRoomchosen.room;
                                                 }, 500));
                                             });
                                         });
@@ -87,11 +103,14 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
                                         database.getUserLoggedIn(User.username, function(User){
                                             database.clockIn(User, $scope.desRoomchosen.room ,currTime, function() {
                                                 console.log("Clocked in user: " + JSON.stringify(User));
+                                                $scope.alertClass=""; //show alert
+                                                $scope.alertMessage="Transferred: " + $scope.srcRoomchosen.username +
+                                                    " to room: " + $scope.srcRoomchosen.room;
                                             });
                                         });
                                     });
                                 });
-                            }
+                            } /*Callback hell, seriously dont do this again...*/
                         });
                     });
                 });

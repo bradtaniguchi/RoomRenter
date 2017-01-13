@@ -32,6 +32,9 @@
                          data-ng-if="true">
                         <h4>Swapping room {{srcRoomchosen.room}} to room {{desRoomchosen.room}}</h4>
                     </div>
+                    <div data-ng-class="alertClass" class="alert alert-info">
+                        {{alertMessage}}
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

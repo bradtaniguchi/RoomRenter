@@ -118,7 +118,6 @@ roomRenter.service('database', ['$localForage' ,'moment', 'appInfo', function($l
      *
     * */
     this.getUsersLoggedIn = function(callback) {
-        console.log("getUsersLoggedIn: inside function");
         $localForage.getItem(clockedInUsers).then(function(usersLoggedIn) {
             console.log("getUsersLoggedIn: got clockedInUsers: " + JSON.stringify(usersLoggedIn));
             /*var Users = [];

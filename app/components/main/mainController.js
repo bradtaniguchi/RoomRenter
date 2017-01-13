@@ -2,7 +2,8 @@
  * Created by brad on 12/16/16.
  */
 
-roomRenter.controller("mainController", function($scope, $location, database, $timeout, $interval, appInfo, moment) {
+roomRenter.controller("mainController", function($scope, $location, database, $timeout, $interval, $rootScope,
+                                                 appInfo, moment) {
     $scope.name = "";
     $scope.timeInMs = 0;
     /*get the number of rooms clocked into*/

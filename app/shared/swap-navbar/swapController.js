@@ -1,7 +1,7 @@
 /**
  * Created by brad on 1/11/17.
  */
-roomRenter.controller('swapController', function($scope, database, appInfo, moment, $rootScope){
+roomRenter.controller('swapController', function($scope, database, appInfo, moment, $timeout,$rootScope){
     $scope.srcRoomchosen = {}; //room 0 is default
     $scope.desRoomchosen = {};
     $scope.srcRooms = []; //array of src rooms
@@ -33,30 +33,41 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
         } else {
             /*Next we need to find out if the source desRoom is filled or not, due to bad API I made the only way to do this
             * is to get all users logged in, and find which room they are in, and see if that the is the chosen one.
-            * If we do not find the room amongst the logged in users, we must be selecting an empty room */
+            * If we do not find the room amongst the logged in users, we must be selecting an empty room
+            * NOTE: callback hell....*/
             database.getUsersLoggedIn(function(usernames) { //gosh my API SUCKS!
                 /*We need to track how many come back, if we look into all users clocked in and didn't find it
                 * we must be switching into an empty room*/
                 var asyncCounter = 0;
                 usernames.forEach(function(username) {
-                    database.getUserLoggedIn(username, function(User){
-                        database.getRoomLoggedIn(User, function(roomNumber){
+                    database.getUserLoggedIn(username, function(desUser){
+                        database.getRoomLoggedIn(desUser, function(roomNumber){
                             /*Now we should async be checking to find which room is the same as the desRoom*/
                             if(roomNumber == $scope.desRoomchosen.room) {
                                 /*We found the room!*/
-                                console.log("Found room " + roomNumber + ", user " +User.username + " is in it!");
+                                console.log("Found room " + roomNumber + ", user " +desUser.username + " is in it!");
                                 /*First we need to clock out the desUser*/
-                                var timeOut = moment().format(appInfo.momentFormat);
-                                database.clockOut(User, timeOut, function(){ //capture the error here if there is one!
-                                    console.log("Clocked out desUser: " + $scope.desRoomchosen.username);
-                                    /*Now ClockIn this same user..*/
-                                });
-                                /*Next we also have to clock out the srcUser.. Also because of bad API we need to also get
-                                * the src User!*/
-                                database.getUserLoggedIn($scope.srcRoomchosen.username, function(User) {
-                                    database.clockOut(User, timeOut, function(){
-                                        console.log("Clocked out srcUser: " + $scope.srcRoomchosen.username);
-                                        /*Now clockIn this same user...*/
+                                var currTime = moment().format(appInfo.momentFormat);
+                                database.clockOut(desUser, currTime, function() { //capture the error here if there is one!
+                                    console.log("Clocked out desUser: " + desUser.username);
+                                    /*Next we also have to clock out the srcUser.. Also because of bad API we need to also get
+                                     * the src User!*/
+                                    database.getUserLoggedIn($scope.srcRoomchosen.username, function(srcUser) {
+                                        database.clockOut(srcUser, currTime, function(){
+                                            console.log("Clocked out srcUser: " + $scope.srcRoomchosen.username);
+                                            database.clockIn(srcUser, $scope.desRoomchosen.room, currTime, function() {
+                                                console.log("Clocked in " + srcUser.username + " into room: " +
+                                                    $scope.desRoomchosen.room);
+                                                /*TODO: Idk why I run into a race condition here,
+                                                * I pause execution because of it.*/
+                                                $timeout(database.clockIn(desUser, $scope.srcRoomchosen.room, currTime, function() {
+                                                    console.log('Should see me!');
+                                                    /*We clocked the des user into the Src Room*/
+                                                    console.log("Clocked in " + desUser.username + " into room: "+
+                                                        $scope.srcRoomchosen.room);
+                                                }, 500));
+                                            });
+                                        });
                                     });
                                 });
                             } else {

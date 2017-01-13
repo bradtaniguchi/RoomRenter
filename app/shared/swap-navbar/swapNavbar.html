@@ -11,26 +11,31 @@
                 <div class="modal-body">
                     <!--step 1. Show who IS clocked In.-->
                     <p>Click on the room to swap from:</p>
-                    <div class="btn-groupone" data-toggle="buttons">
-                        <label class="btn btn-primary">
-                            <input type="radio" data-ng-click="swapRooms()" name="options" id="rm1" autocomplete="off"> Room 1
-                        </label>
+                    <div class="btn-group" data-toggle="buttons" data-ng-repeat="srcRoom in srcRooms">
+                        <div class="btn btn-primary" data-ng-click="$parent.srcRoomchosen = srcRoom"
+                             title="The destination room, the User wants to switch from">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <label>Room {{srcRoom.room}}</label>
+                        </div>
                     </div>
                     <!--step 2. Show all Rooms, with special span icons on buttons with users in it. -->
                     <p>Click on the room to swap to:</p>
-                    <div class="btn-grouptwo" data-toggle="buttons">
-                        <label class="btn btn-danger">
-                            <input type="radio" data-ng-click="swapRooms()" name="options" id="option1" autocomplete="off"> Room 1
+                    <div class="btn-group" data-toggle="buttons" data-ng-repeat="desRoom in desRooms">
+                        <label class="btn btn-danger" data-ng-click="$parent.desRoomchosen = desRoom"
+                            title="The destination room, the User wants to go into">
+                            <!--<span class="glyphicon glyphicon-user" data-ng-if="srcRooms[desRoom.room].occupied"></span>-->
+                            <label>Room {{desRoom.room}}</label>
                         </label>
                     </div>
                     <!--show the user what they are choosing, after they have chosen some rooms-->
-                    <div class="input-group" data-ng-if="true">
-                        <h4>Swapping room.. to room ..</h4>
+                    <div class="input-group"
+                         data-ng-if="true">
+                        <h4>Swapping room {{srcRoomchosen.room}} to room {{desRoomchosen.room}}</h4>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="go('/')">Swap</button>
+                    <button type="button" class="btn btn-primary" data-ng-click="swapRooms()">Swap</button>
                 </div>
             </div>
         </div>

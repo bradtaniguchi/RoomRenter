@@ -39,6 +39,7 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
                 /*We need to track how many come back, if we look into all users clocked in and didn't find it
                 * we must be switching into an empty room*/
                 var asyncCounter = 0;
+                var currTime = moment().format(appInfo.momentFormat);
                 usernames.forEach(function(username) {
                     database.getUserLoggedIn(username, function(desUser){
                         database.getRoomLoggedIn(desUser, function(roomNumber){
@@ -47,7 +48,6 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
                                 /*We found the room!*/
                                 console.log("Found room " + roomNumber + ", user " +desUser.username + " is in it!");
                                 /*First we need to clock out the desUser*/
-                                var currTime = moment().format(appInfo.momentFormat);
                                 database.clockOut(desUser, currTime, function() { //capture the error here if there is one!
                                     console.log("Clocked out desUser: " + desUser.username);
                                     /*Next we also have to clock out the srcUser.. Also because of bad API we need to also get
@@ -78,14 +78,25 @@ roomRenter.controller('swapController', function($scope, database, appInfo, mome
                             if(asyncCounter == usernames.length) {
                                 /*The room chosen does not have a user in it*/
                                 console.log("We didn't find the user, we must have chosen an empty room");
-                                /*Do stuff...*/
+                                /*Clock out the user, then clock them back into the room elsewhere*/
+                                database.getUserLoggedIn($scope.srcRoomchosen.username, function(User){
+                                    database.clockOut(User, currTime, function(){ //capture the error here if there is one!
+                                        console.log("Clocked out user: " + username);
+                                        $scope.clockOutMessage = "Clocked User " + username + " out of room " + roomNumber;
+                                        /*Now we want to clock the user into the new room*/
+                                        database.getUserLoggedIn(User.username, function(User){
+                                            database.clockIn(User, $scope.desRoomchosen.room ,currTime, function() {
+                                                console.log("Clocked in user: " + JSON.stringify(User));
+                                            });
+                                        });
+                                    });
+                                });
                             }
                         });
                     });
                 });
             });
         }
-        
     };
 
     /*Builds the list of buttons to switch on the page*/

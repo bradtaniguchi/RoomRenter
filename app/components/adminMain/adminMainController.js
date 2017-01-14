@@ -20,7 +20,7 @@ roomRenter.controller('adminMainController', function($scope, generalService, ap
 
     /*When the user clicks on the Login Button on the modal popup. We check their password*/
     $scope.adminLogin = function() {
-        if ($scope.adminPassword == appInfo.adminPassword || appInfo.debug) {
+        if ($scope.adminPassword == appInfo.adminPassword) {
             /*dismiss the modal*/
             angular.element('#loginModal').modal('hide');
             $scope.alertClose();

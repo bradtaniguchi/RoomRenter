@@ -22,8 +22,7 @@ system.
 **Dev** - Branch most people will work on. Most pull/pushes will be to
 this branch.
 
-**DatabaseDev** - This Branch follows the Dev branch, but with the database
-activated, so the program may only run within an nw.js window.
+**BradsBranch** - Experimental branch, that is consistently unstable.  
 
 ---
 **Project Structure**

@@ -1,12 +1,13 @@
-/**
- * Created by brad on 12/22/16.
- * This javascript file handles all the routing of the application.
- * Because its a node-webkit app, the URLs are hidden. But I have given them
- * logical names to help us during debugging. More can be added at
- * NOTE: All controllers/views are declared alphabetically.
- */
-roomRenter.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.
+(function(){
+  'use strict'
+  /*
+  Bradley Taniguchi
+  This file handles the routes within the application
+  NOTE: this setup is identical to what it was before
+  */
+  angular.module('roomRenter')
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider
     when('/Admin/Export', {
         templateUrl: 'app/components/adminExport/adminExportView.html',
         controller: 'adminExportController'
@@ -30,4 +31,7 @@ roomRenter.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'app/components/main/mainView.html',
         controller: 'mainController'
     });
-}]);
+
+  }]);
+
+})();

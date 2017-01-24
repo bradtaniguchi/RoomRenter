@@ -1,5 +1,5 @@
 (function(){
-  'use strict'
+  'use strict';
   /*
   Bradley Taniguchi
   This file handles the routes within the application

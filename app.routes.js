@@ -8,12 +8,12 @@
   angular.module('roomRenter')
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-    when('/Admin/Export', {
+    .when('/Admin/Export', {
         templateUrl: 'app/components/adminExport/adminExportView.html',
         controller: 'adminExportController'
     }).when('/Admin',{
-        templateUrl: 'app/components/adminMain/adminMainView.html',
-        controller: 'adminMainController'
+        templateUrl: 'app/components/admin/adminView.html',
+        controller: 'adminController'
     }).when('/Admin/Stat', {
         templateUrl: 'app/components/adminStat/adminStatView.html',
         controller: 'adminStatController'

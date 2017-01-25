@@ -15,12 +15,12 @@
             </div>
             <div class="panel-body">
                 <div class="btn-group" role="group" aria-label="Clock In " title="Clock Into a Room">
-                    <button data-ng-click="go('/ClockIn')" class="btn btn-default btn-lg">Clock In &nbsp;</button>
+                    <button data-ng-click="vm.go('/ClockIn')" class="btn btn-default btn-lg">Clock In &nbsp;</button>
                 </div>
                 <br>
                 <br>
                 <div class="btn-group" role="group" aria-label="Clock Out" title="Clock Out of a Room">
-                    <button data-ng-click="go('/ClockOut')" class="btn btn-default btn-lg">Clock Out</button>
+                    <button data-ng-click="vm.go('/ClockOut')" class="btn btn-default btn-lg">Clock Out</button>
                 </div>
             </div>
         </div>
@@ -38,22 +38,23 @@
             <h3>
                 <span class="label label-default" title="The number of rooms available">Open Rooms: </span>
             </h3>
-            <output class="form-control">{{roomsVacant}}</output>
+            <output class="form-control">{{vm.roomsVacant}}</output>
         </div>
         <div class="col-sm-4">
             <h3>
                 <span class="label label-default" title="The current time">Current Time:</span>
             </h3>
             <output class="form-control" >
-                {{ clock | date:'HH:mm:ss'}}
+                {{ vm.clock | date:'HH:mm:ss'}}
+                UPDATE
             </output>
         </div>
-        <div data-ng-class="timePrompt" class="col-sm-4">
+        <div data-ng-class="m.vtimePrompt" class="col-sm-4">
             <h3>
                 <span class="label label-default" title="The user that has been clocked in the longest">Oldest ClockIn Time:</span>
             </h3>
             <output class="form-control">
-                {{nextAvailableTime}}
+                {{vm.nextAvailableTime}}
             </output>
         </div>
     </div>

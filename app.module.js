@@ -7,13 +7,14 @@
 
   /*Lets also add the generic changeView function serivce*/
   angular.module('roomRenter').service('generalService', generalService);
-  generalService.$inject = ['$log'];
+  generalService.$inject = ['$log', '$location'];
 
-  function generalService($log) {
+  function generalService($log, $location) {
     var vm = this;
     vm.changeView = function(path) {
-      $log.log('Changing View' + path)
-    }
+      $log.log('Changing View' + path);
+      $location.path(path);
+    };
     return vm;
   }
 })();

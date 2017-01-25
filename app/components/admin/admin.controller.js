@@ -11,7 +11,7 @@
     vm.alertClass = "hide";
     vm.showModal = showModal;
     vm.clearDatabase = clearDatabase;
-    vm.adminLogin = adminlogin;
+    vm.adminLogin = adminLogin;
     vm.alertClose = alertClose;
     vm.alrtOpen = alertOpen;
     vm.goModal = goModal;

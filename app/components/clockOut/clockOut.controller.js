@@ -4,7 +4,7 @@
   angular.module('roomRenter').controller('clockOutController', clockOutController);
   clockOutController.$inject = ['$log', 'constants', 'generalService', '$timeout'];
 
-  function clockOutController($log, constats, generalService, $timeout) {
+  function clockOutController($log, constants, generalService, $timeout) {
     var vm = this;
     vm.room = 0;
     vm.numberOfRooms = constants.NUMBER_OF_ROOMS;

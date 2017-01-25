@@ -20,7 +20,6 @@
     }).when('/Admin/Time',{
         templateUrl: 'app/components/adminTime/adminTimeView.html',
         controller: 'adminTimeController as vm'
-
     }).when('/ClockIn',{
         templateUrl: 'app/components/clockIn/clockInView.html',
         controller: 'clockInController as vm'
@@ -32,4 +31,8 @@
         controller: 'mainController as vm'
     });
   }]);
+  /*Call resolve functions
+  Using:
+  https://johnpapa.net/route-resolve-and-controller-activate-in-angularjs/
+  */
 })();

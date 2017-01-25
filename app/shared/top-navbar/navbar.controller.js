@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('roomRenter').controller('navbarController', navbarController);
-  navbarController.$inject = ['$log', 'constants'];
-  
-  function navbarController($log, constants) {
+  navbarController.$inject = ['$log', 'constants', 'generalService'];
+
+  function navbarController($log, constants, generalService) {
     var vm = this;
     //vm.name = "navbarController name"; //wtf does this do?
     //vm.swapMessage = "..."; //wtf does THIS do?

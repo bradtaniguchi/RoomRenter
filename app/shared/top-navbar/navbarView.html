@@ -4,7 +4,7 @@ NOTE: I think we will have to ng-include this snippet!-->
 <nav class="navbar navbar-default">
     <div class="navbar-header">
         <div class="navbar-form navbar-left">
-            <button class="btn btn-default" data-ng-click="go('/Admin')" data-toggle="tooltip" data-placement="bottom"
+            <button class="btn btn-default" data-ng-click="vm.go('/Admin')" data-toggle="tooltip" data-placement="bottom"
                     title="Open the Admin tools">Admin
             </button>
             <span data-toggle="modal" data-target="#swapRoomsModal">
@@ -20,16 +20,16 @@ NOTE: I think we will have to ng-include this snippet!-->
         </div>
     </div>
     <div class="navbar-form pull-right">
-        <button class="btn btn-default" data-ng-click="go('/')" data-toggle="tooltip" data-placement="bottom"
+        <button class="btn btn-default" data-ng-click="vm.go('/')" data-toggle="tooltip" data-placement="bottom"
                 title="Go to the Main Page">
             <span class="glyphicon glyphicon-home"></span>
         </button>
-        <button class="btn btn-default" data-ng-click="refresh()" data-toggle="tooltip" data-placement="bottom"
+        <button class="btn btn-default" data-ng-click="vm.refresh()" data-toggle="tooltip" data-placement="bottom"
                 title="Refresh the current application page">
             <span class="glyphicon glyphicon-refresh"></span>
         </button>
-        <button class="btn btn-default" data-ng-click="back()" data-toggle="tooltip" data-placement="bottom"
-                title="Go Back" >
+        <button class="btn btn-default" data-ng-click="vm.back()" data-toggle="tooltip" data-placement="bottom"
+                title="Go Back">
             <span class="glyphicon glyphicon-menu-left"></span>
         </button>
     </div>
@@ -42,7 +42,7 @@ NOTE: I think we will have to ng-include this snippet!-->
             <span aria-hidden="true">&times;
             </span>
                     </button>
-                    <h4 class="modal-title">RoomRenter version: {{version}}
+                    <h4 class="modal-title">RoomRenter version: {{vm.version}}
                     </h4>
                 </div>
                 <div class="">

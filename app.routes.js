@@ -10,26 +10,26 @@
     $routeProvider
     .when('/Admin/Export', {
         templateUrl: 'app/components/adminExport/adminExportView.html',
-        controller: 'adminExportController'
+        controller: 'adminExportController as vm'
     }).when('/Admin',{
         templateUrl: 'app/components/admin/adminView.html',
-        controller: 'adminController'
+        controller: 'adminController as vm'
     }).when('/Admin/Stat', {
         templateUrl: 'app/components/adminStat/adminStatView.html',
-        controller: 'adminStatController'
+        controller: 'adminStatController as vm'
     }).when('/Admin/Time',{
         templateUrl: 'app/components/adminTime/adminTimeView.html',
-        controller: 'adminTimeController'
+        controller: 'adminTimeController as vm'
 
     }).when('/ClockIn',{
         templateUrl: 'app/components/clockIn/clockInView.html',
-        controller: 'clockInController'
+        controller: 'clockInController as vm'
     }).when('/ClockOut',{
         templateUrl: 'app/components/clockOut/clockOutView.html',
-        controller: 'clockOutController'
+        controller: 'clockOutController as vm'
     }).otherwise({
         templateUrl: 'app/components/main/mainView.html',
-        controller: 'mainController'
+        controller: 'mainController as vm'
     });
   }]);
 })();

@@ -31,7 +31,5 @@
         templateUrl: 'app/components/main/mainView.html',
         controller: 'mainController'
     });
-
   }]);
-
 })();

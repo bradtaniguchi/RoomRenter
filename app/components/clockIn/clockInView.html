@@ -9,7 +9,7 @@ TODO: Add data-toggles and titles to all input fields!-->
             <label for="toromail" class="col-xs-2 col-form-label">Toro Username</label>
             <div class="col-xs-10">
                 <div class="input-group">
-                    <input data-ng-model="toromail" placeholder="username1"
+                    <input data-ng-model="vm.toromail" placeholder="username1"
                            type="text" class="form-control" aria-describedby="Username" id="toromail"/>
                     <span class="input-group-addon">@toromail.csudh.edu</span>
                 </div>
@@ -18,26 +18,26 @@ TODO: Add data-toggles and titles to all input fields!-->
         <div class="form-group row" data-toggle="tooltip" title="Your ID that is on your studentID">
             <label for="studentID" class="col-xs-2 col-form-label">StudentID Number</label>
             <div class="col-xs-10">
-                <input data-ng-model="studentID" type="number" class="form-control" id="studentID"/>
+                <input data-ng-model="vm.studentID" type="number" class="form-control" id="studentID"/>
             </div>
         </div>
         <div class= "well well-sm">
-            <h4><strong>Room Chosen: {{chosenRoom}}</strong></h4>
+            <h4><strong>Room Chosen: {{vm.chosenRoom}}</strong></h4>
         </div>
         <div class="input-group">
-            <div class="btn-group" role="group" data-ng-repeat="room in rooms">
+            <div class="btn-group" role="group" data-ng-repeat="room in vm.rooms">
                 <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-model="$parent.chosenRoom"
                     data-ng-click="selectRoom(room.value)" data-ng-class="room.buttonClass"
                 data-ng-toggle="tooltip" title="{{room.tooltipMessage}}">{{room.text}}</button>
             </div>
         </div>
-        <div data-ng-class="alertClass" class="alert alert-danger alert-dismissable">
-            <a data-ng-click="alertClose()" class="close" aria-label="close">×</a>
-            <strong>Error!</strong> {{errorMessage}}
+        <div data-ng-class="vm.alertClass" class="alert alert-danger alert-dismissable">
+            <a data-ng-click="vm.alertClose()" class="close" aria-label="close">×</a>
+            <strong>Error!</strong> {{vm.errorMessage}}
         </div>
         <br/>
-        <button class="btn btn-primary btn-lg" data-ng-click="go('/')">Go Back</button>
-        <button class="btn btn-default btn-lg" data-ng-click="submit()">Confirm</button>
+        <button class="btn btn-primary btn-lg" data-ng-click="vm.go('/')">Go Back</button>
+        <button class="btn btn-default btn-lg" data-ng-click="vm.submit()">Confirm</button>
     </form>
 </div>
 <!--modal popup, for successful entry-->
@@ -51,13 +51,13 @@ TODO: Add data-toggles and titles to all input fields!-->
                 <h4 class="modal-title">Successful ClockIn</h4>
             </div>
             <div class="modal-body">
-                <p> User: {{toromail}} has clocked into room {{chosenRoom}}</p>
+                <p> User: {{vm.toromail}} has clocked into room {{vm.chosenRoom}}</p>
                 <br />
                 <p><i>There is a rough 2 hour limit in using the study rooms.</i></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        data-ng-click="go('/')">Ok</button>
+                        data-ng-click="vm.go('/')">Ok</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -65,5 +65,3 @@ TODO: Add data-toggles and titles to all input fields!-->
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-

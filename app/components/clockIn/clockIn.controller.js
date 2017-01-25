@@ -1,14 +1,14 @@
 (function(){
   angular.module('roomRenter').controller('clockInController', clockInController);
-  clockInController.$inject = ['$log', 'constants', '$timeout'];
+  clockInController.$inject = ['$log', 'constants', '$timeout', 'generalService'];
 
-  function clockInController($log, constants, $timeout) {
+  function clockInController($log, constants, $timeout, generalService) {
     var vm = this;
     vm.toromail = "";
     vm.errorMessage = "";
     vm.choosenRoom = 0;
     vm.alertClass = 'hide';
-    vm.numberOfRooms = constatns.NUMBER_OF_ROOMS;
+    vm.numberOfRooms = constants.NUMBER_OF_ROOMS;
     vm.rooms = [];
     // vm.buildRooms = buildRooms;
     //vm.dynamicBuildRooms = dynamicBuildRooms;

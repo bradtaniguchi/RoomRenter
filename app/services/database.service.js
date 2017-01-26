@@ -29,7 +29,6 @@
             createDatabase();
           } else {
             $log.log('Database structure exists!');
-            
           }
         }); //handle error!
     }

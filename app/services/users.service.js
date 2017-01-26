@@ -13,16 +13,11 @@
   */
   function users() {
     return {
-      /*fuction definitions*/
-      /*getUsersLoggedIn: gets the users currently logged in by checking the
-      datbase config datastructure
-      @returns {array} an array of User objects that are currently logged in*/
-      getUsersLoggedIn: function(){
-        $log.log('Getting the users logged in...');
-        return [];
-      },
-
-
+      /*function definitions*/
+      getLastLogInObject: getLastLogInObject
     };
+    function getLastLogInObject(User) {
+      return (User.entries[User.entries.length-1]);
+    }
   }
 })();

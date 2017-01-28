@@ -41,6 +41,10 @@
     <!--clipboard.js-->
     <script type="text/javascript" src="node_modules/clipboard/dist/clipboard.min.js"></script>
 
+    <!--database config files-->
+    <script type="text/javascript" src="node_modules/localforage/dist/localforage.nopromises.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-localforage/dist/angular-localForage.min.js"></script>
+
     <!--CUSTOM JAVASCRIPT FILES GO HERE-->
     <script type="text/javascript" src="app.module.js"></script>
     <script type="text/javascript" src="app.constants.js"></script>
@@ -53,14 +57,13 @@
     <script type="text/javascript" src="app/components/adminTime/admin.time.controller.js"></script>
     <script type="text/javascript" src="app/components/clockIn/clockIn.controller.js"></script>
     <script type="text/javascript" src="app/components/clockOut/clockOut.controller.js"></script>
-    <!--<script type="text/javascript" src="app/components/main/mainController.js"></script>-->
     <script type="text/javascript" src="app/components/main/main.controller.js"></script>
     <script type="text/javascript" src="app/shared/top-navbar/navbar.controller.js"></script>
     <script type="text/javascript" src="app/shared/swap-navbar/swap.controller.js"></script>
 
-    <!--database config files-->
-    <!--<script type="text/javascript" src="app/database/database.js"></script>-->
-    <script type="text/javascript" src="node_modules/localforage/dist/localforage.nopromises.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-localforage/dist/angular-localForage.min.js"></script>
+    <!--services-->
+    <script type="text/javascript" src="app/services/clockIn.service.js"></script>
+    <script type="text/javascript" src="app/services/database.service.js"></script>
+    <script type="text/javascript" src="app/services/users.service.js"></script>
 </body>
 </html>

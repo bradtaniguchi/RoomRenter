@@ -14,7 +14,10 @@
       /*these are the public service functions*/
       checkDatabaseStructure: checkDatabaseStructure,
       getUser : getUser,
+      addUser : addUser,
+      updateUser : updateUser,
       getUsersLoggedIn : getUsersLoggedIn,
+      addUserLoggedIn : addUserLoggedIn,
       createUser: createUser
     };
 
@@ -55,12 +58,30 @@
     /* gets a User object when given the name.
      returns null if there is no user within the database with that key
     */
-    function getUser(username, callback) {
-      $localForage.getItem(username).then(function(User) {
+    function getUser(userID, callback) {
+      $localForage.getItem(userID).then(function(User) {
           if(callback !== undefined ) {
             return callback(User);
           }
       }); //capture error!
+    }
+    /*Creates a User object within the database with the given userID
+    Does not check if the username already exists!*/
+    function addUser(userID, firstEntry, callback) {
+      $localForage.setItem(userID, {"entries":[firstEntry]})
+        .then(function(User){
+          if(callback !== undefined) {
+            callback(User);
+          }
+        }); //catch error!
+    }
+    /*Updates a given userID within the database.*/
+    function updateUser(userID, User, callback) {
+        $localForage.setItem(UserID, User).then(function(){
+          if(callback !== undefined){
+            callback();
+          }
+        }); //handle error!
     }
     /*Gets the user objects that are in*/
     function getUsersLoggedIn(callback) {
@@ -70,6 +91,27 @@
             return callback(Users);
           }
         }); //capture error!
+    }
+    /*Adds a user to the usersLoggedIn*/
+    function addUserLoggedIn(userID, User, callback) {
+      /*Lets just make sure there aren't already 5 people clocked in, if so then
+      we can't add this one.*/
+      $localForage.getItem(constants.DATABASE_OBJECT)
+        .then(function(loggedInUsers) {
+          if(loggedInUsers.length == constants.NUMBER_OF_ROOMS) {
+            $log.log("Reached max number of users clocked in!");
+            if(callback !== undefined) {
+              callback();
+            }
+          } else { //there is room!
+            $localForage.setItem(constants.DATABASE_OBJECT,
+              loggedInUsers.push({"userID":User}))
+              .then(function(){
+                $log.log("Added user: " + User + " to loggedInUsers");
+              });
+          }
+
+        });
     }
     /*Creates a user with the given ID
     First we check to see if there is already the User object with the given ID

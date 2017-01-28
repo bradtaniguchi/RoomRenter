@@ -14,10 +14,20 @@
   function users() {
     return {
       /*function definitions*/
-      getLastLogInObject: getLastLogInObject
+      getLastLogInObject: getLastLogInObject,
+      addNewEntry : addNewEntry,
     };
-    function getLastLogInObject(User) {
+    function getLastLogInObject(User, callback) {
+      if(callback !== undefined) {
+        callback(User.entries[User.entries.length-1]);
+      }
       return (User.entries[User.entries.length-1]);
+    }
+    function addNewEntry(User, entry, callback) {
+      if(callback !== undefined) {
+        callback(User.entries.push(entry));
+      }
+      return (User.entries.push(entry));
     }
   }
 })();

@@ -18,7 +18,8 @@
       updateUser : updateUser,
       getUsersLoggedIn : getUsersLoggedIn,
       addUserLoggedIn : addUserLoggedIn,
-      createUser: createUser
+      createUser: createUser,
+      clearDatabase : clearDatabase
     };
 
     /*checks to see if the database datastructure exists and calls the create
@@ -52,7 +53,11 @@
     function clearDatabase(callback) {
       $localForage.clear().then(function() {
         $log.log("Cleared the database, creating the data object..");
-        createDatabase();
+        createDatabase(function(){
+          if(callback !== undefined) {
+            callback();
+          }
+        });
       });
     }
     /* gets a User object when given the name.

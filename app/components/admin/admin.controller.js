@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('roomRenter').controller('adminController', adminController);
-  adminController.$inject = ['$log', 'constants', 'generalService'];
+  adminController.$inject = ['$log', 'constants', 'generalService', 'database'];
 
-  function adminController($log, constants, generalService) {
+  function adminController($log, constants, generalService, database) {
     var vm = this;
     vm.numberofRooms = constants.NUMBER_OF_ROOMS;
     //vm.adminPassword = constantts.ADMIN_PASSWORD; //move this to a service
@@ -28,7 +28,8 @@
     }
     function clearDatabase() {
       $log.log("Clearing the database");
-      /*TODO: call database delete service*/
+      database.clearDatabase();
+      alert("Deleted the database!");
     }
 
     /*calls an admin login service, which checks the password and compares it to

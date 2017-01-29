@@ -14,10 +14,10 @@
   function users() {
     return {
       /*function definitions*/
-      getLastLogInObject: getLastLogInObject,
+      getLastLoginObject: getLastLoginObject,
       addNewEntry : addNewEntry,
     };
-    function getLastLogInObject(User, callback) {
+    function getLastLoginObject(User, callback) {
       if(callback !== undefined) {
         callback(User.entries[User.entries.length-1]);
       }

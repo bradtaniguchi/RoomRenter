@@ -67,7 +67,7 @@
     function getUser(userID, callback) {
       $localForage.getItem(userID).then(function(User) {
           if(callback !== undefined ) {
-            return callback(User);
+            callback(User);
           }
       }); //capture error!
     }

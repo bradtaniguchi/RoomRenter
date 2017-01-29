@@ -17,6 +17,7 @@
       addUser : addUser,
       updateUser : updateUser,
       getUsersLoggedIn : getUsersLoggedIn,
+      getRoomsLoggedIn : getRoomsLoggedIn,
       addUserLoggedIn : addUserLoggedIn,
       createUser: createUser,
       clearDatabase : clearDatabase
@@ -91,11 +92,31 @@
     /*Gets the user objects that are in*/
     function getUsersLoggedIn(callback) {
       $localForage.getItem(constants.RESERVED_DATABASE_NAME)
-        .then(function(Users){
+        .then(function(usersLoggedIn){
           if(callback !== undefined) {
-            return callback(Users);
+            return callback(usersLoggedIn.usersLoggedIn);
           }
         }); //capture error!
+    }
+    /*Gets the room objects currently logged In*/
+    function getRoomsLoggedIn(callback) {
+      /*First we need the users logged in, then we need to get their last
+      clockin objects*/
+      var rooms = [];
+      getUsersLoggedIn(function(Users){
+        var roomsAvail = Users.length;
+        Users.forEach(function(User) {
+          users.getLastLoginObject(User, function(loginObject){
+            rooms.push(loginObject);
+            if(rooms.length == roomsAvail) {
+              if(callback !== undefined) {
+                callback(rooms);
+              }
+            }
+          });
+        });
+
+      });
     }
     /*Adds a user to the usersLoggedIn*/
     function addUserLoggedIn(userID, User, callback) {

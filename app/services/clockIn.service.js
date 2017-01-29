@@ -18,7 +18,7 @@
         ' Room number: '+ room);
       /* First we check if the entry is a valid entry.
       IE the userID is a valid ID (all numbers) and the room is positive*/
-      if(typeOf(userID)!='number') {
+      if(typeof(userID)!='number') {
         if(callback !== undefined) {
           callback({"error":true, "errorMessage":"Entry is not a number!"});
         }

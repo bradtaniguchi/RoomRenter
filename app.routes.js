@@ -5,8 +5,10 @@
   This file handles the routes within the application
   NOTE: this setup is identical to what it was before
   */
-  angular.module('roomRenter')
-  .config(['$routeProvider', function($routeProvider) {
+  angular.module('roomRenter').config(config);
+  config.$inject = ['$routeProvider'];
+
+  function config($routeProvider) {
     $routeProvider
     .when('/Admin/Export', {
         templateUrl: 'app/components/adminExport/adminExportView.html',
@@ -22,7 +24,8 @@
         controller: 'adminTimeController as vm'
     }).when('/ClockIn',{
         templateUrl: 'app/components/clockIn/clockInView.html',
-        controller: 'clockInController as vm'
+        controller: 'clockInController as vm',
+        
     }).when('/ClockOut',{
         templateUrl: 'app/components/clockOut/clockOutView.html',
         controller: 'clockOutController as vm'
@@ -30,7 +33,7 @@
         templateUrl: 'app/components/main/mainView.html',
         controller: 'mainController as vm'
     });
-  }]);
+  }
   /*Call resolve functions
   Using:
   https://johnpapa.net/route-resolve-and-controller-activate-in-angularjs/

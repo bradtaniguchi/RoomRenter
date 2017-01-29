@@ -45,11 +45,10 @@
                 <span class="label label-default" title="The current time">Current Time:</span>
             </h3>
             <output class="form-control" >
-                {{ vm.clock | date:'HH:mm:ss'}}
-                UPDATE
+                {{ vm.now | date:'HH:mm:ss'}}
             </output>
         </div>
-        <div data-ng-class="m.vtimePrompt" class="col-sm-4">
+        <div data-ng-class="vm.timePrompt" class="col-sm-4">
             <h3>
                 <span class="label label-default" title="The user that has been clocked in the longest">Oldest ClockIn Time:</span>
             </h3>

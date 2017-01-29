@@ -4,9 +4,9 @@
   *24/01/2017
   */
   angular.module('roomRenter').factory('clockIn', clockIn);
-  clockIn.$inject=['$log', 'constants', 'moment', 'database'];
+  clockIn.$inject=['$log', 'constants', 'moment', 'database', 'users'];
 
-  function clockIn($log, constants, moment, database){
+  function clockIn($log, constants, moment, database, users){
     return {
       clockIn : clockIn
     };
@@ -14,7 +14,7 @@
     Function to clockIn a user into the database
     */
     function clockIn(userID, username, room, callback){
-      $log.log('User ID: '+userID, ' Username: '+ username +
+      $log.log('clockIn.Service: User ID: '+userID, ' Username: '+ username +
         ' Room number: '+ room);
       /* First we check if the entry is a valid entry.
       IE the userID is a valid ID (all numbers) and the room is positive*/
@@ -38,7 +38,8 @@
         });*/
 
         /*Now lets see if the user exists already*/
-        database.getUser(function(User) {
+        database.getUser(userID, function(User) {
+          $log.log("in get user!");
           /*Define the user object we will use*/
           var newEntry = {
             "clockIn":"NOW",
@@ -53,9 +54,9 @@
             database.getUser(userID, function(User) {
               /*now add the entry to the userobject and add it to the database*/
               users.addNewEntry(User, newEntry, function(updatedUser){
-                users.addUser(userID, updatedUser, function(){
+                database.addUser(userID, updatedUser, function(){
                   $log.log("ClockedIn user: " + updatedUser);
-                  database.addUserLoggedIn(UserID, User);
+                  database.addUserLoggedIn(userID, User);
                 });
               });
 
@@ -64,7 +65,7 @@
             /*User doesn't exist, lets create them*/
             database.addUser(userID, newEntry, function(User){
               $log.log("Created user, and clockedIn: " + User);
-              database.addUserLoggedIn(UserID, User);
+              database.addUserLoggedIn(userID, User);
             });
           }//end if else
         });

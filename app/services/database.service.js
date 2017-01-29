@@ -92,9 +92,9 @@
     /*Gets the user objects that are in*/
     function getUsersLoggedIn(callback) {
       $localForage.getItem(constants.RESERVED_DATABASE_NAME)
-        .then(function(usersLoggedIn){
+        .then(function(databaseObject){
           if(callback !== undefined) {
-            return callback(usersLoggedIn.usersLoggedIn);
+            return callback(databaseObject.usersLoggedIn);
           }
         }); //capture error!
     }
@@ -122,18 +122,23 @@
     function addUserLoggedIn(userID, User, callback) {
       /*Lets just make sure there aren't already 5 people clocked in, if so then
       we can't add this one.*/
-      $localForage.getItem(constants.DATABASE_OBJECT)
-        .then(function(loggedInUsers) {
-          if(loggedInUsers.length == constants.NUMBER_OF_ROOMS) {
+      $localForage.getItem(constants.RESERVED_DATABASE_NAME)
+        .then(function(databaseObject) {
+          if(databaseObject.usersLoggedIn.length == constants.NUMBER_OF_ROOMS) {
             $log.log("Reached max number of users clocked in!");
             if(callback !== undefined) {
               callback();
             }
           } else { //there is room!
-            $localForage.setItem(constants.DATABASE_OBJECT,
-              loggedInUsers.push({"userID":User}))
+            var newDatabaseObject = databaseObject;
+            var userToEnter = {};
+            userToEnter[userID] = User;
+
+            newDatabaseObject.usersLoggedIn.push(userToEnter);
+            $localForage.setItem(constants.RESERVED_DATABASE_NAME,
+              newDatabaseObject)
               .then(function(){
-                $log.log("Added user: " + User + " to loggedInUsers");
+                $log.log("Added user: " + JSON.stringify(User) + " to loggedInUsers");
               });
           }
 

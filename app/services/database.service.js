@@ -17,6 +17,7 @@
       addUser : addUser,
       updateUser : updateUser,
       getUsersLoggedIn : getUsersLoggedIn,
+      getRoomsLoggedIn : getRoomsLoggedIn,
       addUserLoggedIn : addUserLoggedIn,
       createUser: createUser,
       clearDatabase : clearDatabase
@@ -96,6 +97,16 @@
             return callback(databaseObject.usersLoggedIn);
           }
         }); //capture error!
+    }
+    /**
+     * Gets JUST the room numbers in an array that are occupied. 
+     * This is utilized for the clockin button creation, were we just want the rooms
+     * that are occupied.
+     */
+    function getRoomsLoggedIn() {
+      $localForage.getItem(constants.RESERVED_DATABASE_NAME).then(function(databaseObject){
+        return databaseObject.usersLoggedIn.map(function(user){return user.lastEntry.room});
+      });
     }
     /*Adds a user to the usersLoggedIn databaseObject.
     We apply ONLY the last User entry, which makes it easier to show on the view*/

@@ -6,7 +6,7 @@
   * from user objects.
   */
   angular.module('roomRenter').factory('users', users);
-  users.$inject = ['$log', '$localForage', 'database'];
+  users.$inject = ['$log', '$localForage'];
 
   /*The users factory provides an interface to get the following:
   * 1. The users currently logged in

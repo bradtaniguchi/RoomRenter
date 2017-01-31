@@ -7,9 +7,9 @@
   * The database structure I references is defined in the app.constants.js
   */
   angular.module('roomRenter').factory('database', database);
-  database.$inject = ['$log', 'constants', '$localForage'];
+  database.$inject = ['$log', 'constants', '$localForage', 'users'];
 
-  function database($log, constants, $localForage) {
+  function database($log, constants, $localForage, users) {
     return {
       /*these are the public service functions*/
       checkDatabaseStructure: checkDatabaseStructure,
@@ -17,7 +17,6 @@
       addUser : addUser,
       updateUser : updateUser,
       getUsersLoggedIn : getUsersLoggedIn,
-      getRoomsLoggedIn : getRoomsLoggedIn,
       addUserLoggedIn : addUserLoggedIn,
       createUser: createUser,
       clearDatabase : clearDatabase
@@ -98,27 +97,8 @@
           }
         }); //capture error!
     }
-    /*Gets the room objects currently logged In*/
-    function getRoomsLoggedIn(callback) {
-      /*First we need the users logged in, then we need to get their last
-      clockin objects*/
-      var rooms = [];
-      getUsersLoggedIn(function(Users){
-        var roomsAvail = Users.length;
-        Users.forEach(function(User) {
-          users.getLastLoginObject(User, function(loginObject){
-            rooms.push(loginObject);
-            if(rooms.length == roomsAvail) {
-              if(callback !== undefined) {
-                callback(rooms);
-              }
-            }
-          });
-        });
-
-      });
-    }
-    /*Adds a user to the usersLoggedIn*/
+    /*Adds a user to the usersLoggedIn databaseObject.
+    We apply ONLY the last User entry, which makes it easier to show on the view*/
     function addUserLoggedIn(userID, User, callback) {
       /*Lets just make sure there aren't already 5 people clocked in, if so then
       we can't add this one.*/
@@ -133,10 +113,8 @@
             var newDatabaseObject = databaseObject;
             var userToEnter = {
               "userID": userID,
-              "User": User
+              "lastEntry": users.getLastLoginObject(User)
             };
-            //userToEnter[userID] = User; //this is ugly
-
 
             newDatabaseObject.usersLoggedIn.push(userToEnter);
             $localForage.setItem(constants.RESERVED_DATABASE_NAME,

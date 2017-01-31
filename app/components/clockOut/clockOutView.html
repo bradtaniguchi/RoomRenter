@@ -7,19 +7,20 @@
         <div data-ng-repeat="room in vm.usedRooms track by room.roomNumber" class="btn-group" data-toggle="buttons">
             <div class="form-group">
                 <div class="input-group" data-toggle="tooltip" title="The room you were using" >
-                    <span class="input-group-addon" >Room {{room.roomNumber}}.</span>
-                    <input type="text" class="form-control" title="username" value="{{room.username}} | {{room.timeIn}}" readonly>
+                    <span class="input-group-addon" >Room {{room.lastEntry.room}}.</span>
+                    <input type="text" class="form-control" title="username" value="{{room.lastEntry.username}} | {{room.lastEntry.clockIn}}" readonly>
                     <span class="input-group-btn">
                         <button class="btn btn-default" title="Clock out of the current room" data-toggle="modal"
                                 data-target="#successModal" role="button"
-                                data-ng-click="vm.clockOut(room.username, room.roomNumber)">Clock Out</button>
+                                data-ng-click="vm.clockOut(room.room)">Clock Out</button>
                     </span>
                 </div>
             </div>
         </div>
-        <div data-ng-class="alertClass" class="alert alert-info">
+        <div ng-if="vm.usedRooms.length == 0" data-ng-class="alertClass" class="alert alert-info">
             <p>{{vm.emptyMessage}}</p>
         </div>
+        <br>
         <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
                 data-ng-click="vm.go('/')">Go Back</button>
     </form>

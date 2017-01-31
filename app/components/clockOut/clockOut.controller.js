@@ -2,28 +2,21 @@
   'use strict';
 
   angular.module('roomRenter').controller('clockOutController', clockOutController);
-  clockOutController.$inject = ['$log', 'constants', 'generalService', '$timeout'];
+  clockOutController.$inject = ['$log', 'constants', 'generalService', '$timeout', 'database'];
 
-  function clockOutController($log, constants, generalService, $timeout) {
+  function clockOutController($log, constants, generalService, $timeout, database) {
     var vm = this;
     vm.room = 0;
     vm.numberOfRooms = constants.NUMBER_OF_ROOMS;
     vm.usedRooms = [];
     vm.alertClass = ""; //shows the alert message if the rooms are empty
-    vm.emptyMessage = ""; //only shows if there are no rooms
+    vm.emptyMessage = "All Rooms are available!"; //only shows if there are no rooms
     vm.clockOutMessage = ""; //shows when the user clocks out of their room
-
-    /*these variables need to be updated*/
-    vm.clockOutStartTime = "";
-    vm.clockOutEndTime = "";
-    vm.clockOuttime = "";
 
     vm.go = go;
     vm.goModal = goModal;
-    vm.alertClose = alertClose;
-    vm.alertOpen = alertOpen;
-    //vm.getUsedRooms = getUsedRooms;
     vm.clockOut = clockOut;
+    vm.$on = buildRooms();
 
     return vm;
 
@@ -38,23 +31,21 @@
         generalService.changeView(path);
       }, 500);
     }
-    function alertClose() {
-      vm.alertClass = "hide";
-      vm.emptyMessage = "";
-    }
-    function alertOpen() {
-      vm.alertClass = "";
-      vm.emptyMessage = message;
-    }
-
     /*this function is not needed as it init the page, which will be done
     differently*/
     /*function getUsedRooms()
     */
 
-    function clockOut(username, roomNumber) {
+    function clockOut(roomNumber) {
       $log.log("Clocking user out " + username + " " + roomNumber);
       /*TODO: should call a service for this*/
+    }
+    /*creates the rooms for the UI*/
+    function buildRooms() {
+      database.getUsersLoggedIn(function(rooms) {
+        $log.log(JSON.stringify(rooms));
+        vm.usedRooms = rooms;
+      });
     }
   }
 })();

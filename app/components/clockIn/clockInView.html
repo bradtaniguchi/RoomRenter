@@ -26,8 +26,8 @@ TODO: Add data-toggles and titles to all input fields!-->
         <div class="input-group">
             <div class="btn-group" role="group" data-ng-repeat="room in vm.rooms track by $index">
                 <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-model="$parent.chosenRoom"
-                    data-ng-click="vm.selectRoom(room.value)" data-ng-class=""
-                data-ng-toggle="tooltip" title="A room">{{room.text}}</button>
+                    data-ng-click="vm.selectRoom(room.disabled, room.value)" data-ng-class="room.class"
+                    data-ng-toggle="tooltip" title="{{room.message}}">{{room.text}}</button>
             </div>
         </div>
         <div data-ng-class="vm.alertClass" class="alert alert-danger alert-dismissable">

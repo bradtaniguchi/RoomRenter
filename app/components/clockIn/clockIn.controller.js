@@ -31,19 +31,33 @@
       for(var i = 0; i < constants.NUMBER_OF_ROOMS; i++) {
         vm.rooms.push({
           "value" : i + 1,
-          "text" : "Room: " + (i+1)
+          "text" : "Room: " + (i+1),
+          "disabled" : false,
+          "class" : "", //change to disabled to disable this button
+          "message" : "An open room" //displays on hover
         });
       }
-      /*database.getRoomsLoggedIn(function(rooms){
-        vm.rooms = rooms;
-      });*/
+      database.getUsersLoggedIn(function(loggedInRooms) {
+        $log.log("logged in rooms: " + JSON.stringify(loggedInRooms));
+        database.getRoomsLoggedIn(function(rooms){
+          $log.log("rooms: " + JSON.stringify(rooms));
+          rooms.forEach(function(roomNumber){
+            /*disable the given roomNumber*/
+            vm.rooms[roomNumber-1].class = "disabled";
+            vm.rooms[roomNumber-1].disabled = true;
+            vm.rooms[roomNumber-1].message = "An occupied room";
+          });
+        });
+      });
     }
 
     /*Manuallly update what room we have choosen
     This should REALLY just be a component*/
-    function selectRoom(roomNumber) {
-      $log.log("Room chosen: " + roomNumber);
-      vm.chosenRoom = roomNumber;
+    function selectRoom(disabled, roomNumber) {
+      if(!disabled){
+        $log.log("Room chosen: " + roomNumber);
+        vm.chosenRoom = roomNumber;
+      }
     }
 
     /*We only go out of a modal, so this go acts like the other controllers

@@ -103,9 +103,11 @@
      * This is utilized for the clockin button creation, were we just want the rooms
      * that are occupied.
      */
-    function getRoomsLoggedIn() {
+    function getRoomsLoggedIn(callback) {
       $localForage.getItem(constants.RESERVED_DATABASE_NAME).then(function(databaseObject){
-        return databaseObject.usersLoggedIn.map(function(user){return user.lastEntry.room});
+        if(callback !== undefined) {
+          callback(databaseObject.usersLoggedIn.map(function(user){return user.lastEntry.room}));
+        }
       });
     }
     /*Adds a user to the usersLoggedIn databaseObject.

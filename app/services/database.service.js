@@ -131,14 +131,18 @@
             }
           } else { //there is room!
             var newDatabaseObject = databaseObject;
-            var userToEnter = {};
-            userToEnter[userID] = User;
+            var userToEnter = {
+              "userID": userID,
+              "User": User
+            };
+            //userToEnter[userID] = User; //this is ugly
+
 
             newDatabaseObject.usersLoggedIn.push(userToEnter);
             $localForage.setItem(constants.RESERVED_DATABASE_NAME,
               newDatabaseObject)
               .then(function(){
-                $log.log("Added user: " + JSON.stringify(User) + " to loggedInUsers");
+                $log.log("Added user: " + JSON.stringify(userToEnter) + " to loggedInUsers");
               });
           }
 

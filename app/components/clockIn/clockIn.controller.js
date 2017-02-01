@@ -66,7 +66,7 @@
       angular.element('#successModal').modal('hide');
       $timeout(function(){
         generalService.changeView(path);
-      });
+      }, 500);
     }
 
     function alertClose() {
@@ -98,6 +98,7 @@
         alertOpen("No Choosenroom!");
       } else { //good entry
         clockIn.clockIn(vm.userID, vm.name, vm.chosenRoom);
+        angular.element('#successModal').modal('show');
       }
     }
   }

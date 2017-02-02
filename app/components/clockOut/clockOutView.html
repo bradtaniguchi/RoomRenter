@@ -3,16 +3,16 @@
     <div class="panel panel-heading">
         <h1>ClockOut</h1>
     </div>
-    <form class="panel-body">
-        <div data-ng-repeat="room in vm.usedRooms track by room.roomNumber" class="btn-group" data-toggle="buttons">
+    <div class="panel-body">
+        <div data-ng-repeat="room in vm.usedRooms track by room.lastEntry.room" data-toggle="buttons">
             <div class="form-group">
-                <div class="input-group" data-toggle="tooltip" title="The room you were using" >
-                    <span class="input-group-addon" >Room {{room.lastEntry.room}}.</span>
+                <div class="input-group" data-toggle="tooltip" title="The room you were using">
+                    <span class="input-group-addon">Room {{room.lastEntry.room}}.</span>
                     <input type="text" class="form-control" title="username" value="{{room.lastEntry.username}} | {{room.lastEntry.clockIn}}" readonly>
                     <span class="input-group-btn">
                         <button class="btn btn-default" title="Clock out of the current room" data-toggle="modal"
-                                data-target="#successModal" role="button"
-                                data-ng-click="vm.clockOutUser(room.lastEntry.room)">Clock Out</button>
+                              data-target="#successModal" role="button"
+                              data-ng-click="vm.clockOutUser(room.lastEntry.room)">Clock Out</button>
                     </span>
                 </div>
             </div>
@@ -21,8 +21,7 @@
             <p>{{vm.emptyMessage}}</p>
         </div>
         <br>
-        <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
-                data-ng-click="vm.go('/')">Go Back</button>
-    </form>
+        <button type="button" class="btn btn-primary" title="Go Back to the Main Menu" data-ng-click="vm.go('/')">Go Back</button>
+    </div>
 </div>
 <div data-ng-include="'app/shared/success-modal/successModal.html'"></div>

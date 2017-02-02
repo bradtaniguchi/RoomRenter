@@ -9,12 +9,12 @@
                 <h4 class="modal-title">Successful ClockOut</h4>
             </div>
             <div class="modal-body">
-                <p>{{clockOutMessage}}</p>
+                <p>Clocked Out of room <strong>{{vm.choosenRoom}}</strong></p>
                 <br/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        data-ng-click="goModal('/')">Ok</button>
+                        data-ng-click="vm.goModal('/')">Ok</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

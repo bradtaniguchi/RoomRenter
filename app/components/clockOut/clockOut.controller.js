@@ -13,7 +13,8 @@
     vm.usedRooms = [];
     vm.alertClass = ""; //shows the alert message if the rooms are empty
     vm.emptyMessage = "All Rooms are available!"; //only shows if there are no rooms
-    vm.clockOutMessage = ""; //shows when the user clocks out of their room
+    vm.clockOutMessage = "Clocked out of the room successfully!"; //shows when the user clocks out of their room
+    vm.choosenRoom = "";
 
     vm.go = go;
     vm.goModal = goModal;
@@ -36,6 +37,7 @@
 
     function clockOutUser(roomNumber) {
       $log.log("Clocking user out of room " + roomNumber);
+      vm.choosenRoom = roomNumber;
       clockOut.clockOut(roomNumber, function(){
         $log.log("clocked out user in room: " + roomNumber);
       });

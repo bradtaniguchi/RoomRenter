@@ -4,9 +4,10 @@
   *24/01/2017
   */
   angular.module('roomRenter').factory('clockIn', clockIn);
-  clockIn.$inject=['$log', 'constants', 'moment', 'database', 'users'];
+  clockIn.$inject=['$log', 'constants', 'moment', 'database', 'users',
+    '$localForage'];
 
-  function clockIn($log, constants, moment, database, users){
+  function clockIn($log, constants, moment, database, users, $localForage){
     return {
       clockIn : clockIn
     };
@@ -39,7 +40,6 @@
 
         /*Now lets see if the user exists already*/
         database.getUser(userID, function(User) {
-          $log.log("in get user!");
           /*Define the user object we will use*/
           var newEntry = {
             "clockIn":"NOW",
@@ -54,12 +54,13 @@
             database.getUser(userID, function(User) {
               /*now add the entry to the userobject and add it to the database*/
               users.addNewEntry(User, newEntry, function(updatedUser){
-                database.addUser(userID, updatedUser, function(){
-                  $log.log("ClockedIn user: " + updatedUser);
-                  database.addUserLoggedIn(userID, User);
+                /*database.addUser(userID, updatedUser, function(){
+                  $log.log("ClockedIn user: " + updatedUser);*/
+                  $localForage.setItem(userID, updatedUser).then(function(){
+                    $log.log("ClockedIn user: " + JSON.stringify(updatedUser));
+                    database.addUserLoggedIn(userID, User);
                 });
               });
-
             });
           } else {
             /*User doesn't exist, lets create them*/

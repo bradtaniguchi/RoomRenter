@@ -99,14 +99,15 @@
         }); //capture error!
     }
     /**
-     * Gets JUST the room numbers in an array that are occupied. 
+     * Gets JUST the room numbers in an array that are occupied.
      * This is utilized for the clockin button creation, were we just want the rooms
      * that are occupied.
      */
     function getRoomsLoggedIn(callback) {
       $localForage.getItem(constants.RESERVED_DATABASE_NAME).then(function(databaseObject){
         if(callback !== undefined) {
-          callback(databaseObject.usersLoggedIn.map(function(user){return user.lastEntry.room}));
+          callback(databaseObject.usersLoggedIn
+            .map(function(user){return user.lastEntry.room;}));
         }
       });
     }

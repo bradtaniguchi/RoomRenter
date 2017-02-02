@@ -25,7 +25,8 @@
     }
     function addNewEntry(User, entry, callback) {
       if(callback !== undefined) {
-        callback(User.entries.push(entry));
+        User.entries.push(entry)
+        callback(User);
       }
       return (User.entries.push(entry));
     }

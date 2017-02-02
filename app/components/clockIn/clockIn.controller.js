@@ -84,9 +84,6 @@
       $log.log("Hit Submit");
       /*check to make sure all fields have been validated, otherwise open
       UI popups to prompt for different input*/
-      $log.log(vm.name.toLowerCase());
-      $log.log(vm.userID);
-      $log.log(vm.chosenRoom);
       if(vm.name === "") {
         $log.log("No username!");
         alertOpen("No username!");

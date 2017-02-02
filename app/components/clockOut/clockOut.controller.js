@@ -2,9 +2,11 @@
   'use strict';
 
   angular.module('roomRenter').controller('clockOutController', clockOutController);
-  clockOutController.$inject = ['$log', 'constants', 'generalService', '$timeout', 'database'];
+  clockOutController.$inject = ['$log', 'constants', 'generalService',
+    '$timeout', 'database', 'clockOut'];
 
-  function clockOutController($log, constants, generalService, $timeout, database) {
+  function clockOutController($log, constants, generalService,
+    $timeout, database, clockOut) {
     var vm = this;
     vm.room = 0;
     vm.numberOfRooms = constants.NUMBER_OF_ROOMS;
@@ -15,7 +17,7 @@
 
     vm.go = go;
     vm.goModal = goModal;
-    vm.clockOut = clockOut;
+    vm.clockOutUser = clockOutUser;
     vm.$on = buildRooms();
 
     return vm;
@@ -31,14 +33,12 @@
         generalService.changeView(path);
       }, 500);
     }
-    /*this function is not needed as it init the page, which will be done
-    differently*/
-    /*function getUsedRooms()
-    */
 
-    function clockOut(roomNumber) {
-      $log.log("Clocking user out " + username + " " + roomNumber);
-      /*TODO: should call a service for this*/
+    function clockOutUser(roomNumber) {
+      $log.log("Clocking user out of room " + roomNumber);
+      clockOut.clockOut(roomNumber, function(){
+        $log.log("clocked out user in room: " + roomNumber);
+      });
     }
     /*creates the rooms for the UI*/
     function buildRooms() {

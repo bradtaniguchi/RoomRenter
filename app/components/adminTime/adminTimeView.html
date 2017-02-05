@@ -1,47 +1,40 @@
 <!--Admin Stat View-->
 <div class="panel panel-default">
-    <div class="panel panel-heading">
-        <h1>Admin Time View</h1>
+  <div class="panel panel-heading">
+    <h1>Admin Time View</h1>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div data-ng-class="wellClass" class="col-sm-8 well">
+        <!--shows the Username-->
+        <h4>Clocked in User:</h4>
+        <div ng-repeat="room in vm.usedRooms">
+          <form class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">Room {{room.lastEntry.room}}.</span>
+              <input type="text" class="form-control" title="username" value="{{room.lastEntry.username}} / {{room.lastEntry.clockIn}}" size="64" readonly>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div data-ng-class="wellClass" class="col-sm-4 well highlight">
+        <h4>Elapsed Time: </h4>
+        <div ng-repeat="room in vm.usedRooms">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" title="Time the user has been in the room" value="{{room.lastEntry.duration}}" readonly>
+              <span class="input-group-addon" role="button" title="Clock out of current room" data-toggle="modal" data-target="#successModal" role="button" data-ng-click="clockOut(room.username, room.roomNumber)">Clockout</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-        <div class="row">
-            <div data-ng-class="wellClass" class="col-sm-8 well"> <!--shows the Username-->
-                <h4>Clocked in User:</h4>
-                <div ng-repeat="room in usedRooms track by room.roomNumber">
-                    <form class="form-group">
-                        <div class="input-group">
-                            <!--<div class="media-left media-middle">
-                                <img src="assets/Toro.jpg" class="media-object" width="5%" height="5%">
-                            </div>--> <!--IDK why this isn't working-->
-                            <span class="input-group-addon">Room {{room.roomNumber}}.</span>
-                                <input type="text" class="form-control" title="username"
-                                       value="{{room.username}} / {{room.timeIn}}"
-                                       size="64" readonly>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div data-ng-class="wellClass" class="col-sm-4 well highlight">
-                <h4>Elapsed Time: </h4>
-                <div ng-repeat="room in usedRooms track by room.roomNumber">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" class="form-control" title="Time the user has been in the room"
-                                   value="{{room.duration}}" readonly>
-                            <span class="input-group-addon" role="button" title="Clock out of current room"
-                                  data-toggle="modal" data-target="#successModal" role="button"
-                                  data-ng-click="clockOut(room.username, room.roomNumber)">Clockout</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--alert class goes here-->
-        <div data-ng-class="alertClass" class="alert alert-info">
-            <p>{{emptyMessage}}</p>
-        </div>
-        <button type="button" class="btn btn-primary" title="Go Back to the Main Menu"
-                data-ng-click="go('/')">Go Back</button>
-    </div> <!--end panel body-->
+    <!--alert class goes here-->
+    <div data-ng-class="alertClass" class="alert alert-info">
+      <p>{{vm.emptyMessage}}</p>
+    </div>
+    <button type="button" class="btn btn-primary" title="Go Back to the Main Menu" data-ng-click="go('/')">Go Back</button>
+  </div>
+  <!--end panel body-->
 </div>
 <div data-ng-include="'app/shared/success-modal/successModal.html'"></div>

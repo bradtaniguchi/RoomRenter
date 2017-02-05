@@ -1,9 +1,10 @@
 (function(){
   'use strict';
   angular.module('roomRenter').controller('adminTimeController', adminTimeController);
-  adminTimeController.$inject = ['$log', 'constants', 'generalService'];
+  adminTimeController.$inject = ['$log', 'constants', 'generalService', '$timeout',
+    'database'];
 
-  function adminTimeController($log, constants, generalService) {
+  function adminTimeController($log, constants, generalService, $timeout, database) {
     var vm = this;
     vm.room = 0; //what is this variable?
     vm.numberOfRooms = constants.NUMBER_OF_ROOMS;
@@ -19,7 +20,7 @@
     vm.alertClose = alertClose;
     vm.alertOpen = alertOpen;
     vm.clockOut = clockOut; //TODO: I need to  create a service for this
-    //vm.getUsedRooms = getUsedRooms; //TODO: this needs to be done upfront..
+    vm.$on = buildRooms();
 
     return vm;
     /*function definitions*/
@@ -52,9 +53,18 @@
       /*TODO: Call a databse service to clock out a user*/
     }
 
-    function getUsedRoom() {
+    function buildRooms() {
       $log.log('Getting used rooms');
-      /*Change to database service, that gets the used rooms*/
+      database.getUsersLoggedIn(function(rooms) {
+        $log.log(JSON.stringify(rooms));
+        vm.usedRooms = rooms;
+        /*Now add the duration for each room*/
+        vm.usedRooms.map(function(usedRoom){
+          /*For each item add the duration item*/
+          usedRoom.lastEntry.duration = "duration";
+          //TODO: Add the logic to get the duration
+        })
+      });
     }
   }
 })();
